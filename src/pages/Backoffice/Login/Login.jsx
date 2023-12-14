@@ -7,7 +7,7 @@ import { FormRule } from "../../../constants/formRules";
 import AppHeader from "../../../components/Shared/AppHeader/AppHeader.jsx";
 import AppFooter from "../../../components/Shared/AppFooter/AppFooter.jsx";
 
-const LoginBackOffice = () => {
+const Login = () => {
   const handleLogin = (values) => {
     console.log(values);
   };
@@ -56,4 +56,4 @@ const LoginBackOffice = () => {
   );
 };
 
-export default LoginBackOffice;
+export default Login;
