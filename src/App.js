@@ -1,10 +1,10 @@
 import "./App.css";
-import LoginBackOffice from "./pages/Backoffice/LoginBackOffice/LoginBackOffice";
+import Login from "./pages/Backoffice/Login/Login";
 
 const App = () => {
   return (
     <div className="app">
-      <LoginBackOffice />
+      <Login />
     </div>
   );
 };
