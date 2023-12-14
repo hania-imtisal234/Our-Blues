@@ -1,12 +1,12 @@
 import "./App.css";
+import LoginBackOffice from "./pages/Backoffice/LoginBackOffice/LoginBackOffice";
 
-function App() {
+const App = () => {
   return (
-    <div className="text-3xl font-bold underline">
-      <h1>hania likes tea</h1>
-      <h1>hii</h1>
+    <div className="app">
+      <LoginBackOffice />
     </div>
   );
-}
+};
 
 export default App;
