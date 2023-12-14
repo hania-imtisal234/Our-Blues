@@ -7,8 +7,7 @@ const FormInput = ({
   size = "middle",
   placeholder,
   onPressEnter = null,
-  prefix,
-  postfix,
+  addonAfter,
   label,
   rules,
 }) => {
@@ -19,8 +18,7 @@ const FormInput = ({
         size={size}
         className={classNames}
         placeholder={placeholder}
-        prefix={prefix}
-        postfix={postfix}
+        addonAfter={addonAfter}
         onPressEnter={onPressEnter}
       />
     </Form.Item>
