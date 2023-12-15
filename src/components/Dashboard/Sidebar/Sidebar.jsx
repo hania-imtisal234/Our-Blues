@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { adminMenuItems } from "../../../constants/index";
 import { Layout, Menu } from "antd";
 import OurBluesIcon from "../../../assets/Icon.png";
-import { useNavigate } from "react-router-dom/dist";
+import { useNavigate } from "react-router-dom";
 const { Sider } = Layout;
 
 const Sidebar = ({ className = "bg-yale-blue" }) => {
@@ -12,6 +12,35 @@ const Sidebar = ({ className = "bg-yale-blue" }) => {
   const handleMenuClick = ({ item }) => {
     console.log(item.props.route);
     navigate(item.props.route);
+  };
+
+  const renderMenuItems = (items) => {
+    return items.map((item) => {
+      if (item.subItems) {
+        return (
+          <Menu.SubMenu
+            key={item.key}
+            title={item.title}
+            route={item.route}
+            label={item.label}
+            icon={item.icon}
+          >
+            {renderMenuItems(item.subItems)}
+          </Menu.SubMenu>
+        );
+      }
+      return (
+        <Menu.Item
+          key={item.key}
+          title={item.title}
+          route={item.route}
+          label={item.label}
+          icon={item.icon}
+        >
+          {item.label}
+        </Menu.Item>
+      );
+    });
   };
 
   return (
@@ -48,8 +77,11 @@ const Sidebar = ({ className = "bg-yale-blue" }) => {
           mode="inline"
           className={className}
           onClick={handleMenuClick}
-          items={adminMenuItems}
-        />
+          style={{ color: "white" }}
+          defaultSelectedKeys={["second"]}
+        >
+          {renderMenuItems(adminMenuItems)}
+        </Menu>
       </Sider>
     </div>
   );
