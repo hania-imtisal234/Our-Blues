@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { Form, Layout } from "antd";
 import FormInput from "../../../components/Shared/FormInput/FormInput";
 import FormButton from "../../../components/Shared/FormButton/FormButton.jsx";
@@ -7,6 +8,7 @@ import { FormRule } from "../../../constants/formRules";
 import AppHeader from "../../../components/Shared/AppHeader/AppHeader.jsx";
 import AppFooter from "../../../components/Shared/AppFooter/AppFooter.jsx";
 import Loader from "../../../components/Shared/Loader/Loader.jsx";
+import { BACKOFFICE_REGISTER } from "../../../constants/Routes.js";
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -37,8 +39,8 @@ const Login = () => {
               className="flex flex-col items-center"
               onFinish={handleLogin}
             >
-              <div className="xs:h-28 xs:w-24  sm:h-36 sm:w-32 md:w-40 text-left">
-                <img src={OurBlueLogo} alt="logo" className="xs:h-28 sm:h-32" />
+              <div className="w-18 h-16 text-left">
+                <img src={OurBlueLogo} alt="logo" className="xs:h-18 xs:h-16" />
               </div>
               <p className="xs:text-sm xs:w-44 sm:text-lg sm:w-48 flex items-center justify-center text-yale-blue text-2xl font-bold mb-2 mt-0">
                 Log into your account
@@ -65,11 +67,22 @@ const Login = () => {
                   className="xs:w-44 sm:w-56 text-white bg-yale-blue w-56 h-24 mt-4"
                 />
               </div>
+              <div>
+                Dont have an account?{" "}
+                <Link
+                  className="text-white font-bold underline"
+                  to={BACKOFFICE_REGISTER}
+                >
+                  Register
+                </Link>
+              </div>
             </Form>
           )}
         </div>
       </div>
-      <AppFooter />
+      <Layout>
+        <AppFooter />
+      </Layout>
     </Layout>
   );
 };
