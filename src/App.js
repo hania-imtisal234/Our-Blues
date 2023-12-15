@@ -1,10 +1,10 @@
 import "./App.css";
-import Login from "./pages/Backoffice/Login/Login";
+import AppRouter from "./routes/AppRouter";
 
 const App = () => {
   return (
     <div className="app">
-      <Login />
+      <AppRouter />
     </div>
   );
 };

@@ -5,6 +5,7 @@ const FormInput = ({
   name = null,
   classNames = "xs:w-44 sm:w-56 text-yale-blue mt--5",
   size = "middle",
+  type = "text",
   placeholder,
   onPressEnter = null,
   addonAfter,
@@ -14,6 +15,7 @@ const FormInput = ({
   return (
     <Form.Item label={label} name={name} rules={rules} className="my-1">
       <Input
+        type={type}
         name={name}
         size={size}
         className={classNames}
