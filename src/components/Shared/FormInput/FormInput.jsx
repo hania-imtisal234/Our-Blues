@@ -3,7 +3,7 @@ import { Form, Input } from "antd";
 
 const FormInput = ({
   name = null,
-  classNames = "xs:w-44 sm:w-56 text-yale-blue mt--5",
+  classNames = " text-yale-blue mt--5 text-sm",
   size = "middle",
   type = "text",
   placeholder,
@@ -13,7 +13,7 @@ const FormInput = ({
   rules,
 }) => {
   return (
-    <Form.Item label={label} name={name} rules={rules} className="my-1">
+    <Form.Item label={label} name={name} rules={rules} className="m-0 text-sm ">
       <Input
         type={type}
         name={name}

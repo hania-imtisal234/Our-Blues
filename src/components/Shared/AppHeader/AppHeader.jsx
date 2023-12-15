@@ -23,11 +23,11 @@ const AppHeader = () => {
     setIsDrawerOpen(false);
   };
   return (
-    <div className="flex items-center justify-between px-4 py-1 bg-yale-blue">
+    <div className="flex items-center justify-between px-4 py-1 bg-yale-blue h-14">
       <img
         src={OurBluesLogo}
         alt="logo"
-        className="xs:w-14 sm:w-32 my-1 h-[60px] object-contain ml-0 bg-carolina-blue rounded-full"
+        className="xs:w-14 sm:w-[80px] my-1 h-[50px] object-contain ml-0 bg-carolina-blue rounded-full"
       />
       {!enableMenu ? (
         <></>

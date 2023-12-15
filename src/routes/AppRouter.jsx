@@ -7,7 +7,8 @@ import {
   WEBAPP_LOGIN,
   WEBAPP_REGISTER,
 } from "../../src/constants/Routes";
-import LoginBackOffice from "../pages/Backoffice/Login/Login";
+import LoginBackOffice from "../pages/Backoffice/Login/Login.jsx";
+import RegisterBackOffice from "../pages/Backoffice/Register/Register";
 
 const AppRouter = () => {
   return (
@@ -16,10 +17,7 @@ const AppRouter = () => {
         <Routes>
           {/* Backoffice Routes */}
           <Route path={BACKOFFICE_LOGIN} element={<LoginBackOffice />} />
-          <Route
-            path={BACKOFFICE_REGISTER}
-            element={<h1>Backoffice Register</h1>}
-          />
+          <Route path={BACKOFFICE_REGISTER} element={<RegisterBackOffice />} />
 
           {/* Webapp Routes */}
           <Route path={HOME_PAGE} element={<h1>Web app home</h1>} />
