@@ -1,14 +1,16 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {
+  BACKOFFICE_DASHBOARD,
   BACKOFFICE_LOGIN,
   BACKOFFICE_REGISTER,
   HOME_PAGE,
   WEBAPP_LOGIN,
   WEBAPP_REGISTER,
 } from "../../src/constants/Routes";
-import LoginBackOffice from "../pages/Backoffice/Login/Login.jsx";
+import Dashboard from "../pages/Backoffice/Dashboard/Dashboard";
 import RegisterBackOffice from "../pages/Backoffice/Register/Register";
+import LoginBackoffice from "../pages/Backoffice/Login/Login";
 
 const AppRouter = () => {
   return (
@@ -16,8 +18,9 @@ const AppRouter = () => {
       <BrowserRouter>
         <Routes>
           {/* Backoffice Routes */}
-          <Route path={BACKOFFICE_LOGIN} element={<LoginBackOffice />} />
+          <Route path={BACKOFFICE_LOGIN} element={<LoginBackoffice />} />
           <Route path={BACKOFFICE_REGISTER} element={<RegisterBackOffice />} />
+          <Route path={BACKOFFICE_DASHBOARD} element={<Dashboard />} />
 
           {/* Webapp Routes */}
           <Route path={HOME_PAGE} element={<h1>Web app home</h1>} />

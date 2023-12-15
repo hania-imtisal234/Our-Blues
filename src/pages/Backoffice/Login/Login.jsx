@@ -63,7 +63,7 @@ const Login = () => {
               />
               <div className="">
                 <FormButton
-                  label={"Login"}
+                  label="Login"
                   className="xs:w-44 sm:w-56 text-white bg-yale-blue w-56 h-24 mt-4"
                 />
               </div>
