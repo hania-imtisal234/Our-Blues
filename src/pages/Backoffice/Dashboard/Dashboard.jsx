@@ -1,5 +1,6 @@
 import React from "react";
-import Sidebar from "../../../components/Dashboard/Sidebar/Sidebar";
+import Sidebar from "../../../components/Backoffice/Dashboard/Sidebar/Sidebar";
+import AppHeader from "../../../components/Shared/AppHeader/AppHeader";
 import { Layout } from "antd";
 import DashboardRouter from "../../../routes/DashboardRouter";
 const { Content } = Layout;
@@ -10,7 +11,8 @@ const Dashboard = () => {
       <Layout className="min-h-[100vh]">
         <Sidebar className="bg-yale-blue" />
         <Layout>
-          <Content className="mx-0 my-2">
+          <AppHeader />
+          <Content className="mx-4 my-2 ">
             <DashboardRouter />
           </Content>
         </Layout>
