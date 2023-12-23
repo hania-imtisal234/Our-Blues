@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom/dist";
-import UserDetails from "../pages/Backoffice/Dashboard/UserDetails";
+import UserDetails from "../pages/Backoffice/Dashboard/UserDetails/UserDetails";
 
 const DashboardRouter = () => {
   return (

@@ -142,8 +142,8 @@ export const FormRule = {
   ],
   PHONENUMBER_TABLE: [
     {
-      pattern: /^(\d{10}|N\/A)$/,
-      message: "Phone number must be 10 digits.",
+      pattern: /^(\d{11}|N\/A)$/,
+      message: "Phone number must be of the format 12345678901",
     },
     {
       required: true,
