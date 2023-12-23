@@ -11,6 +11,7 @@ import {
 import Dashboard from "../pages/Backoffice/Dashboard/Dashboard";
 import RegisterBackOffice from "../pages/Backoffice/Register/Register";
 import LoginBackoffice from "../pages/Backoffice/Login/Login";
+import LoginUser from "../pages/WebApp/Login/Login";
 
 const AppRouter = () => {
   return (
@@ -24,7 +25,7 @@ const AppRouter = () => {
 
           {/* Webapp Routes */}
           <Route path={HOME_PAGE} element={<h1>Web app home</h1>} />
-          <Route path={WEBAPP_LOGIN} element={<h1>Web app login</h1>} />
+          <Route path={WEBAPP_LOGIN} element={<LoginUser />} />
           <Route path={WEBAPP_REGISTER} element={<h1>Web app register</h1>} />
         </Routes>
       </BrowserRouter>
