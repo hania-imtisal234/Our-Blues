@@ -10,3 +10,32 @@
 #custom-sidebar .ant-menu-item-selected {
   background-color: #7bafd4;
 }
+#custom-menu .ant-menu-submenu-arrow::before {
+  background-color: #ffffff;
+}
+#custom-menu .ant-menu-submenu-title .ant-menu-submenu-arrow::after {
+  background-color: #ffffff;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background-color: #808080;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

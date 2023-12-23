@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { adminMenuItems } from "../../../constants/index";
+import { adminMenuItems } from "../../../../constants/index";
 import { Layout, Menu } from "antd";
-import OurBluesIcon from "../../../assets/Icon.png";
+import OurBluesIcon from "../../../../assets/Icon.png";
 import { useNavigate } from "react-router-dom";
 const { Sider } = Layout;
 
@@ -78,7 +78,6 @@ const Sidebar = ({ className = "bg-yale-blue" }) => {
           className={className}
           onClick={handleMenuClick}
           style={{ color: "white" }}
-          defaultSelectedKeys={["second"]}
         >
           {renderMenuItems(adminMenuItems)}
         </Menu>
