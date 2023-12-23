@@ -3,9 +3,7 @@ import { FormRule } from "../../../../constants/formRules";
 import {
   InputType,
   userGenderOptions,
-  userGenderTypes,
   userStatusTypeOptions,
-  userStatusTypes,
 } from "../../../../enums";
 import { getLabelForKey, validateName } from "../../../../utils";
 
@@ -19,20 +17,22 @@ export const userDetailsConfig = (
 ) => {
   return [
     {
-      title: "S.No",
+      title: "",
       dataIndex: "sNo",
       key: "sNo",
       editable: false,
       inputType: InputType.STRING,
       align: "center",
+      width: "5%",
     },
     {
-      title: "First Name",
+      title: <div className="text-sm text-yale-blue">First Name</div>,
       dataIndex: "firstName",
       key: "firstName",
       editable: true,
       inputType: InputType.STRING,
       align: "center",
+      width: "10%",
       inputProps: {
         rules: [
           () => ({
@@ -44,12 +44,13 @@ export const userDetailsConfig = (
       },
     },
     {
-      title: "Last Name",
+      title: <div className="text-sm text-yale-blue">Last Name</div>,
       dataIndex: "lastName",
       key: "lastName",
       editable: true,
       inputType: InputType.STRING,
       align: "center",
+      width: "10%",
       inputProps: {
         rules: [
           () => ({
@@ -62,7 +63,7 @@ export const userDetailsConfig = (
     },
 
     {
-      title: "Phone Number",
+      title: <div className="text-sm text-yale-blue">Phone Number</div>,
       dataIndex: "phoneNumber",
       key: "phoneNumber",
       editable: true,
@@ -73,7 +74,7 @@ export const userDetailsConfig = (
       },
     },
     {
-      title: "Email",
+      title: <div className="text-sm text-yale-blue">Email</div>,
       dataIndex: "email",
       key: "email",
       editable: false,
@@ -81,11 +82,12 @@ export const userDetailsConfig = (
       align: "center",
     },
     {
-      title: "Gender",
+      title: <div className="text-sm text-yale-blue">Gender</div>,
       dataIndex: "gender",
       key: "gender",
       editable: true,
       inputType: InputType.SELECT,
+      width: "10%",
       inputProps: {
         options: userGenderOptions,
       },
@@ -93,18 +95,19 @@ export const userDetailsConfig = (
       render: (text) => getLabelForKey(userGenderOptions, text),
     },
     {
-      title: "Age",
+      title: <div className="text-sm text-yale-blue">Age</div>,
       dataIndex: "age",
       key: "age",
       editable: true,
       inputType: InputType.NUMBER,
       align: "center",
+      width: "7%",
       inputProps: {
         rules: FormRule.AGE,
       },
     },
     {
-      title: "Address",
+      title: <div className="text-sm text-yale-blue">Address</div>,
       dataIndex: "address",
       key: "address",
       editable: true,
@@ -115,7 +118,7 @@ export const userDetailsConfig = (
       },
     },
     {
-      title: "Status",
+      title: <div className="text-sm text-yale-blue">Status</div>,
       dataIndex: "status",
       key: "role",
       width: "10%",
@@ -129,7 +132,7 @@ export const userDetailsConfig = (
       render: (text) => getLabelForKey(userStatusTypeOptions, text),
     },
     {
-      title: "Action",
+      title: "",
       dataIndex: "action",
       align: "center",
       width: "10%",

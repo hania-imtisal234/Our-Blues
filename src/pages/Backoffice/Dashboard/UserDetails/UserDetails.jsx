@@ -14,6 +14,7 @@ const userDetails = () => {
       dataIndex: "1",
       sNo: "1",
       firstName: "Hania",
+      phoneNumber: "12312312312",
       lastName: "Imtisal",
       email: "hani@korean.com",
       gender: "male",
@@ -23,11 +24,27 @@ const userDetails = () => {
     },
   ]);
 
-  const saveUserDetailsData = async (key) => {
+  // This function saves the edited changes.
+  const onSave = async (key) => {
     try {
-      setEditingKey("");
+      const row = await form.validateFields();
+      const newData = [...userDetailsData];
+      const index = newData.findIndex((item) => key.key === item.key);
+      if (index > -1) {
+        const item = newData[index];
+        newData.splice(index, 1, {
+          ...item,
+          ...row,
+        });
+        setUserDetailsData(newData);
+        setEditingKey("");
+      } else {
+        newData.push(row);
+        setUserDetailsData(newData);
+        setEditingKey("");
+      }
     } catch (error) {
-      throw new Error(error);
+      console.error(error);
     }
   };
 
@@ -35,6 +52,7 @@ const userDetails = () => {
   const onCancel = () => {
     setEditingKey("");
   };
+  // Editing key is really important.
 
   // This function enables the editing mode for the selected record.
   const onEdit = (record) => {
@@ -52,25 +70,16 @@ const userDetails = () => {
     setEditingKey(record.key);
   };
 
-  const deleteUserDetailsData = async (record) => {
-    try {
-      const filteredData = userDetailsData.filter(
-        (user) => user.firstName !== "Hania"
-      );
-      setUserDetailsData(filteredData);
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-      throw new Error(error);
-    }
+  const onDelete = (key) => {
+    const newData = userDetailsData.filter((item) => item.key !== key.key);
+    setUserDetailsData(newData);
   };
-
   const columns = userDetailsConfig(
     editingKey,
-    saveUserDetailsData,
+    onSave,
     onCancel,
     onEdit,
-    deleteUserDetailsData
+    onDelete
   );
 
   const mergedColumns = columns.map((col) => {
@@ -83,12 +92,7 @@ const userDetails = () => {
         record,
         dataIndex: col.dataIndex,
         inputType: col.inputType,
-        inputProps:
-          col.dataIndex === "status" && record.status === "invited"
-            ? {
-                options: [],
-              }
-            : col.inputProps,
+        inputProps: col.inputProps,
         editing: record.key === editingKey,
       }),
     };
@@ -96,7 +100,6 @@ const userDetails = () => {
 
   return (
     <div>
-      <h1>Ant Design Stupid table is below:</h1>
       <Form form={form}>
         <Table
           components={{

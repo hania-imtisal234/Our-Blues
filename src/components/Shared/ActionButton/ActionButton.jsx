@@ -18,9 +18,9 @@ const ActionButton = ({
   onDelete = () => {},
 }) => {
   const editable = record.key === editingKey;
-
   return editable ? (
-    <div className="flex items-center justify-evenly">
+    <div className="flex items-center gap-2">
+      {/* Ant design confirm popup */}
       <Popconfirm
         title="Are you sure?"
         okButtonProps={{ type: "default" }}
@@ -38,7 +38,7 @@ const ActionButton = ({
       />
     </div>
   ) : (
-    <div className="flex items-center justify-center gap-5">
+    <div className="flex items-center gap-2">
       {/* Edit Button */}
       <CustomButton
         className="w-1 bg-yale-blue text-white"
