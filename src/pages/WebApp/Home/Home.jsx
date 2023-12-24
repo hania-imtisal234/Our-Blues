@@ -3,16 +3,14 @@ import { Layout, Button, Input } from "antd";
 import AppHeader from "../../../components/Shared/AppHeader/AppHeader.jsx";
 import AppFooter from "../../../components/Shared/AppFooter/AppFooter.jsx";
 import { ReadOutlined, QuestionCircleOutlined, InfoCircleOutlined } from "@ant-design/icons";
+import { BOOK_MEETING } from "../../../constants/Routes.js";
+import { useNavigate } from "react-router-dom";
 
 
 const Home = () => {
   const [city, setCity] = useState("");
   const [therapistName, setTherapistName] = useState("");
-
-  const handleBooking = () => {
-    console.log(`therapis ${city} for therapist: ${therapistName}`);
-  };
-
+  const navigate = useNavigate();
   return (
     <Layout className="mainLayout bg-white">
       <AppHeader />
@@ -40,7 +38,7 @@ const Home = () => {
             onChange={(therapistInput) => setTherapistName(therapistInput.target.value)}
             className="ant-input bg-white text-yale-blue mt-3"
           />
-          <Button type="primary" size="large" onClick={handleBooking} className="bg-carolina-blue text-white mt-5">
+          <Button type="primary" size="large" onClick={() => { navigate(BOOK_MEETING); }} className="bg-carolina-blue text-white mt-5">
             Book Therapist
           </Button>
         </div>
