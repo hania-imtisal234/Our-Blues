@@ -11,7 +11,11 @@ import {
 import Dashboard from "../pages/Backoffice/Dashboard/Dashboard";
 import RegisterBackOffice from "../pages/Backoffice/Register/Register";
 import LoginBackoffice from "../pages/Backoffice/Login/Login";
+ 26-create-a-homepage-for-users
 import Home from "../pages/WebApp/Home/Home";
+
+import LoginUser from "../pages/WebApp/Login/Login";
+ develop
 
 const AppRouter = () => {
   return (
@@ -24,8 +28,13 @@ const AppRouter = () => {
           <Route path={BACKOFFICE_DASHBOARD} element={<Dashboard />} />
 
           {/* Webapp Routes */}
+        26-create-a-homepage-for-users
           <Route path={HOME_PAGE} element={<Home/>} />
           <Route path={WEBAPP_LOGIN} element={<h1>Web app login</h1>} />
+
+          <Route path={HOME_PAGE} element={<h1>Web app home</h1>} />
+          <Route path={WEBAPP_LOGIN} element={<LoginUser />} />
+      develop
           <Route path={WEBAPP_REGISTER} element={<h1>Web app register</h1>} />
         </Routes>
       </BrowserRouter>

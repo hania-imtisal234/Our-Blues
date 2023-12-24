@@ -6,6 +6,7 @@ export const adminMenuItems = [
     key: "first",
     label: <div className="text-white">Users</div>,
     title: <div className="text-white">Users</div>,
+    route: "/backoffice/users",
     icon: <UserOutlined style={{ color: "white" }} />,
     subItems: [
       {

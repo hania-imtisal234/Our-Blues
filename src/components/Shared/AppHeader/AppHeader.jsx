@@ -12,7 +12,7 @@ import {
 } from "../../../constants/Routes.js";
 
 const AppHeader = () => {
-  const [enableMenu, setEnableMenu] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -29,42 +29,46 @@ const AppHeader = () => {
         alt="logo"
         className="xs:w-14 sm:w-[70px] my-1 h-[50px] object-contain ml-0 bg-carolina-blue rounded-full"
       />
-      {!enableMenu ? (
-        <></>
+      {!isLoggedIn ? (
+        <>
+          <div className="flex item-center justify-end">
+            <div className=" xs:hidden md:flex  gap-2 ">
+              <CustomButton
+                buttonLabel="Login"
+                className="bg-yale-blue text-white"
+                size="middle"
+                onClick={() => {
+                  navigate(BACKOFFICE_LOGIN);
+                }}
+              />
+              <CustomButton
+                buttonLabel="Register"
+                className="bg-yale-blue text-white"
+                size="middle"
+                onClick={() => {
+                  navigate(BACKOFFICE_REGISTER);
+                }}
+              />
+            </div>
+          </div>
+        </>
       ) : (
         <>
           <ul className="xs:hidden md:flex md:items-center md:justify-end  flex-1 gap-2 font-bold  text-white sm:text-xl mx-0 xs:text-sm mx-2 md:text-xl mx-4">
             <li>Dashboard</li>
           </ul>
+          <div className="flex item-center justify-end">
+            <div className="xs:hidden md:flex items-center gap-1 xs:gap-1 mx-1 ">
+              <Avatar
+                size={"middle"}
+                icon={<UserOutlined />}
+                className="cursor-pointer"
+              />
+            </div>
+          </div>
         </>
       )}
-      <div className="flex item-center justify-end">
-        <div className=" xs:hidden md:flex  gap-2 ">
-          <CustomButton
-            buttonLabel="Login"
-            className="bg-yale-blue text-white"
-            size="middle"
-            onClick={() => {
-              navigate(BACKOFFICE_LOGIN);
-            }}
-          />
-          <CustomButton
-            buttonLabel="Register"
-            className="bg-yale-blue text-white"
-            size="middle"
-            onClick={() => {
-              navigate(BACKOFFICE_REGISTER);
-            }}
-          />
-        </div>
-        <div className="xs:hidden md:flex items-center gap-1 xs:gap-1 mx-1 ">
-          <Avatar
-            size={"middle"}
-            icon={<UserOutlined />}
-            className="cursor-pointer"
-          />
-        </div>
-      </div>
+
       <div className="md:hidden">
         <MenuOutlined className="text-white" onClick={showDrawer} />
       </div>
