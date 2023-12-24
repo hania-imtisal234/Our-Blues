@@ -7,3 +7,4 @@ export const BACKOFFICE_DASHBOARD = "/backoffice/*";
 export const HOME_PAGE = "/";
 export const WEBAPP_LOGIN = "/login";
 export const WEBAPP_REGISTER = "/register";
+export const BOOK_MEETING="/book";
