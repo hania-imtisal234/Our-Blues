@@ -31,13 +31,13 @@ const Home = () => {
             placeholder="Enter your city"
             value={city}
             onChange={(cityInput) => setCity(cityInput.target.value)}
-            className="ant-input bg-carolina-blue text-white"
+            className="ant-input bg-white text-yale-blue"
           />
           <Input
             placeholder="Enter therapist's name"
             value={therapistName}
             onChange={(therapistInput) => setTherapistName(therapistInput.target.value)}
-            className="ant-input bg-carolina-blue text-white mt-3"
+            className="ant-input bg-white text-yale-blue mt-3"
           />
           <Button type="primary" size="large" onClick={handleBooking} className="bg-carolina-blue text-white mt-5">
             Book Therapist
