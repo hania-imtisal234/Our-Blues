@@ -3,6 +3,10 @@ export const BACKOFFICE_LOGIN = "/backoffice";
 export const BACKOFFICE_REGISTER = "/backoffice/register";
 export const BACKOFFICE_DASHBOARD = "/backoffice/*";
 
+//BackOffice Dashboard
+export const DASHBOARD_USERSINFO = "/users";
+export const DASHBOARD_THERAPISTSINFO = "/users/therapists";
+
 // Webapp
 export const HOME_PAGE = "/";
 export const WEBAPP_LOGIN = "/login";

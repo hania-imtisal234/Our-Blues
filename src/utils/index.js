@@ -1,6 +1,7 @@
 import { Form } from "antd";
 import { NAME_ONLY_LETTERS, NAME_REQUIRED } from "../constants/messages";
 import { editableTableInputConfig } from "../enums";
+import CustomButton from "../components/Shared/CustomButton/CustomButton";
 
 export const getItem = (label, key, icon, children) => {
   return {
@@ -40,11 +41,15 @@ export const EditableCell = ({
   inputType,
   children,
   inputProps,
+  record,
+  onPreview,
   ...restProps
 }) => {
   const inputConfig = editableTableInputConfig(inputProps);
   let inputNode = inputConfig[inputType];
-
+  const handlePreview = () => {
+    onPreview(record);
+  };
   return (
     <td {...restProps}>
       {editing ? (

@@ -17,6 +17,39 @@
   background-color: #ffffff;
 }
 
+.ant-btn .ant-btn-primary {
+  background-color: #00356b;
+}
+
+.css-dev-only-do-not-override-6j9yrn .ant-btn-primary {
+  background-color: #00356b;
+}
+.ant-modal-confirm-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100px;
+}
+
+.ant-image-mask {
+  height: 50px;
+  border-radius: 2px;
+}
+.ant-modal-confirm .ant-modal-confirm-titl {
+  color: #00356b;
+}
+.ant-image-img .css-dev-only-do-not-override-6j9yrn {
+  font-size: large;
+}
+.ant-image-mask-info {
+  color: white;
+  font-size: large;
+}
+/* .css-dev-only-do-not-override-6j9yrn .ant-image-error {
+  height: auto;
+} */
 /* width */
 ::-webkit-scrollbar {
   width: 15px;
