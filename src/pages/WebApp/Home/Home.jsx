@@ -21,7 +21,7 @@ const Home = () => {
           Within Our-Blues, we illuminate the path to mental wellness, offering a safe harbor for self-discovery, healing, and the empowering embrace of your unique journey towards inner balance. Our platform is designed to offer expert guidance from certified therapists, fostering a holistic approach that addresses the emotional, mental, and physical dimensions of well-being. Join us on this transformative journey, where Our-Blues becomes a beacon of support, understanding, and empowerment for all.
         </p>
       </div>
-      <div className="container bg-yale-blue p-10  text-center text-white rounded-10 relative z-1 ">
+      <div className="w-full bg-yale-blue p-10 text-center text-white rounded-10 relative z-1 mx-auto">
         <h2 className="text-2xl font-bold mb-1 font-sans text-white">
           Find and Book Your Therapist Now
         </h2>
@@ -44,7 +44,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="container bg-white bg-gradient-to-r from-yale-blue to-carolina-blue text-left text-white rounded-10 relative z-1 mt-20 shadow-lg ">
+      <div className="w-full bg-white bg-gradient-to-r from-yale-blue to-carolina-blue text-left text-white rounded-10 relative z-1 mt-20 shadow-lg ">
   <h2 className="text-2xl font-bold mb-4 font-sans text-center mt-10">
     Looking for more?
   </h2>

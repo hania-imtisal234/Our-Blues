@@ -3,12 +3,14 @@ import { Layout, Select, DatePicker, Button, message, Rate } from "antd";
 import WebHeader from "../../../components/Shared/WebHeader/WebHeader.jsx";
 import { ReadOutlined } from "@ant-design/icons";
 import ViewRatings from "../../../components/Shared/ViewRatings/ViewRatings.jsx";
+import { THERAPIIST_REQUIRED, } from "../../../constants/messages.js"
+
 
 const { Content } = Layout;
 const { Option } = Select;
 
 const BookMeeting = () => {
-  const [therapists, setTherapists] = useState([
+  const [therapists] = useState([
     { id: 1, name: "Therapist 1", rating: 4.5, review: "Great Therapist", availability: ["Monday", "Wednesday", "Friday"] },
     { id: 2, name: "Therapist 2", rating: 3.8 , review: "1- Had a really good experience, defintely helpful.", availability: ["Tuesday", "Thursday"]},
     { id: 3, name: "Therapist 3", rating: 5.0, review: "Definitely suggest it", availability: ["Monday", "Thursday", "Saturday"] },
@@ -16,33 +18,17 @@ const BookMeeting = () => {
 
   const [selectedTherapist, setSelectedTherapist] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
+  const [isDatePickerOpen, setDatePickerOpen] = useState(false);
+  
 
-  const handleTherapistChange = (value) => {
-    setSelectedTherapist(value);
-  };
+  const handleTherapistChange = (value) => {setSelectedTherapist(value); };
+  const handleDateChange = (date) => {setSelectedDate(date); };
+  
+const handleBookAppointment = () => !selectedTherapist || !selectedDate ? message.error(THERAPIIST_REQUIRED) : message.success("Appointment booked successfully!");
+const getAvailableDays = () => selectedTherapist ? therapists.find((t) => t.id === selectedTherapist)?.availability || [] : [];
+const disabledDate = (current) => !getAvailableDays().includes(current.format("dddd"));
+const pickerClassName = isDatePickerOpen ? 'small-datepicker' : '';
 
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-  };
-
-  const handleBookAppointment = () => {
-    if (!selectedTherapist || !selectedDate) {
-      message.error("Please select a therapist and date");
-      return;
-    }
-    message.success("Appointment booked successfully!");
-  };
-  const getAvailableDays = () => {
-    if (selectedTherapist) {
-      const therapist = therapists.find((t) => t.id === selectedTherapist);
-      return therapist ? therapist.availability : [];
-    }
-    return [];
-  };
-  const disabledDate = (current) => {
-    const availableDays = getAvailableDays();
-    return !availableDays.includes(current.format("dddd"));
-  };
 
   return (
     <Layout className="mainLayout bg-white">
@@ -65,15 +51,17 @@ const BookMeeting = () => {
               ))}
             </Select>
           </div>
-          <div className="mb-4">
+          <div className="mb-1">
         <label className="block mb-2">Select Date and Time:</label>
-        <DatePicker
+        <DatePicker 
           showTime
           placeholder="Select date and time"
           onChange={handleDateChange}
           className="w-full"
           disabledDate={disabledDate}
-        />
+          open={isDatePickerOpen}
+          onOpenChange={(open) => setDatePickerOpen(open)}
+          />
       </div>
           <Button
             type="primary"
