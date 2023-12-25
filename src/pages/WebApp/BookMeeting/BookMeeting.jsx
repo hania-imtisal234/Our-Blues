@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Layout, Select, DatePicker, Button, message, Rate } from "antd";
-import AppHeader from "../../../components/Shared/AppHeader/AppHeader.jsx";
+import WebHeader from "../../../components/Shared/WebHeader/WebHeader.jsx";
 import { ReadOutlined } from "@ant-design/icons";
 import ViewRatings from "../../../components/Shared/ViewRatings/ViewRatings.jsx";
 
@@ -9,9 +9,9 @@ const { Option } = Select;
 
 const BookMeeting = () => {
   const [therapists, setTherapists] = useState([
-    { id: 1, name: "Therapist 1", rating: 4.5, review: "Great Therapist" },
-    { id: 2, name: "Therapist 2", rating: 3.8 , review: "1- Had a really good experience, defintely helpful."},
-    { id: 3, name: "Therapist 3", rating: 5.0, review: "Definitely suggest it" },
+    { id: 1, name: "Therapist 1", rating: 4.5, review: "Great Therapist", availability: ["Monday", "Wednesday", "Friday"] },
+    { id: 2, name: "Therapist 2", rating: 3.8 , review: "1- Had a really good experience, defintely helpful.", availability: ["Tuesday", "Thursday"]},
+    { id: 3, name: "Therapist 3", rating: 5.0, review: "Definitely suggest it", availability: ["Monday", "Thursday", "Saturday"] },
   ]);
 
   const [selectedTherapist, setSelectedTherapist] = useState(null);
@@ -32,10 +32,21 @@ const BookMeeting = () => {
     }
     message.success("Appointment booked successfully!");
   };
+  const getAvailableDays = () => {
+    if (selectedTherapist) {
+      const therapist = therapists.find((t) => t.id === selectedTherapist);
+      return therapist ? therapist.availability : [];
+    }
+    return [];
+  };
+  const disabledDate = (current) => {
+    const availableDays = getAvailableDays();
+    return !availableDays.includes(current.format("dddd"));
+  };
 
   return (
     <Layout className="mainLayout bg-white">
-      <AppHeader />
+      <WebHeader />
       <Content className="flex justify-between items-center h-screen p-12">
         <div className="bg-gradient-to-r from-yale-blue to-carolina-blue p-12 rounded-lg shadow-lg text-white w-96 mb-20 ml-10">
           <h1 className="text-3xl font-bold mb-8 text-left">Book Appointment</h1>
@@ -55,14 +66,15 @@ const BookMeeting = () => {
             </Select>
           </div>
           <div className="mb-4">
-            <label className="block mb-2">Select Date and Time:</label>
-            <DatePicker
-              showTime
-              placeholder="Select date and time"
-              onChange={handleDateChange}
-              className="w-full"
-            />
-          </div>
+        <label className="block mb-2">Select Date and Time:</label>
+        <DatePicker
+          showTime
+          placeholder="Select date and time"
+          onChange={handleDateChange}
+          className="w-full"
+          disabledDate={disabledDate}
+        />
+      </div>
           <Button
             type="primary"
             icon={<ReadOutlined />}
