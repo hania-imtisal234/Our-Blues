@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Layout, Button, Input } from "antd";
-import AppHeader from "../../../components/Shared/AppHeader/AppHeader.jsx";
+import WebHeader from "../../../components/Shared/WebHeader/WebHeader.jsx";
 import AppFooter from "../../../components/Shared/AppFooter/AppFooter.jsx";
 import { ReadOutlined, QuestionCircleOutlined, InfoCircleOutlined } from "@ant-design/icons";
 import { BOOK_MEETING } from "../../../constants/Routes.js";
@@ -13,7 +13,7 @@ const Home = () => {
   const navigate = useNavigate();
   return (
     <Layout className="mainLayout bg-white">
-      <AppHeader />
+      <WebHeader />
       <div className="text-center p-20 z-1 bg-white">
   <h1 className="text-5xl font-bold font-sans mb-1">
     <span className="text-shadow-lg text-yale-blue">Our Blues</span></h1>
