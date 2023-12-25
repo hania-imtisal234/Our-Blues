@@ -33,17 +33,17 @@
   height: 100px;
 }
 
-.ant-image-mask {
+#LicenseeImage .ant-image-mask {
   height: 50px;
   border-radius: 2px;
 }
-.ant-modal-confirm .ant-modal-confirm-titl {
+#PreviewModal .ant-modal-confirm .ant-modal-confirm-titl {
   color: #00356b;
 }
-.ant-image-img .css-dev-only-do-not-override-6j9yrn {
+#LicenseeImage .ant-image-img .css-dev-only-do-not-override-6j9yrn {
   font-size: large;
 }
-.ant-image-mask-info {
+#LicenseeImage .ant-image-mask-info {
   color: white;
   font-size: large;
 }

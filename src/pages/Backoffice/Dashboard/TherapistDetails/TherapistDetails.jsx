@@ -27,7 +27,14 @@ const TherapistDetails = () => {
   const handlePreview = (record) => {
     Modal.info({
       title: "Image Preview",
-      content: <Image src={record.licenseeImage} alt="Licensee Image" />,
+      content: (
+        <Image
+          src={record.licenseeImage}
+          alt="Licensee Image"
+          id="LicenseeImage"
+        />
+      ),
+      id: "PreviewModal",
     });
   };
   // This function saves the edited changes.

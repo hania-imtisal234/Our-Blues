@@ -7,9 +7,6 @@ import {
   userStatusTypeOptions,
 } from "../../../../enums";
 import { getLabelForKey, validateName } from "../../../../utils";
-import { Image, Modal } from "antd";
-import { useState } from "react";
-import FormModal from "../../../../components/Shared/FormModal/FormModal";
 
 // This function returns an array of columns for User Details Table.
 export const therapistDetailsConfig = (
@@ -137,7 +134,7 @@ export const therapistDetailsConfig = (
       render: (text) => getLabelForKey(userStatusTypeOptions, text),
     },
     {
-      title: "Preview", // Add a new column for the preview button
+      title: "Preview",
       dataIndex: "preview",
       key: "preview",
       render: (_, record) => (
