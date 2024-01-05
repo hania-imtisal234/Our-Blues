@@ -8,6 +8,20 @@ export const FormRule = {
       max: 50,
     },
   ],
+  TIME: [
+    {
+      required: true,
+      message: "Please enter a valid time!",
+      pattern: /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/,
+    },
+  ],
+  DATE: [
+    {
+      required: true,
+      message: "Please enter a valid date!",
+      pattern: /^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-(19|20)\d\d$/,
+    },
+  ],
   LINK: [
     {
       required: false,

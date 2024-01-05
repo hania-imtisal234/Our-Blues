@@ -60,3 +60,26 @@ export const userStatusTypeOptions = [
     label: "deactivated",
   },
 ];
+export const appointmentStatusTypes = {
+  INPROCESS: "in-process",
+  CONFIRMED: "confirmed",
+  CANCELLED: "cancelled",
+};
+
+export const appointmentStatusTypeOptions = [
+  {
+    key: appointmentStatusTypes.INPROCESS,
+    value: appointmentStatusTypes.INPROCESS,
+    label: "in-Process",
+  },
+  {
+    key: appointmentStatusTypes.CONFIRMED,
+    value: appointmentStatusTypes.CONFIRMED,
+    label: "confirmed",
+  },
+  {
+    key: appointmentStatusTypes.CANCELLED,
+    value: appointmentStatusTypes.CANCELLED,
+    label: "cancelled",
+  },
+];
