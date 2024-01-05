@@ -14,7 +14,10 @@ const Dashboard = () => {
   return (
     <div className="bg-sea-salt" id="custom-dashboard">
       <Layout className="min-h-[100vh]">
-        <Sidebar className="bg-yale-blue" menuItems={menuItems} />
+        <Sidebar
+          className="bg-yale-blue sticky top-0 z-10"
+          menuItems={menuItems}
+        />
         <Layout>
           <AppHeader />
           <Content className="mx-4 my-2 ">

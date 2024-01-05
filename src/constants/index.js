@@ -44,24 +44,31 @@ export const therapistMenuItems = [
   },
   {
     key: "second",
-    label: <div className="text-white">Edit profile</div>,
-    title: "EditProfile",
-    route: "/backoffice/editProfile",
+    label: <div className="text-white">View profile</div>,
+    title: "View Profile",
+    route: "/backoffice/viewProfile",
     icon: <DomainVerificationIcon style={{ color: "white" }} />,
     subItems: [
       {
         key: "third",
         label: (
-          <div className="text-white" id="viewProfile">
-            View Profile
+          <div className="text-white" id="editProfile">
+            Edit Profile
           </div>
         ),
         title: "ViewProfile",
-        route: "/backoffice/editProfile-view",
+        route: "/backoffice/ViewProfile/edit",
         icon: <UserOutlined style={{ color: "white" }} />,
       },
       {
         key: "fourth",
+        label: <div className="text-white">Change Password</div>,
+        title: "ChangePassword",
+        route: "/backoffice/viewProfile/changePassword",
+        icon: <UserOutlined style={{ color: "white" }} />,
+      },
+      {
+        key: "fifth",
         label: <div className="text-white">Set Fees & Time</div>,
         title: "SetFee&Time",
         route: "/backoffice/editProfile/set-fee-time",

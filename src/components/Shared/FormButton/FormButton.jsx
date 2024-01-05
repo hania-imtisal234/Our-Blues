@@ -4,7 +4,7 @@ import { Button, Form } from "antd";
 function FormButton({
   label,
   type = "primary",
-  className = "",
+  className = "hover:bg-light-blue",
   loading,
   disabled = false,
   size = "large",

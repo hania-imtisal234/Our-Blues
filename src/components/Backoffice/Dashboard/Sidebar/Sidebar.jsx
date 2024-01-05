@@ -23,6 +23,7 @@ const Sidebar = ({ className = "bg-yale-blue", menuItems }) => {
             route={item.route}
             label={item.label}
             icon={item.icon}
+            id="menuItems"
           >
             {renderMenuItems(item.subItems)}
           </Menu.SubMenu>
@@ -43,7 +44,12 @@ const Sidebar = ({ className = "bg-yale-blue", menuItems }) => {
   };
 
   return (
-    <div className="bg-yale-blue" id="custom-sidebar">
+    <div
+      className={`bg-yale-blue ${
+        collapsed ? "sticky top-0" : "sticky top-0 z-10"
+      }`}
+      id="custom-sidebar"
+    >
       <Sider
         collapsible
         collapsed={collapsed}
@@ -71,7 +77,7 @@ const Sidebar = ({ className = "bg-yale-blue", menuItems }) => {
           </div>
         )}
 
-        <div className="demo-logo-vertical" />
+        <div className="demo-logo-vertical" id="menuItems" />
         <Menu
           mode="inline"
           className={className}
