@@ -15,6 +15,7 @@ const ActionButton = ({
   onCancel,
   editingKey,
   onEdit,
+  isDeleteAllowed, // Set a default value for isDeleteAllowed
   onDelete = () => {},
 }) => {
   const editable = record.key === editingKey;
@@ -41,26 +42,28 @@ const ActionButton = ({
     <div className="flex items-center gap-2">
       {/* Edit Button */}
       <CustomButton
-        className="w-1 bg-yale-blue text-white"
+        className="w-2 bg-yale-blue text-white"
         disabled={editingKey !== ""}
         onClick={() => onEdit(record)}
         icon={<EditOutlined />}
       />
-      {/* Delete Button */}
-      <Popconfirm
-        title="Are you sure?"
-        okButtonProps={{ danger: true }}
-        onConfirm={() => onDelete(record)}
-        onCancel={onCancel}
-      >
-        <CustomButton
-          className="w-1 bg-yale-blue text-white"
-          disabled={
-            editingKey !== "" || record.status === userStatusTypes.SUSPENDED
-          }
-          icon={<DeleteOutlined />}
-        />
-      </Popconfirm>
+      {/* Delete Button - Show only if isDeleteAllowed is true */}
+      {isDeleteAllowed && (
+        <Popconfirm
+          title="Are you sure?"
+          okButtonProps={{ danger: true }}
+          onConfirm={() => onDelete(record)}
+          onCancel={onCancel}
+        >
+          <CustomButton
+            className="w-1 bg-yale-blue text-white"
+            disabled={
+              editingKey !== "" || record.status === userStatusTypes.SUSPENDED
+            }
+            icon={<DeleteOutlined />}
+          />
+        </Popconfirm>
+      )}
     </div>
   );
 };
