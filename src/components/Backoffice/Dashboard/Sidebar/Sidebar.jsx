@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { adminMenuItems } from "../../../../constants/index";
 import { Layout, Menu } from "antd";
 import OurBluesIcon from "../../../../assets/Icon.png";
 import { useNavigate } from "react-router-dom";
 const { Sider } = Layout;
 
-const Sidebar = ({ className = "bg-yale-blue" }) => {
+const Sidebar = ({ className = "bg-yale-blue", menuItems }) => {
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
 
@@ -79,7 +78,7 @@ const Sidebar = ({ className = "bg-yale-blue" }) => {
           onClick={handleMenuClick}
           style={{ color: "white" }}
         >
-          {renderMenuItems(adminMenuItems)}
+          {renderMenuItems(menuItems)}
         </Menu>
       </Sider>
     </div>
