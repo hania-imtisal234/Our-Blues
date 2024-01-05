@@ -5,11 +5,14 @@ import TherapistDetails from "../pages/Backoffice/Dashboard/TherapistDetails/The
 import AppointmentDetails from "../pages/Backoffice/Dashboard/AppointmentDetails/AppointmentDetails.jsx";
 import {
   DASHBOARD_APPOINTMENTS,
+  DASHBOARD_CHANGEPASSWORD,
+  DASHBOARD_CHANGEPROFILE,
   DASHBOARD_EDITPROFILE,
   DASHBOARD_SET_FEE_TIME,
   DASHBOARD_THERAPISTSINFO,
   DASHBOARD_USERSINFO,
 } from "../constants/Routes.js";
+import EditProfile from "../components/Shared/EditProfile/EditProfile.jsx";
 
 const DashboardRouter = () => {
   return (
@@ -20,9 +23,10 @@ const DashboardRouter = () => {
         <Route path={DASHBOARD_THERAPISTSINFO} element={<TherapistDetails />} />
         {/* Therapist Routes */}
         <Route path={DASHBOARD_APPOINTMENTS} element={<AppointmentDetails />} />
+        <Route path={DASHBOARD_EDITPROFILE} element={<EditProfile />} />
         <Route
-          path={DASHBOARD_EDITPROFILE}
-          element={<h1>Therapist Edit Profile</h1>}
+          path={DASHBOARD_CHANGEPASSWORD}
+          element={<h1>Therapist CHANGE PASSWORD</h1>}
         />
         <Route
           path={DASHBOARD_SET_FEE_TIME}
