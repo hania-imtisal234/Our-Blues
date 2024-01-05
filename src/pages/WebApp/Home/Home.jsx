@@ -32,10 +32,8 @@ const Home = () => {
           empowerment for all.
         </p>
       </div>
-      <div
-        className="w-full bg-yale-blue p-10  text-center text-white rounded-10 relative z-1 "
-        id="hania"
-      >
+      <div className="w-full bg-yale-blue p-10 text-center text-white rounded-10 relative z-1 mx-auto">
+
         <h2 className="text-2xl font-bold mb-1 font-sans text-white">
           Find and Book Your Therapist Now
         </h2>
@@ -66,6 +64,23 @@ const Home = () => {
           </Button>
         </div>
       </div>
+
+      <div className="w-full bg-white bg-gradient-to-r from-yale-blue to-carolina-blue text-left text-white rounded-10 relative z-1 mt-20 shadow-lg ">
+  <h2 className="text-2xl font-bold mb-4 font-sans text-center mt-10">
+    Looking for more?
+  </h2>
+  <div className="flex items-center justify-around mb-10 text-font-sans">
+    <Button type="link" className="text-white text-lg " icon={<ReadOutlined />}>
+      Read Mental Health Articles
+    </Button>
+    <Button type="link" className="text-white text-lg" icon={<QuestionCircleOutlined />}>
+      Ask a Question
+    </Button>
+    <Button type="link" className="text-white text-lg" icon={<InfoCircleOutlined />}>
+      About Us
+    </Button>
+  </div>
+</div>
 
       <div className="container bg-white bg-gradient-to-r from-yale-blue to-carolina-blue text-left text-white rounded-10 relative z-1 mt-20 shadow-lg ">
         <h2 className="text-2xl font-bold mb-4 font-sans text-center mt-10">
