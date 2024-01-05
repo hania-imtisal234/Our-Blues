@@ -69,3 +69,10 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+#viewProfile
+  .ant-menu-title-content
+  .ant-menu-submenu-selected
+  > .ant-menu-submenu-title {
+  color: #ffffff;
+}

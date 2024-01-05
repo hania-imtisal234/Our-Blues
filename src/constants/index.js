@@ -33,3 +33,40 @@ export const adminMenuItems = [
     icon: <DomainVerificationIcon style={{ color: "white" }} />,
   },
 ];
+
+export const therapistMenuItems = [
+  {
+    key: "first",
+    label: <div className="text-white">Appointments</div>,
+    title: <div className="text-white">Appointments</div>,
+    route: "/backoffice/appointments",
+    icon: <UserOutlined style={{ color: "white" }} />,
+  },
+  {
+    key: "second",
+    label: <div className="text-white">Edit profile</div>,
+    title: "EditProfile",
+    route: "/backoffice/editProfile",
+    icon: <DomainVerificationIcon style={{ color: "white" }} />,
+    subItems: [
+      {
+        key: "third",
+        label: (
+          <div className="text-white" id="viewProfile">
+            View Profile
+          </div>
+        ),
+        title: "ViewProfile",
+        route: "/backoffice/editProfile-view",
+        icon: <UserOutlined style={{ color: "white" }} />,
+      },
+      {
+        key: "fourth",
+        label: <div className="text-white">Set Fees & Time</div>,
+        title: "SetFee&Time",
+        route: "/backoffice/editProfile/set-fee-time",
+        icon: <UserOutlined style={{ color: "white" }} />,
+      },
+    ],
+  },
+];
