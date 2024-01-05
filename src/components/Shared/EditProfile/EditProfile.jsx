@@ -21,7 +21,7 @@ const EditProfile = () => {
 
   return (
     <div className="flex-col">
-      <h1 className="flex justify-center text-yale-blue font-bold xs:text-2xl md:text-3xl p-4">
+      <h1 className="flex justify-center text-yale-blue font-bold py-10 xs:text-2xl md:text-3xl ">
         Edit Profile
       </h1>
       <div className="flex justify-center items-center p-2">
