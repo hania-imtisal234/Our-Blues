@@ -13,6 +13,7 @@ import {
   DASHBOARD_USERSINFO,
 } from "../constants/Routes.js";
 import EditProfile from "../components/Shared/EditProfile/EditProfile.jsx";
+import ChangePassword from "../components/Shared/ChangePassword/ChangePassword.jsx";
 
 const DashboardRouter = () => {
   return (
@@ -24,10 +25,7 @@ const DashboardRouter = () => {
         {/* Therapist Routes */}
         <Route path={DASHBOARD_APPOINTMENTS} element={<AppointmentDetails />} />
         <Route path={DASHBOARD_EDITPROFILE} element={<EditProfile />} />
-        <Route
-          path={DASHBOARD_CHANGEPASSWORD}
-          element={<h1>Therapist CHANGE PASSWORD</h1>}
-        />
+        <Route path={DASHBOARD_CHANGEPASSWORD} element={<ChangePassword />} />
         <Route
           path={DASHBOARD_SET_FEE_TIME}
           element={<h1>Therapist set fee and timefff</h1>}
