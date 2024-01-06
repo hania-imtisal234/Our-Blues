@@ -97,3 +97,33 @@
   background-color: #7bafd4;
   padding-left: 0px;
 }
+:where(.css-dev-only-do-not-override-6j9yrn).ant-picker-dropdown
+  .ant-picker-date-panel
+  .ant-picker-body {
+  padding: 0px 0px;
+}
+
+:where(.css-dev-only-do-not-override-6j9yrn).ant-picker-dropdown
+  .ant-picker-date-panel {
+  width: 250px;
+}
+.ant-picker-date-panel
+  :where(.css-dev-only-do-not-override-6j9yrn).ant-picker-dropdown
+  .ant-picker-date-panel {
+  padding: 2px;
+  width: 250px;
+}
+.ant-picker-header
+  :where(.css-dev-only-do-not-override-6j9yrn).ant-picker-dropdown
+  .ant-picker-header {
+  padding: 2px;
+}
+:where(.css-dev-only-do-not-override-6j9yrn).ant-picker-dropdown
+  .ant-picker-date-panel {
+  line-height: 28px;
+}
+
+:where(.css-dev-only-do-not-override-6j9yrn).ant-picker-dropdown
+  .ant-picker-cell {
+  padding: 2px;
+}

@@ -57,6 +57,7 @@ const Sidebar = ({ className = "bg-yale-blue", menuItems }) => {
         onCollapse={(value) => setCollapsed(value)}
         className={className}
         breakpoint="md"
+        style={{ position: "sticky", top: 0, zIndex: 10 }}
       >
         {!collapsed ? (
           <div className="flex items-center justify-center bg-yale-blue h-14 gap-2">
