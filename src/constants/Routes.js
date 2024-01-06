@@ -17,3 +17,6 @@ export const HOME_PAGE = "/";
 export const WEBAPP_LOGIN = "/login";
 export const WEBAPP_REGISTER = "/register";
 export const BOOK_MEETING = "/book";
+export const HEALTHBLOG = "/healthblog";
+export const THERAPISTS = "/therapists";
+export const SUPPORTGROUP = "/supportgroup";
