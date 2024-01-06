@@ -1,12 +1,18 @@
 import React from "react";
 import { Avatar } from "antd";
 import OurBluesLogo from "../../../assets/Logo.png";
-import CustomButton from "../CustomButton/CustomButton.jsx";
+import CustomButton from "../../Shared/CustomButton/CustomButton.jsx";
 import { MenuOutlined, UserOutlined } from "@ant-design/icons";
 import { useState } from "react";
-import MobileDrawer from "../MobileDrawer/MobileDrawer.jsx";
+import MobileDrawer from "../../Shared/MobileDrawer/MobileDrawer.jsx";
 import { useNavigate } from "react-router";
-import { WEBAPP_LOGIN, WEBAPP_REGISTER } from "../../../constants/Routes.js";
+import {
+  HEALTHBLOG,
+  SUPPORTGROUP,
+  THERAPISTS,
+  WEBAPP_LOGIN,
+  WEBAPP_REGISTER,
+} from "../../../constants/Routes.js";
 
 const WebHeader = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -26,24 +32,36 @@ const WebHeader = () => {
   };
 
   return (
-    <div className="flex items-center justify-between px-4 py-1 bg-yale-blue sticky top-0 z-10">
+    <div className=" flex items-center justify-between px-4 py-1 bg-yale-blue sticky top-0 z-10">
       <div className="flex items-center gap-8">
         <img
           src={OurBluesLogo}
           alt="logo"
           className="lg:w-14 sm:w-[70px] my-1 h-[50px] object-contain ml-0 bg-carolina-blue rounded-full"
         />
-        <CustomButton
-          buttonLabel="Health Blog"
-          className="text-white hover:underline"
-          size="middle"
-        />
-        <CustomButton
-          buttonLabel="Therapists"
-          className="text-white hover:underline"
-          size="middle"
-          onClick={handleTherapistButtonClick}
-        />
+        <ul className="h-10 xs:hidden md:flex md:items-center md:justify-end  flex-1 gap-6  text-white font-bold md:text-base sm:text-xl sm:mx-0 xs:text-sm xs:mx-2  mx-4">
+          <a
+            onClick={() => {
+              navigate(HEALTHBLOG);
+            }}
+          >
+            <li>Health Blog</li>
+          </a>
+          <a
+            onClick={() => {
+              navigate(THERAPISTS);
+            }}
+          >
+            <li>Therapists</li>
+          </a>
+          <a
+            onClick={() => {
+              navigate(SUPPORTGROUP);
+            }}
+          >
+            <li>Join Support Group</li>
+          </a>
+        </ul>
       </div>
       {!isLoggedIn ? (
         <div className="flex items-center gap-2">

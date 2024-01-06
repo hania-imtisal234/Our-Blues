@@ -4,10 +4,11 @@ import { Button, Form } from "antd";
 function FormButton({
   label,
   type = "primary",
-  className = "hover:bg-light-blue",
+  className = "hover:bg-light-blue border-white",
   loading,
   disabled = false,
   size = "large",
+  onClick = () => {},
 }) {
   return (
     <>
@@ -19,6 +20,7 @@ function FormButton({
           htmlType="submit"
           className={className}
           loading={loading}
+          onClick={onClick}
         >
           {label}
         </Button>
