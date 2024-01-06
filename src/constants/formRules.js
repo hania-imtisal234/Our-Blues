@@ -48,6 +48,15 @@ export const FormRule = {
       max: 50,
     },
   ],
+  FEES: [
+    {
+      required: true,
+      pattern: /^\d+$/,
+      message: "Please enter fee! ",
+      min: 1000,
+      max: 50000,
+    },
+  ],
   COUNTRY: [
     {
       required: true,

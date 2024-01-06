@@ -13,7 +13,12 @@ const FormInput = ({
   rules,
 }) => {
   return (
-    <Form.Item label={label} name={name} rules={rules} className="m-0 text-sm ">
+    <Form.Item
+      label={label}
+      name={name}
+      rules={rules}
+      className="m-0 text-sm text-yale-blue"
+    >
       <Input
         type={type}
         name={name}
