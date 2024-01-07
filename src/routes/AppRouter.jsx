@@ -7,7 +7,8 @@ import {
   HOME_PAGE,
   WEBAPP_LOGIN,
   WEBAPP_REGISTER,
-  BOOK_MEETING
+  BOOK_MEETING,
+  SUPPORTGROUP
 } from "../../src/constants/Routes";
 import Dashboard from "../pages/Backoffice/Dashboard/Dashboard";
 import RegisterBackOffice from "../pages/Backoffice/Register/Register";
@@ -16,7 +17,7 @@ import Home from "../pages/WebApp/Home/Home";
 import Register from "../pages/WebApp/Register/Register"
 import LoginUser from "../pages/WebApp/Login/Login";
 import BookMeeting from "../pages/WebApp/BookMeeting/BookMeeting";
-
+import SupportGroup from '../pages/WebApp/SupportGroup/SupportGroup';
 const AppRouter = () => {
   return (
     <div>
@@ -32,6 +33,7 @@ const AppRouter = () => {
           <Route path={WEBAPP_LOGIN} element={<LoginUser />} />
           <Route path={WEBAPP_REGISTER} element={<Register/>} />
           <Route path={BOOK_MEETING} element={<BookMeeting/>} />
+          <Route path={SUPPORTGROUP} element={<SupportGroup/>}/>
         </Routes>
       </BrowserRouter>
     </div>
