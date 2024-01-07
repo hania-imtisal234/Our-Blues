@@ -8,9 +8,7 @@ import {
   WEBAPP_LOGIN,
   WEBAPP_REGISTER,
   BOOK_MEETING,
-
-  SUPPORTGROUP
-
+  SUPPORTGROUP,
   THERAPISTS,
 
 } from "../../src/constants/Routes";

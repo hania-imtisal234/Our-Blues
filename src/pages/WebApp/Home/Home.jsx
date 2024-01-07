@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import FormInput from "../../../components/Shared/FormInput/FormInput.jsx";
 import { FormRule } from "../../../constants/formRules.js";
 import FormButton from "../../../components/Shared/FormButton/FormButton.jsx";
+import AppChatBot from "../../../components/Shared/AppChatbot/AppChatbot.jsx";
 
 const Home = () => {
   const [city, setCity] = useState("");
@@ -111,7 +112,9 @@ const Home = () => {
           </div>
         </div>
       </div>
-
+      <Layout style={{ marginTop: "8vh" }}>
+          <AppChatBot/>
+      </Layout>
       <Layout style={{ marginTop: "10vh" }}>
         <AppFooter />
       </Layout>
