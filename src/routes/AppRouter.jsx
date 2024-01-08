@@ -9,7 +9,12 @@ import {
   WEBAPP_REGISTER,
   SUPPORTGROUP,
   THERAPISTS,
+
+  HEALTHBLOG
+
+
   THERAPISTDETAILS,
+
 } from "../../src/constants/Routes";
 import Dashboard from "../pages/Backoffice/Dashboard/Dashboard";
 import RegisterBackOffice from "../pages/Backoffice/Register/Register";
@@ -19,6 +24,9 @@ import Register from "../pages/WebApp/Register/Register";
 import LoginUser from "../pages/WebApp/Login/Login";
 import SupportGroup from "../pages/WebApp/SupportGroup/SupportGroup";
 import Therapists from "../pages/WebApp/Therapists/Therapists";
+
+import ViewHealthblog from "../pages/WebApp/ViewHealthblog/ViewHealthblog";
+
 import TherapistDetails from "../pages/WebApp/TherapistDetails/TherapistDetails";
 
 const AppRouter = () => {
@@ -37,7 +45,12 @@ const AppRouter = () => {
           <Route path={WEBAPP_REGISTER} element={<Register />} />
           <Route path={SUPPORTGROUP} element={<SupportGroup />} />
           <Route path={THERAPISTS} element={<Therapists />} />
+
+          <Route path={HEALTHBLOG} element={<ViewHealthblog />} />
+
+
           <Route path={THERAPISTDETAILS} element={<TherapistDetails />} />
+
         </Routes>
       </BrowserRouter>
     </div>
