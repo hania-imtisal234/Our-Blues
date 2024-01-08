@@ -8,6 +8,7 @@ import MobileDrawer from "../../Shared/MobileDrawer/MobileDrawer.jsx";
 import { useNavigate } from "react-router";
 import {
   HEALTHBLOG,
+  HOME_PAGE,
   SUPPORTGROUP,
   THERAPISTS,
   WEBAPP_LOGIN,
@@ -35,9 +36,12 @@ const WebHeader = () => {
     <div className=" flex items-center justify-between px-4 py-1 bg-yale-blue sticky top-0 z-10">
       <div className="flex items-center gap-8">
         <img
+          onClick={() => {
+            navigate(HOME_PAGE);
+          }}
           src={OurBluesLogo}
           alt="logo"
-          className="lg:w-14 sm:w-[70px] my-1 h-[50px] object-contain ml-0 bg-carolina-blue rounded-full"
+          className="lg:w-14 sm:w-[70px] my-1 h-[50px] object-contain ml-0 bg-carolina-blue rounded-full cursor-pointer"
         />
         <ul className="h-10 xs:hidden md:flex md:items-center md:justify-end  flex-1 gap-6  text-white font-bold md:text-base sm:text-xl sm:mx-0 xs:text-sm xs:mx-2  mx-4">
           <a

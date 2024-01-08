@@ -24,7 +24,7 @@ const Login = () => {
     }
   };
   return (
-    <Layout className="mainLayout bg-sea-salt">
+    <Layout className="mainLayout bg-sea-salt h-screen">
       <AppHeader />
       <div className="flex items-center justify-center m-7">
         <div className="xs:w-56 sm:w-72 px-10 pt-5 pb-5 rounded-2xl bg-carolina-blue">
@@ -80,7 +80,7 @@ const Login = () => {
           )}
         </div>
       </div>
-      <Layout>
+      <Layout style={{ marginTop: "5vh" }}>
         <AppFooter />
       </Layout>
     </Layout>

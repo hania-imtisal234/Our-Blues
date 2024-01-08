@@ -108,7 +108,7 @@ export const appointmentDetailsConfig = (
       title: <div className="text-sm text-yale-blue">Status</div>,
       dataIndex: "status",
       key: "role",
-      width: "10%",
+      width: "15%",
       editable: true,
       inputType: InputType.SELECT,
       inputProps: {
@@ -122,7 +122,7 @@ export const appointmentDetailsConfig = (
       title: "",
       dataIndex: "action",
       align: "center",
-      width: "7%",
+      width: "9%",
       key: "action",
       render: (_, record) => {
         return (

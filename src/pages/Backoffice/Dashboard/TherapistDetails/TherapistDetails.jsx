@@ -2,6 +2,7 @@ import { Form, Table, Modal, Image } from "antd";
 import React, { useState } from "react";
 import { EditableCell } from "../../../../utils";
 import { therapistDetailsConfig } from "./therapistDetailsConfig";
+import ourBluesLogo from "../../../../assets/Logo.png";
 
 const TherapistDetails = () => {
   // Ant Design's Form Hook
@@ -15,12 +16,12 @@ const TherapistDetails = () => {
       dataIndex: "1",
       sNo: "1",
       firstName: "Hania",
-      phoneNumber: "12312312312",
+      phoneNumber: "0331-2575044",
       lastName: "Imtisal",
-      email: "hani@korean.com",
-      gender: "male",
-      age: 5,
-      address: "hania ka ghar",
+      email: "hania@gmail.com",
+      gender: "female",
+      age: 20,
+      address: "Faisal Town",
       status: "suspended",
     },
   ]);
