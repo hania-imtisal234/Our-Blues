@@ -10,6 +10,7 @@ import {
   BOOK_MEETING,
   SUPPORTGROUP,
   THERAPISTS,
+  HEALTHBLOG
 
 } from "../../src/constants/Routes";
 import Dashboard from "../pages/Backoffice/Dashboard/Dashboard";
@@ -21,6 +22,7 @@ import LoginUser from "../pages/WebApp/Login/Login";
 import BookMeeting from "../pages/WebApp/BookMeeting/BookMeeting";
 import SupportGroup from '../pages/WebApp/SupportGroup/SupportGroup';
 import Therapists from "../pages/WebApp/Therapists/Therapists";
+import ViewHealthblog from "../pages/WebApp/ViewHealthblog/ViewHealthblog";
 
 const AppRouter = () => {
   return (
@@ -39,6 +41,7 @@ const AppRouter = () => {
           <Route path={BOOK_MEETING} element={<BookMeeting/>} />
           <Route path={SUPPORTGROUP} element={<SupportGroup/>}/>
           <Route path={THERAPISTS} element={<Therapists />} />
+          <Route path={HEALTHBLOG} element={<ViewHealthblog />} />
 
         </Routes>
       </BrowserRouter>
