@@ -9,7 +9,7 @@ import { Layout } from "antd";
 import DashboardRouter from "../../../routes/DashboardRouter";
 const { Content } = Layout;
 const Dashboard = () => {
-  const userRole = "therapist";
+  const userRole = "admin";
   const menuItems = userRole === "admin" ? adminMenuItems : therapistMenuItems;
   return (
     <div className="bg-sea-salt" id="custom-dashboard">

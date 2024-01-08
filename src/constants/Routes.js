@@ -13,7 +13,7 @@ export const DASHBOARD_EDITPROFILE = "/ViewProfile/edit";
 export const DASHBOARD_CHANGEPASSWORD = "/viewProfile/changePassword";
 export const DASHBOARD_SET_FEE_TIME = "/editProfile/set-fee-time";
 // Webapp
-export const HOME_PAGE = "/";
+export const HOME_PAGE = "/home";
 export const WEBAPP_LOGIN = "/login";
 export const WEBAPP_REGISTER = "/register";
 export const BOOK_MEETING = "/book";

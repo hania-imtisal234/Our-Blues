@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Layout, Button, Form } from "antd";
+import { Layout, Button, Form, FloatButton } from "antd";
 import WebHeader from "../../../components/WebApp/WebHeader/WebHeader.jsx";
 import AppFooter from "../../../components/Shared/AppFooter/AppFooter.jsx";
 import {
   ReadOutlined,
   QuestionCircleOutlined,
   InfoCircleOutlined,
+  WechatOutlined,
 } from "@ant-design/icons";
 import { BOOK_MEETING } from "../../../constants/Routes.js";
 import { useNavigate } from "react-router-dom";
@@ -18,6 +19,15 @@ const Home = () => {
   const [city, setCity] = useState("");
   const [therapistName, setTherapistName] = useState("");
   const navigate = useNavigate();
+  const [chatBotVisible, setChatBotVisible] = useState(false);
+
+  const handleOpenChatBot = () => {
+    setChatBotVisible(true);
+  };
+
+  const handleCloseChatBot = () => {
+    setChatBotVisible(false);
+  };
 
   return (
     <Layout className="mainLayout bg-white h-screen">
@@ -113,7 +123,8 @@ const Home = () => {
         </div>
       </div>
       <Layout style={{ marginTop: "8vh" }}>
-          <AppChatBot/>
+        <FloatButton icon={<WechatOutlined />} onClick={handleOpenChatBot} />
+        <AppChatBot visible={chatBotVisible} onClose={handleCloseChatBot} />
       </Layout>
       <Layout style={{ marginTop: "10vh" }}>
         <AppFooter />

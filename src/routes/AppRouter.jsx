@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import {
   BACKOFFICE_DASHBOARD,
   BACKOFFICE_LOGIN,
@@ -9,12 +9,8 @@ import {
   WEBAPP_REGISTER,
   SUPPORTGROUP,
   THERAPISTS,
-
-  HEALTHBLOG
-
-
+  HEALTHBLOG,
   THERAPISTDETAILS,
-
 } from "../../src/constants/Routes";
 import Dashboard from "../pages/Backoffice/Dashboard/Dashboard";
 import RegisterBackOffice from "../pages/Backoffice/Register/Register";
@@ -24,9 +20,7 @@ import Register from "../pages/WebApp/Register/Register";
 import LoginUser from "../pages/WebApp/Login/Login";
 import SupportGroup from "../pages/WebApp/SupportGroup/SupportGroup";
 import Therapists from "../pages/WebApp/Therapists/Therapists";
-
 import ViewHealthblog from "../pages/WebApp/ViewHealthblog/ViewHealthblog";
-
 import TherapistDetails from "../pages/WebApp/TherapistDetails/TherapistDetails";
 
 const AppRouter = () => {
@@ -41,16 +35,13 @@ const AppRouter = () => {
 
           {/* Webapp Routes */}
           <Route path={HOME_PAGE} element={<Home />} />
+          <Route path={"/"} element={<Navigate to={HOME_PAGE} />} />
           <Route path={WEBAPP_LOGIN} element={<LoginUser />} />
           <Route path={WEBAPP_REGISTER} element={<Register />} />
           <Route path={SUPPORTGROUP} element={<SupportGroup />} />
           <Route path={THERAPISTS} element={<Therapists />} />
-
           <Route path={HEALTHBLOG} element={<ViewHealthblog />} />
-
-
           <Route path={THERAPISTDETAILS} element={<TherapistDetails />} />
-
         </Routes>
       </BrowserRouter>
     </div>
