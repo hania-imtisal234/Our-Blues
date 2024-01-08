@@ -9,13 +9,13 @@ import AppHeader from "../../../components/Shared/AppHeader/AppHeader.jsx";
 import AppFooter from "../../../components/Shared/AppFooter/AppFooter.jsx";
 import Loader from "../../../components/Shared/Loader/Loader.jsx";
 import { BACKOFFICE_REGISTER } from "../../../constants/Routes.js";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import axios from "axios";
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-    const handleError = (err) =>
+  const handleError = (err) =>
     toast.error(err, {
       position: "bottom-left",
     });
@@ -23,7 +23,6 @@ const Login = () => {
     toast.success(msg, {
       position: "bottom-left",
     });
-
 
   const handleLogin = async (values) => {
     try {

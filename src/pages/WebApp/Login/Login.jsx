@@ -8,14 +8,14 @@ import { FormRule } from "../../../constants/formRules";
 import AppHeader from "../../../components/Shared/AppHeader/AppHeader.jsx";
 import AppFooter from "../../../components/Shared/AppFooter/AppFooter.jsx";
 import Loader from "../../../components/Shared/Loader/Loader.jsx";
-import { BACKOFFICE_REGISTER } from "../../../constants/Routes.js";
-import { ToastContainer, toast } from "react-toastify";
+import { WEBAPP_REGISTER } from "../../../constants/Routes.js";
+import { toast } from "react-toastify";
 import axios from "axios";
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-    const handleError = (err) =>
+  const handleError = (err) =>
     toast.error(err, {
       position: "bottom-left",
     });
@@ -39,13 +39,12 @@ const Login = () => {
       if (success) {
         handleSuccess(message);
         setTimeout(() => {
-          if(data.role == "therapist"){
-            navigate("/")
-          } else if (data.role == "admin"){
-            console.log("Admin Logged in")
-            navigate("/backoffice/Dashboard")
+          if (data.role == "therapist") {
+            navigate("/");
+          } else if (data.role == "admin") {
+            console.log("Admin Logged in");
+            navigate("/backoffice/Dashboard");
           }
-          
         }, 1000);
       } else {
         handleError(message);
@@ -104,7 +103,7 @@ const Login = () => {
                 Dont have an account?{" "}
                 <Link
                   className="text-white font-bold underline"
-                  to={BACKOFFICE_REGISTER}
+                  to={WEBAPP_REGISTER}
                 >
                   Register
                 </Link>

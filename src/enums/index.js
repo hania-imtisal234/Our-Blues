@@ -130,3 +130,14 @@ export const Therapists = [
     profile: <UserOutlined style={{ color: "white" }} />,
   },
 ];
+
+export const Payments = {
+  userId: 1,
+  userName: "Hania",
+  userEmail: "hania.imtisal234@gmail.com",
+  therapistId: 1,
+  therapistName: "Therapist 1",
+  amount: 1000,
+  currency: "PKR",
+  address: "NFC,Lahore",
+};

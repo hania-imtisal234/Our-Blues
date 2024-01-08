@@ -3,7 +3,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-const authRoute = require("./routes/AuthRoute")
+const authRoute = require("./routes/AuthRoute");
+const checkoutController = require("./controllers/checkoutController");
 const { MONGO_URL, PORT } = process.env;
 const app = express();
 
@@ -11,7 +12,7 @@ mongoose
   .connect(MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-  }) 
+  })
   .then(() => console.log("MongoDB is connected successfully"))
   .catch((err) => console.error(err));
 
@@ -27,8 +28,8 @@ app.use(
   })
 );
 
-app.use(cookieParser())
+app.use(cookieParser());
 
 app.use(express.json());
 
-app.use("/", authRoute)
+app.use("/", authRoute);

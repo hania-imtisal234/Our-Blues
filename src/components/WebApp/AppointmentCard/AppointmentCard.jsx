@@ -1,9 +1,11 @@
-import { Button, DatePicker, message } from "antd";
+import { DatePicker } from "antd";
 import React, { useState } from "react";
 import { ReadOutlined } from "@ant-design/icons";
 import FormButton from "../../Shared/FormButton/FormButton";
+import { loadStripe } from "@stripe/stripe-js";
+import { Payments } from "../../../enums";
 
-const AppointmentCard = ({ therapistInfo, therapists }) => {
+const AppointmentCard = ({ therapistInfo }) => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [isDatePickerOpen, setDatePickerOpen] = useState(false);
   const THERAPIST_REQUIRED = "Therapist is required"; // Assuming this constant is defined
@@ -12,11 +14,36 @@ const AppointmentCard = ({ therapistInfo, therapists }) => {
     setSelectedDate(date);
   };
 
-  const handleBookAppointment = () => {
-    if (!therapistInfo || !selectedDate) {
-      message.error(THERAPIST_REQUIRED);
-    } else {
-      message.success("Appointment booked successfully!");
+  const handleBookAppointment = async () => {
+    const stripe = await loadStripe(
+      "pk_test_51OWNFwSGbQwiiPfQU0irBiHJ1vuiSeCbom1cm6R2AxgZCc0GHZ0uMHP2aRyXbJwjp04s1Pathfv4EbcMGk6eTlAR00NyZmIYNc"
+    );
+
+    const body = {
+      Payments: { Payments },
+    };
+
+    const headers = {
+      "Content-Type": "application/json",
+    };
+
+    const response = await fetch(
+      "http://localhost:7000/api/create-checkout-session",
+      {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify({ data: [Payments] }),
+      }
+    );
+
+    const session = await response.json();
+
+    const result = stripe.redirectToCheckout({
+      sessionId: session.id,
+    });
+
+    if (result.error) {
+      console.log(result.error);
     }
   };
 
