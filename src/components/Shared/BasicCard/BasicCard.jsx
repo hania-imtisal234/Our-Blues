@@ -1,12 +1,17 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 
 const BasicCard = ({ name }) => {
   const navigate = useNavigate();
   return (
-    <div className="bg-yale-blue w-40 h-40 rounded-lg">
+    <div
+      className="bg-yale-blue w-40 h-40 rounded-lg cursor-pointer"
+      onClick={() => {
+        navigate(name);
+      }}
+    >
       <div className="flex justify-center p-4">
         <Avatar size={60} icon={<UserOutlined />} className="cursor-pointer " />
       </div>

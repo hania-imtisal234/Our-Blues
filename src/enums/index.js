@@ -1,5 +1,5 @@
 import { Input, InputNumber, Select, Switch } from "antd";
-
+import { UserOutlined } from "@ant-design/icons";
 // Input types for Ant Design.
 export const InputType = {
   SELECT: "select",
@@ -81,5 +81,52 @@ export const appointmentStatusTypeOptions = [
     key: appointmentStatusTypes.CANCELLED,
     value: appointmentStatusTypes.CANCELLED,
     label: "cancelled",
+  },
+];
+
+export const Therapists = [
+  {
+    id: 1,
+    name: "Therapist 1",
+    title: "Psychiatrist",
+    qualification: "MBBS, FCPS",
+    rating: 4.5,
+    review: "Great Therapist",
+    availability: ["Monday", "Wednesday", "Friday"],
+    experience: "12 Years",
+    profile: <UserOutlined style={{ color: "white" }} />,
+  },
+  {
+    id: 2,
+    name: "Therapist 2",
+    title: "Psychiatrist",
+    qualification: "MBBS, FCPS",
+    rating: 3.8,
+    review: "1- Had a really good experience, defintely helpful.",
+    availability: ["Tuesday", "Thursday"],
+    experience: "9 Years",
+    profile: <UserOutlined style={{ color: "white" }} />,
+  },
+  {
+    id: 3,
+    name: "Therapist 3",
+    title: "Psychiatrist",
+    qualification: "MBBS, FCPS",
+    rating: 5.0,
+    review: "Definitely suggest it",
+    availability: ["Monday", "Thursday", "Saturday"],
+    experience: "15 Years",
+    profile: <UserOutlined style={{ color: "white" }} />,
+  },
+  {
+    id: 4,
+    name: "Therapist 4",
+    title: "Psychiatrist",
+    qualification: "MBBS, FCPS",
+    rating: 4.0,
+    review: "Definitely suggest it",
+    availability: ["Monday", "Thursday", "Saturday"],
+    experience: "14 Years",
+    profile: <UserOutlined style={{ color: "white" }} />,
   },
 ];
