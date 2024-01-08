@@ -1,14 +1,48 @@
 import { Form, Table, Modal, Image } from "antd";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { EditableCell } from "../../../../utils";
 import { therapistDetailsConfig } from "./therapistDetailsConfig";
 import ourBluesLogo from "../../../../assets/Logo.png";
+import { useCookies } from "react-cookie";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const TherapistDetails = () => {
   // Ant Design's Form Hook
   const [form] = Form.useForm();
   const [isLoading, setIsLoading] = useState(false);
   const [editingKey, setEditingKey] = useState("");
+
+  const navigate = useNavigate();
+  const [cookies, removeCookie] = useCookies([]);
+  const [lastName, setUsername] = useState("");
+  useEffect(() => {
+    const verifyCookie = async () => {
+      console.log(cookies.token);
+      if (!cookies.token) {
+        navigate("/login");
+      }
+      const { data } = await axios.post(
+        "http://localhost:4000/",
+        {},
+        { withCredentials: true }
+      );
+      const { status, user } = data;
+      setUsername(user);
+      return status
+        ? toast(`Hello ${user}`, {
+            position: "top-right",
+          })
+        : (removeCookie("token"), navigate("/login"));
+    };
+    verifyCookie();
+  }, [cookies, navigate, removeCookie]);
+  const Logout = () => {
+    removeCookie("token");
+    navigate("/signup");
+  };
+
 
   const [userDetailsData, setUserDetailsData] = useState([
     {

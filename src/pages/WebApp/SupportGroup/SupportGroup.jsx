@@ -1,17 +1,49 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Layout, Input, Button, List, Avatar, Empty } from "antd";
 import WebHeader from "../../../components/WebApp/WebHeader/WebHeader";
+import io from "socket.io-client";
+import { useCookies } from "react-cookie";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const { Content } = Layout;
+
+const socket = io("http://localhost:3001", { transports: ["websocket"] });
+
 const SupportGroup = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const [currentUser, setCurrentUser] = useState("");
+  
+  const [cookies, removeCookie] = useCookies([]);
+  const [lastName, setUsername] = useState("");
+
+  useEffect(() => {
+
+    
+
+    const user = prompt("Enter your name:");
+    setCurrentUser(user);
+
+    socket.on("message", (data) => {
+      setMessages((prevMessages) => [...prevMessages, data]);
+    });
+
+    return () => {
+      socket.connect();
+    };
+  }, []);
+
   const handleSendMessage = () => {
     if (newMessage.trim() !== "") {
-      setMessages([...messages, { user: "You", content: newMessage }]);
+      const messageData = { user: currentUser, content: newMessage };
+      setMessages((prevMessages) => [...prevMessages, messageData]); 
+      socket.emit("message", messageData);
       setNewMessage("");
     }
   };
+
   return (
     <Layout>
       <WebHeader />
@@ -29,7 +61,7 @@ const SupportGroup = () => {
               itemLayout="horizontal"
               dataSource={messages}
               renderItem={(item) => (
-                <List.Item className={item.user === "You" ? "text-right" : "text-left"}>
+                <List.Item className={item.user === currentUser ? "text-right" : "text-left"}>
                   <List.Item.Meta
                     avatar={<Avatar>{item.user[0]}</Avatar>}
                     title={item.user}
@@ -41,7 +73,7 @@ const SupportGroup = () => {
           )}
           <div className="flex mt-4">
             <Input
-              className="mr-2 text-black " 
+              className="mr-2 text-black"
               placeholder="Type a message..."
               value={newMessage}
               onChange={(e) => setNewMessage(e.target.value)}
@@ -55,4 +87,5 @@ const SupportGroup = () => {
     </Layout>
   );
 };
+
 export default SupportGroup;

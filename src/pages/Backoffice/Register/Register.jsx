@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Form, Layout } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FormInput from "../../../components/Shared/FormInput/FormInput";
 import FormButton from "../../../components/Shared/FormButton/FormButton.jsx";
 import OurBlueLogo from "../../../assets/Logo.png";
@@ -11,14 +11,42 @@ import Loader from "../../../components/Shared/Loader/Loader.jsx";
 import FormSelect from "../../../components/Shared/FormSelect/FormSelect.jsx";
 import AppUploader from "../../../components/Shared/AppUploader/AppUploader.jsx";
 import { BACKOFFICE_LOGIN } from "../../../constants/Routes.js";
+import { ToastContainer, toast } from "react-toastify";
+import axios from "axios";
 
 const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+    const handleError = (err) =>
+    toast.error(err, {
+      position: "bottom-left",
+    });
+  const handleSuccess = (msg) =>
+    toast.success(msg, {
+      position: "bottom-left",
+    });
+
 
   const handleLogin = async (values) => {
     try {
       setIsLoading(true);
-      console.log(values);
+      const { data } = await axios.post(
+        "http://localhost:4000/signup",
+        {
+          ...values,
+        },
+        { withCredentials: true }
+      );
+      console.log(data);
+      const { success, message } = data;
+      if (success) {
+        handleSuccess(message);
+        setTimeout(() => {
+          navigate("/");
+        }, 1000);
+      } else {
+        handleError(message);
+      }
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);

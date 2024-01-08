@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import WebHeader from "../../../components/WebApp/WebHeader/WebHeader";
 import { Layout } from "antd";
 import { useParams } from "react-router-dom";
@@ -7,6 +7,10 @@ import { Therapists } from "../../../enums";
 import TherapistCard from "../../../components/WebApp/TherapistCard/TherapistCard";
 import ViewRatings from "../../../components/WebApp/ViewRatings/ViewRatings";
 import AppointmentCard from "../../../components/WebApp/AppointmentCard/AppointmentCard";
+import { useCookies } from "react-cookie";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const TherapistDetails = () => {
   const params = useParams();
@@ -16,6 +20,37 @@ const TherapistDetails = () => {
     (therapist) => therapist.name == selectedTherapist
   );
   console.log(therapistInfo);
+
+  const navigate = useNavigate();
+  
+  const [cookies, removeCookie] = useCookies([]);
+  const [lastName, setUsername] = useState("");
+  useEffect(() => {
+    const verifyCookie = async () => {
+      console.log(cookies.token);
+      if (!cookies.token) {
+        navigate("/login");
+      }
+      const { data } = await axios.post(
+        "http://localhost:4000/",
+        {},
+        { withCredentials: true }
+      );
+      const { status, user } = data;
+      setUsername(user);
+      return status
+        ? toast(`Hello ${user}`, {
+            position: "top-right",
+          })
+        : (removeCookie("token"), navigate("/login"));
+    };
+    verifyCookie();
+  }, [cookies, navigate, removeCookie]);
+  const Logout = () => {
+    removeCookie("token");
+    navigate("/signup");
+  };
+
 
   return (
     <Layout className="mainLayout bg-sea-salt h-full">

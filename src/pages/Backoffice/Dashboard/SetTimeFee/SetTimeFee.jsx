@@ -1,11 +1,46 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, TimePicker, DatePicker } from "antd";
 import FormInput from "../../../../components/Shared/FormInput/FormInput";
 import { FormRule } from "../../../../constants/formRules";
 import FormButton from "../../../../components/Shared/FormButton/FormButton";
 import dayjs from "dayjs";
+import { useCookies } from "react-cookie";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
 
 const SetTimeFee = () => {
+
+  const navigate = useNavigate();
+  const [cookies, removeCookie] = useCookies([]);
+  const [lastName, setUsername] = useState("");
+  useEffect(() => {
+    const verifyCookie = async () => {
+      console.log(cookies.token);
+      if (!cookies.token) {
+        navigate("/login");
+      }
+      const { data } = await axios.post(
+        "http://localhost:4000/",
+        {},
+        { withCredentials: true }
+      );
+      const { status, user } = data;
+      setUsername(user);
+      return status
+        ? toast(`Hello ${user}`, {
+            position: "top-right",
+          })
+        : (removeCookie("token"), navigate("/login"));
+    };
+    verifyCookie();
+  }, [cookies, navigate, removeCookie]);
+  const Logout = () => {
+    removeCookie("token");
+    navigate("/signup");
+  };
+
   const [value, setValue] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const onChangeTime = (time) => {

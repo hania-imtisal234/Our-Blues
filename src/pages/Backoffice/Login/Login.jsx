@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Form, Layout } from "antd";
 import FormInput from "../../../components/Shared/FormInput/FormInput";
 import FormButton from "../../../components/Shared/FormButton/FormButton.jsx";
@@ -9,14 +9,42 @@ import AppHeader from "../../../components/Shared/AppHeader/AppHeader.jsx";
 import AppFooter from "../../../components/Shared/AppFooter/AppFooter.jsx";
 import Loader from "../../../components/Shared/Loader/Loader.jsx";
 import { BACKOFFICE_REGISTER } from "../../../constants/Routes.js";
+import { ToastContainer, toast } from "react-toastify";
+import axios from "axios";
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+    const handleError = (err) =>
+    toast.error(err, {
+      position: "bottom-left",
+    });
+  const handleSuccess = (msg) =>
+    toast.success(msg, {
+      position: "bottom-left",
+    });
+
 
   const handleLogin = async (values) => {
     try {
       setIsLoading(true);
-      console.log(values);
+      const { data } = await axios.post(
+        "http://localhost:4000/login",
+        {
+          ...values,
+        },
+        { withCredentials: true }
+      );
+      console.log(data);
+      const { success, message } = data;
+      if (success) {
+        handleSuccess(message);
+        setTimeout(() => {
+          navigate("/");
+        }, 1000);
+      } else {
+        handleError(message);
+      }
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
