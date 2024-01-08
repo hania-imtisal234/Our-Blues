@@ -7,10 +7,9 @@ import {
   HOME_PAGE,
   WEBAPP_LOGIN,
   WEBAPP_REGISTER,
-  BOOK_MEETING,
   SUPPORTGROUP,
   THERAPISTS,
-
+  THERAPISTDETAILS,
 } from "../../src/constants/Routes";
 import Dashboard from "../pages/Backoffice/Dashboard/Dashboard";
 import RegisterBackOffice from "../pages/Backoffice/Register/Register";
@@ -18,9 +17,9 @@ import LoginBackoffice from "../pages/Backoffice/Login/Login";
 import Home from "../pages/WebApp/Home/Home";
 import Register from "../pages/WebApp/Register/Register";
 import LoginUser from "../pages/WebApp/Login/Login";
-import BookMeeting from "../pages/WebApp/BookMeeting/BookMeeting";
-import SupportGroup from '../pages/WebApp/SupportGroup/SupportGroup';
+import SupportGroup from "../pages/WebApp/SupportGroup/SupportGroup";
 import Therapists from "../pages/WebApp/Therapists/Therapists";
+import TherapistDetails from "../pages/WebApp/TherapistDetails/TherapistDetails";
 
 const AppRouter = () => {
   return (
@@ -35,11 +34,10 @@ const AppRouter = () => {
           {/* Webapp Routes */}
           <Route path={HOME_PAGE} element={<Home />} />
           <Route path={WEBAPP_LOGIN} element={<LoginUser />} />
-          <Route path={WEBAPP_REGISTER} element={<Register/>} />
-          <Route path={BOOK_MEETING} element={<BookMeeting/>} />
-          <Route path={SUPPORTGROUP} element={<SupportGroup/>}/>
+          <Route path={WEBAPP_REGISTER} element={<Register />} />
+          <Route path={SUPPORTGROUP} element={<SupportGroup />} />
           <Route path={THERAPISTS} element={<Therapists />} />
-
+          <Route path={THERAPISTDETAILS} element={<TherapistDetails />} />
         </Routes>
       </BrowserRouter>
     </div>
