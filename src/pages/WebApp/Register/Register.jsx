@@ -65,7 +65,7 @@ const Register = () => {
       if (success) {
         handleSuccess(message);
         setTimeout(() => {
-          navigate("/");
+          navigate("/backoffice/Dashboard");
         }, 1000);
       } else {
         handleError(message);

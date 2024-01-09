@@ -44,11 +44,14 @@ const Login = () => {
         handleSuccess(message);
         setTimeout(() => {
           if (data.role == "therapist") {
+
+
             localStorage.setItem(
               "userInfo",
               JSON.stringify({ role: "therapist", loggedIn: true })
             );
             // setUserInfo({ role: "therapist", loggedIn: true });
+
             navigate("/backoffice/Dashboard");
           } else if (data.role == "admin") {
             localStorage.setItem(
