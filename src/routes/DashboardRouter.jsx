@@ -4,6 +4,7 @@ import UserDetails from "../pages/Backoffice/Dashboard/UserDetails/UserDetails";
 import TherapistDetails from "../pages/Backoffice/Dashboard/TherapistDetails/TherapistDetails.jsx";
 import AppointmentDetails from "../pages/Backoffice/Dashboard/AppointmentDetails/AppointmentDetails.jsx";
 import {
+  DASHBOARD_ADDARTICLES,
   DASHBOARD_APPOINTMENTS,
   DASHBOARD_CHANGEPASSWORD,
   DASHBOARD_CHANGEPROFILE,
@@ -23,6 +24,8 @@ const DashboardRouter = () => {
         {/* Admin Routes */}
         <Route path={DASHBOARD_USERSINFO} element={<UserDetails />} />
         <Route path={DASHBOARD_THERAPISTSINFO} element={<TherapistDetails />} />
+        {/* <Route path={DASHBOARD_ADDARTICLES} element={<TherapistDetails />} /> */}
+
         {/* Therapist Routes */}
         <Route path={DASHBOARD_APPOINTMENTS} element={<AppointmentDetails />} />
         <Route path={DASHBOARD_EDITPROFILE} element={<EditProfile />} />

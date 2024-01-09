@@ -10,12 +10,13 @@ import { Layout } from "antd";
 import DashboardRouter from "../../../routes/DashboardRouter";
 import { useCookies } from "react-cookie";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const { Content } = Layout;
 var userRole
 const Dashboard = () => {
+
 
   const handleLogin = async () => {
     try {
@@ -33,15 +34,26 @@ const Dashboard = () => {
 
   const menuItems = userRole === "admin" ? adminMenuItems : therapistMenuItems;
 
+  const [userInfo, setUserInfo] = useState({
+    role: "",
+    loggedIn: false,
+  });
+
+
   const navigate = useNavigate();
   const [cookies, removeCookie] = useCookies([]);
   const [lastName, setUsername] = useState("");
+
   useEffect(() => {
     const verifyCookie = async () => {
       console.log(cookies.token);
       if (!cookies.token) {
         navigate("/login");
       }
+
+      const storedUserInfo = JSON.parse(localStorage.getItem("userInfo")) || {};
+      setUserInfo(storedUserInfo);
+
       const { data } = await axios.post(
         "http://localhost:4000/",
         {},
@@ -61,7 +73,8 @@ const Dashboard = () => {
     removeCookie("token");
     navigate("/signup");
   };
-
+  const menuItems =
+    userInfo.role === "admin" ? adminMenuItems : therapistMenuItems;
   return (
     <div className="bg-sea-salt" id="custom-dashboard">
       <Layout className="min-h-[100vh]">

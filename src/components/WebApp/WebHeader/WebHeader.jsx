@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Avatar } from "antd";
 import OurBluesLogo from "../../../assets/Logo.png";
 import CustomButton from "../../Shared/CustomButton/CustomButton.jsx";
@@ -19,7 +19,14 @@ const WebHeader = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const navigate = useNavigate();
-
+  useEffect(() => {
+    const storedUserInfo = JSON.parse(localStorage.getItem("userInfo")) || {};
+    setIsLoggedIn(storedUserInfo.loggedIn);
+  }, []);
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate(WEBAPP_LOGIN);
+  };
   const showDrawer = () => {
     setIsDrawerOpen(true);
   };
@@ -87,12 +94,22 @@ const WebHeader = () => {
           />
         </div>
       ) : (
-        <div className="flex items-center gap-1">
-          <Avatar
-            size={"middle"}
-            icon={<UserOutlined />}
-            className="cursor-pointer"
-          />
+        <div className="flex items-center gap-1 justify-end">
+          <div>
+            <CustomButton
+              buttonLabel="Logout"
+              className="bg-yale-blue text-white"
+              size="middle"
+              onClick={handleLogout}
+            />
+          </div>
+          <div className="xs:hidden md:flex items-center gap-1 xs:gap-1 mx-1 ">
+            <Avatar
+              size={"middle"}
+              icon={<UserOutlined />}
+              className="cursor-pointer"
+            />
+          </div>
         </div>
       )}
 
