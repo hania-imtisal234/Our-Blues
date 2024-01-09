@@ -21,37 +21,6 @@ const TherapistDetails = () => {
   );
   console.log(therapistInfo);
 
-  const navigate = useNavigate();
-  
-  const [cookies, removeCookie] = useCookies([]);
-  const [lastName, setUsername] = useState("");
-  useEffect(() => {
-    const verifyCookie = async () => {
-      console.log(cookies.token);
-      if (!cookies.token) {
-        navigate("/login");
-      }
-      const { data } = await axios.post(
-        "http://localhost:4000/",
-        {},
-        { withCredentials: true }
-      );
-      const { status, user } = data;
-      setUsername(user);
-      return status
-        ? toast(`Hello ${user}`, {
-            position: "top-right",
-          })
-        : (removeCookie("token"), navigate("/login"));
-    };
-    verifyCookie();
-  }, [cookies, navigate, removeCookie]);
-  const Logout = () => {
-    removeCookie("token");
-    navigate("/signup");
-  };
-
-
   return (
     <Layout className="mainLayout bg-sea-salt h-full">
       <WebHeader />

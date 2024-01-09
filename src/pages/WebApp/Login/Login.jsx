@@ -40,7 +40,7 @@ const Login = () => {
         handleSuccess(message);
         setTimeout(() => {
           if (data.role == "therapist") {
-            navigate("/");
+            navigate("/backoffice/Dashboard");
           } else if (data.role == "admin") {
             console.log("Admin Logged in");
             navigate("/backoffice/Dashboard");

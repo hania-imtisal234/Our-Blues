@@ -14,8 +14,23 @@ import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const { Content } = Layout;
+var userRole
 const Dashboard = () => {
-  const userRole = "admin";
+
+  const handleLogin = async () => {
+    try {
+      const { data } = await axios.post(
+        "http://localhost:4000/",
+        {
+        },
+        { withCredentials: true }
+      );
+      userRole = data.role
+    } catch (error) {
+      throw new Error(error);
+    }
+  };
+
   const menuItems = userRole === "admin" ? adminMenuItems : therapistMenuItems;
 
   const navigate = useNavigate();
