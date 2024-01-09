@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 // backend/controllers/checkoutController.js
 const stripe = require("stripe")(process.env.STRIPE_SECRET);
 
