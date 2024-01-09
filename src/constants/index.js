@@ -28,13 +28,6 @@ export const adminMenuItems = [
       },
     ],
   },
-  {
-    key: "fourth",
-    label: <div className="text-white">Verification</div>,
-    title: "Verification",
-    route: "/backoffice/verification",
-    icon: <DomainVerificationIcon style={{ color: "white" }} />,
-  },
 ];
 
 export const therapistMenuItems = [

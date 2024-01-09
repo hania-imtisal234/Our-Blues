@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Form, Layout } from "antd";
 import FormInput from "../../../components/Shared/FormInput/FormInput";
@@ -11,9 +11,13 @@ import Loader from "../../../components/Shared/Loader/Loader.jsx";
 import { WEBAPP_REGISTER } from "../../../constants/Routes.js";
 import { toast } from "react-toastify";
 import axios from "axios";
+import AppContext from "../../../context/AppContext.js";
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
+  // const { userInfo, setUserInfo } = useUserContext(""); //yahn use kia
+  const appContext = useContext(AppContext);
+  const { userInfo, setRole, setLoggedIn, setUserInfo } = appContext;
   const navigate = useNavigate();
   const handleError = (err) =>
     toast.error(err, {
@@ -40,8 +44,17 @@ const Login = () => {
         handleSuccess(message);
         setTimeout(() => {
           if (data.role == "therapist") {
-            navigate("/");
+            localStorage.setItem(
+              "userInfo",
+              JSON.stringify({ role: "therapist", loggedIn: true })
+            );
+            // setUserInfo({ role: "therapist", loggedIn: true });
+            navigate("/backoffice/Dashboard");
           } else if (data.role == "admin") {
+            localStorage.setItem(
+              "userInfo",
+              JSON.stringify({ role: "admin", loggedIn: true })
+            );
             console.log("Admin Logged in");
             navigate("/backoffice/Dashboard");
           }
@@ -55,6 +68,7 @@ const Login = () => {
       throw new Error(error);
     }
   };
+
   return (
     <Layout className="mainLayout bg-sea-salt h-full">
       <AppHeader />

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Avatar } from "antd";
 import OurBluesLogo from "../../../assets/Logo.png";
 import CustomButton from "../CustomButton/CustomButton.jsx";
@@ -15,7 +15,14 @@ const AppHeader = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const navigate = useNavigate();
-
+  useEffect(() => {
+    const storedUserInfo = JSON.parse(localStorage.getItem("userInfo")) || {};
+    setIsLoggedIn(storedUserInfo.loggedIn);
+  }, []);
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate(BACKOFFICE_LOGIN);
+  };
   const showDrawer = () => {
     setIsDrawerOpen(true);
   };
@@ -58,6 +65,14 @@ const AppHeader = () => {
             <li></li>
           </ul>
           <div className="flex item-center justify-end">
+            <div>
+              <CustomButton
+                buttonLabel="Logout"
+                className="bg-yale-blue text-white"
+                size="middle"
+                onClick={handleLogout}
+              />
+            </div>
             <div className="xs:hidden md:flex items-center gap-1 xs:gap-1 mx-1 ">
               <Avatar
                 size={"middle"}
