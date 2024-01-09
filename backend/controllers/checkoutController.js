@@ -5,7 +5,7 @@ const checkoutController = {
   createCheckoutSession: async (req, res) => {
     try {
       const { data } = req.body;
-
+      console.log(data);
       if (!Array.isArray(data)) {
         return res
           .status(400)
@@ -13,23 +13,23 @@ const checkoutController = {
       }
 
       const lineItems = data.map((item) => ({
-        priceData: {
+        price_data: {
           currency: item.currency,
-          productData: {
+          product_data: {
             name: item.therapistName,
           },
-          unitAmount: item.amount * 100,
+          unit_amount: item.amount * 100,
         },
         quantity: 1,
       }));
 
       const session = await stripe.checkout.sessions.create({
-        paymentMethodTypes: ["card"],
-        lineItems: lineItems,
+        payment_method_types: ["card"],
+        line_items: lineItems,
         mode: "payment",
-        successUrl: "http://localhost:3000/success",
-        cancelUrl: "http://localhost:3000/cancel",
-        customerEmail: data[0].userEmail,
+        success_url: "http://localhost:3000/success",
+        cancel_url: "http://localhost:3000/cancel",
+        customer_email: data[0].userEmail,
       });
 
       res.json({ id: session.id });
