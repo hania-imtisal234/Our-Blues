@@ -39,7 +39,22 @@ const Login = () => {
       if (success) {
         handleSuccess(message);
         setTimeout(() => {
-          navigate("/backoffice/Dashboard");
+          if (data.role == "therapist") {
+            localStorage.setItem(
+              "userInfo",
+              JSON.stringify({ role: "therapist", loggedIn: true })
+            );
+            // setUserInfo({ role: "therapist", loggedIn: true });
+
+            navigate("/backoffice/Dashboard");
+          } else if (data.role == "admin") {
+            localStorage.setItem(
+              "userInfo",
+              JSON.stringify({ role: "admin", loggedIn: true })
+            );
+            console.log("Admin Logged in");
+            navigate("/backoffice/Dashboard");
+          }
         }, 1000);
       } else {
         handleError(message);

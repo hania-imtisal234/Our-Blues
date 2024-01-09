@@ -9,6 +9,7 @@ import { useNavigate } from "react-router";
 import {
   BACKOFFICE_LOGIN,
   BACKOFFICE_REGISTER,
+  WEBAPP_LOGIN,
 } from "../../../constants/Routes.js";
 
 const AppHeader = () => {
@@ -21,7 +22,7 @@ const AppHeader = () => {
   }, []);
   const handleLogout = () => {
     localStorage.clear();
-    navigate(BACKOFFICE_LOGIN);
+    navigate(WEBAPP_LOGIN);
   };
   const showDrawer = () => {
     setIsDrawerOpen(true);
@@ -45,7 +46,7 @@ const AppHeader = () => {
                 className="bg-yale-blue text-white"
                 size="middle"
                 onClick={() => {
-                  navigate(BACKOFFICE_LOGIN);
+                  navigate(WEBAPP_LOGIN);
                 }}
               />
               <CustomButton

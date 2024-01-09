@@ -14,31 +14,25 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const { Content } = Layout;
-var userRole
+var userRole;
 const Dashboard = () => {
-
-
   const handleLogin = async () => {
     try {
       const { data } = await axios.post(
         "http://localhost:4000/",
-        {
-        },
+        {},
         { withCredentials: true }
       );
-      userRole = data.role
+      userRole = data.role;
     } catch (error) {
       throw new Error(error);
     }
   };
 
-  const menuItems = userRole === "admin" ? adminMenuItems : therapistMenuItems;
-
   const [userInfo, setUserInfo] = useState({
     role: "",
     loggedIn: false,
   });
-
 
   const navigate = useNavigate();
   const [cookies, removeCookie] = useCookies([]);

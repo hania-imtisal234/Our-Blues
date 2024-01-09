@@ -8,7 +8,11 @@ import {
   InfoCircleOutlined,
   WechatOutlined,
 } from "@ant-design/icons";
-import { BOOK_MEETING } from "../../../constants/Routes.js";
+import {
+  BOOK_MEETING,
+  HEALTHBLOG,
+  THERAPISTS,
+} from "../../../constants/Routes.js";
 import { useNavigate } from "react-router-dom";
 import FormInput from "../../../components/Shared/FormInput/FormInput.jsx";
 import { FormRule } from "../../../constants/formRules.js";
@@ -117,7 +121,7 @@ const Home = () => {
                 label="Book Therapist"
                 className="xs:w-44 sm:w-56 text-white border-white bg-yale-blue w-56 h-24 mt-4"
                 onClick={() => {
-                  navigate(BOOK_MEETING);
+                  navigate(THERAPISTS);
                 }}
               />
             </Form>
@@ -133,6 +137,9 @@ const Home = () => {
               type="link"
               className="text-white text-base md:text-lg my-2"
               icon={<ReadOutlined />}
+              onClick={() => {
+                navigate(HEALTHBLOG);
+              }}
             >
               Read Mental Health Articles
             </Button>
@@ -140,6 +147,7 @@ const Home = () => {
               type="link"
               className="text-white text-base md:text-lg my-2"
               icon={<QuestionCircleOutlined />}
+              onClick={handleOpenChatBot}
             >
               Ask a Question
             </Button>

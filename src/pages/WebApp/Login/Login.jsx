@@ -44,8 +44,6 @@ const Login = () => {
         handleSuccess(message);
         setTimeout(() => {
           if (data.role == "therapist") {
-
-
             localStorage.setItem(
               "userInfo",
               JSON.stringify({ role: "therapist", loggedIn: true })
