@@ -1,23 +1,71 @@
 import { Form } from "antd";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FormRule } from "../../../constants/formRules";
 import FormSelect from "../FormSelect/FormSelect";
 import FormButton from "../FormButton/FormButton";
 import FormInput from "../FormInput/FormInput";
 import { Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
+import { ToastContainer, toast } from "react-toastify";
+import axios from "axios";
+
+var _id
 
 const EditProfile = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [antForm] = Form.useForm();
 
-  const handleEditProfile = async (values) => {
+    const handleError = (err) =>
+    toast.error(err, {
+      position: "bottom-left",
+    });
+  const handleSuccess = (msg) =>
+    toast.success(msg, {
+      position: "bottom-left",
+    });
+
+    const getID = async () => {
     try {
-      console.log(values);
+      const { data } = await axios.post(
+        "http://localhost:4000/",
+        {},
+        { withCredentials: true }
+      );
+      _id = data.id;
     } catch (error) {
-      console.log(error);
+      throw new Error(error);
     }
   };
+
+
+  const handleEditProfile = async (values) => {
+    try {
+     setIsLoading(true);
+      const { data } = await axios.post(
+        "http://localhost:4000/updateDetails",
+        {
+          _id, ...values,
+        },
+        { withCredentials: true }
+      );
+      console.log(data);
+      const { success, message } = data;
+      if (success) {
+        handleSuccess(message);
+      } else {
+        handleError(message);
+      }
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      throw new Error(error);
+    }
+  };
+
+  useEffect(() => {
+    getID()
+    console.log(_id)
+  })
 
   return (
     <div className="flex-col">

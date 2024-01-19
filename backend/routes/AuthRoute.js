@@ -1,7 +1,10 @@
 const { Signup, Login } = require("../controllers/authController");
 const router = require("express").Router();
+const { updateDetails, changePassword } = require("../controllers/updateController")
 const { userVerification } = require("../Middlewares/AuthMiddleware");
 const checkoutController = require("../controllers/checkoutController");
+const { supportGroup } = require("../controllers/chatController")
+const { getChat } = require("../Middlewares/chatMiddleware")
 
 router.post(
   "/api/create-checkout-session",
@@ -11,5 +14,9 @@ router.post("/signup", Signup);
 router.post("/login", Login);
 router.post("/", userVerification);
 router.get("/", userVerification);
+router.post("/updateDetails", updateDetails)
+router.post("/updatePassword", changePassword)
+router.post("/saveChat", supportGroup)
+router.get("/getChat", getChat)
 
 module.exports = router;
