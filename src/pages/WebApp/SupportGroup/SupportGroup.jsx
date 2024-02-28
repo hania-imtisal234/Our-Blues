@@ -4,9 +4,9 @@ import WebHeader from "../../../components/WebApp/WebHeader/WebHeader";
 import io from "socket.io-client";
 import { useCookies } from "react-cookie";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 
+
+let count
 const { Content } = Layout;
 
 const socket = io("http://localhost:3001", { transports: ["websocket"] });
@@ -19,9 +19,47 @@ const SupportGroup = () => {
   const [cookies, removeCookie] = useCookies([]);
   const [lastName, setUsername] = useState("");
 
-  useEffect(() => {
+      const getChats = async () => {
+      try {
+        const chats = await axios.get(
+          "http://localhost:4000/getChat/",
+          { withCredentials: true },
+        )
+        for (let i in chats.data.getChats){
+          const messageData = { user: chats.data.getChats[i].user, content: chats.data.getChats[i].content };
+          setMessages((prevMessages) => [...prevMessages, messageData]);
+          count = i
+        }
+        count++
+      } catch (err){
+        console.log(err)
+      }
+    }
 
-    
+    const handleChat = async (values) => {
+    try {
+      console.log(count)
+      const { data } = await axios.post(
+        "http://localhost:4000/saveChat",
+        {
+          count, ...values,
+        },
+        { withCredentials: true }
+      );
+      console.log(data);
+      const { success, message } = data;
+      if (success) {
+        console.log("Success!", message)
+      } else {
+        console.log("Error with Chat")
+      }
+    } catch (error) {
+      throw new Error(error);
+    }
+  };
+
+
+  useEffect(() => {
 
     const user = prompt("Enter your name:");
     setCurrentUser(user);
@@ -29,7 +67,7 @@ const SupportGroup = () => {
     socket.on("message", (data) => {
       setMessages((prevMessages) => [...prevMessages, data]);
     });
-
+    getChats()
     return () => {
       socket.connect();
     };
@@ -38,7 +76,8 @@ const SupportGroup = () => {
   const handleSendMessage = () => {
     if (newMessage.trim() !== "") {
       const messageData = { user: currentUser, content: newMessage };
-      setMessages((prevMessages) => [...prevMessages, messageData]); 
+      handleChat(messageData)
+      count++
       socket.emit("message", messageData);
       setNewMessage("");
     }

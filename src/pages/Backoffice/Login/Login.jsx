@@ -122,7 +122,7 @@ const Login = () => {
           )}
         </div>
       </div>
-      <Layout style={{ marginTop: "5vh" }}>
+      <Layout style={{ marginTop: "15vh" }}>
         <AppFooter />
       </Layout>
     </Layout>
