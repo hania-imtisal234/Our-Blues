@@ -17,7 +17,7 @@ import Dashboard from "../pages/Backoffice/Dashboard/Dashboard";
 import RegisterBackOffice from "../pages/Backoffice/Register/Register";
 import LoginBackoffice from "../pages/Backoffice/Login/Login";
 import Home from "../pages/WebApp/Home/Home";
-import Register from "../pages/WebApp/Register/Register";
+import UserRegister from "../pages/WebApp/Register/Register";
 import LoginUser from "../pages/WebApp/Login/Login";
 import SupportGroup from "../pages/WebApp/SupportGroup/SupportGroup";
 import Therapists from "../pages/WebApp/Therapists/Therapists";
@@ -39,7 +39,7 @@ const AppRouter = () => {
           <Route path={HOME_PAGE} element={<Home />} />
           <Route path={"/"} element={<Navigate to={HOME_PAGE} />} />
           <Route path={WEBAPP_LOGIN} element={<LoginUser />} />
-          <Route path={WEBAPP_REGISTER} element={<Register />} />
+          <Route path={WEBAPP_REGISTER} element={<UserRegister />} />
           <Route path={SUPPORTGROUP} element={<SupportGroup />} />
           <Route path={THERAPISTS} element={<Therapists />} />
           <Route path={HEALTHBLOG} element={<ViewHealthblog />} />

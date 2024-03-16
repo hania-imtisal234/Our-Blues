@@ -44,7 +44,6 @@ const Login = () => {
               "userInfo",
               JSON.stringify({ role: "therapist", loggedIn: true })
             );
-            // setUserInfo({ role: "therapist", loggedIn: true });
 
             navigate("/backoffice/Dashboard");
           } else if (data.role == "admin") {

@@ -1,0 +1,55 @@
+const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
+
+const therapistSchema = new mongoose.Schema({
+  email: {
+    type: String,
+    required: [true, "Your email address is required"],
+    unique: true,
+  },
+  firstName: {
+    type: String,
+    required: [true, "Your First Name is required"],
+  },
+  lastName: {
+    type: String,
+    required: [true, "Your Last Name is required"],
+  },
+  age: {
+    type: Number,
+    required: [true, "Your Last Name is required"],
+  },
+  gender: {
+    type: String,
+    required: [true, "Gender is required"],
+  },
+  password: {
+    type: String,
+    required: [true, "Your password is required"],
+  },
+  phoneNumber: {
+    type: String,
+    required: [true, "Your Phone Number is required"],
+  },
+  location: {
+    type: String,
+    required: [false],
+  },
+  fees: {
+    type: Number,
+    required: [true],
+  },
+  appointmentDate: {
+    type: Date,
+    default: new Date(),
+  },
+  appointmentTime: {
+    type: String,
+  },
+});
+
+therapistSchema.pre("save", async function () {
+  this.password = await bcrypt.hash(this.password, 12);
+});
+
+module.exports = mongoose.model("Therapist", therapistSchema);

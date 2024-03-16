@@ -6,7 +6,6 @@ function FormButton({
   type = "primary",
   className = "hover:bg-light-blue border-white",
   loading,
-  contentFontSize,
   disabled = false,
   size = "large",
   icon,
@@ -18,14 +17,13 @@ function FormButton({
         <Button
           size={size}
           disabled={disabled}
-          contentFontSize={contentFontSize}
           type={type}
           icon={icon}
           htmlType="submit"
           className={className}
           loading={loading}
           onClick={onClick}
-          style={{ fontSize: contentFontSize }}
+          style={{ fontSize: "middle" }}
         >
           {label}
         </Button>

@@ -17,7 +17,6 @@ const { Dragger } = Upload;
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 
-
 const props = {
   name: "file",
   multiple: true,
@@ -41,7 +40,7 @@ const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
-    const handleError = (err) =>
+  const handleError = (err) =>
     toast.error(err, {
       position: "bottom-left",
     });
@@ -53,10 +52,12 @@ const Register = () => {
   const handleLogin = async (values) => {
     try {
       setIsLoading(true);
+
       const { data } = await axios.post(
         "http://localhost:4000/signup",
         {
           ...values,
+          role: "user",
         },
         { withCredentials: true }
       );
@@ -65,7 +66,7 @@ const Register = () => {
       if (success) {
         handleSuccess(message);
         setTimeout(() => {
-          navigate("/backoffice/Dashboard");
+          navigate({ WEBAPP_LOGIN });
         }, 1000);
       } else {
         handleError(message);
@@ -101,7 +102,7 @@ const Register = () => {
                   />
                 </div>
                 <p className="xs:text-sm xs:w-44 sm:text-lg sm:w-48 flex items-center justify-center text-yale-blue text-2xl font-bold ">
-                  Register to OurBlues 
+                  Register to OurBlues
                 </p>
                 <div className="flex gap-2 justify-between">
                   <FormInput
