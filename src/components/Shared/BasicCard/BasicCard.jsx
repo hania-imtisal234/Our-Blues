@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
+import { THERAPISTDETAILS } from "../../../constants/Routes";
 
 const BasicCard = ({ name, id }) => {
   const navigate = useNavigate();
@@ -9,7 +10,7 @@ const BasicCard = ({ name, id }) => {
     <div
       className="bg-yale-blue w-40 h-40 rounded-lg cursor-pointer"
       onClick={() => {
-        navigate(id);
+        navigate(THERAPISTDETAILS.replace(":id", id));
       }}
     >
       <div className="flex justify-center p-4">
