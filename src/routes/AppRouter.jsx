@@ -10,6 +10,7 @@ import {
   SUPPORTGROUP,
   THERAPISTS,
   HEALTHBLOG,
+  SELFCARE,
   THERAPISTDETAILS,
 } from "../../src/constants/Routes";
 import Dashboard from "../pages/Backoffice/Dashboard/Dashboard";
@@ -22,6 +23,7 @@ import SupportGroup from "../pages/WebApp/SupportGroup/SupportGroup";
 import Therapists from "../pages/WebApp/Therapists/Therapists";
 import ViewHealthblog from "../pages/WebApp/ViewHealthblog/ViewHealthblog";
 import TherapistDetails from "../pages/WebApp/TherapistDetails/TherapistDetails";
+import SelfCare from "../pages/WebApp/SelfCare/SelfCare";
 
 const AppRouter = () => {
   return (
@@ -42,6 +44,7 @@ const AppRouter = () => {
           <Route path={THERAPISTS} element={<Therapists />} />
           <Route path={HEALTHBLOG} element={<ViewHealthblog />} />
           <Route path={THERAPISTDETAILS} element={<TherapistDetails />} />
+          <Route path={SELFCARE} element={<SelfCare />}/>
         </Routes>
       </BrowserRouter>
     </div>

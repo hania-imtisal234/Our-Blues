@@ -40,7 +40,7 @@ const WebHeader = () => {
   };
 
   return (
-    <div className=" flex items-center justify-between px-4 py-1 bg-yale-blue sticky top-0 z-10">
+    <div className=" flex fixed items-center justify-between px-4 py-1 bg-yale-blue sticky top-0 z-10">
       <div className="flex items-center gap-8">
         <img
           onClick={() => {
