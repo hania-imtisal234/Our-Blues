@@ -3,48 +3,114 @@ import React, { useState } from "react";
 import { ReadOutlined } from "@ant-design/icons";
 import FormButton from "../../Shared/FormButton/FormButton";
 import { loadStripe } from "@stripe/stripe-js";
-import { Payments } from "../../../enums";
+import { Payments, Therapists } from "../../../enums";
+import axios from "axios";
+import { Roles } from "../../../enums";
+import { useParams } from "react-router-dom";
 
 const AppointmentCard = ({ therapistInfo }) => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [isDatePickerOpen, setDatePickerOpen] = useState(false);
-  const THERAPIST_REQUIRED = "Therapist is required"; // Assuming this constant is defined
+  const [therapistList, setTherapistList] = useState([]);
+  const [usersList, setUsersList] = useState([]);
+
+  const loggedInUserEmail = JSON.parse(
+    localStorage.getItem("userInfo")
+  ).userEmail;
+
+  const { id } = useParams();
+  const selectedTherapistId = parseInt(id);
+
+  const selectedTherapist = Therapists.find(
+    (therapist) => therapist.id === selectedTherapistId
+  );
+
+  const findLoggedInUser = () => {
+    for (let i = 0; i < usersList.length; i++) {
+      if (usersList[i].email === loggedInUserEmail) {
+        return usersList[i];
+      }
+    }
+    return null;
+  };
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
 
   const handleBookAppointment = async () => {
-    const stripe = await loadStripe(
-      "pk_test_51OWNFwSGbQwiiPfQU0irBiHJ1vuiSeCbom1cm6R2AxgZCc0GHZ0uMHP2aRyXbJwjp04s1Pathfv4EbcMGk6eTlAR00NyZmIYNc"
-    );
+    try {
+      const users = await axios.get("http://localhost:4000/getUsers", {
+        withCredentials: true,
+      });
 
-    const body = {
-      Payments: { Payments },
-    };
-
-    const headers = {
-      "Content-Type": "application/json",
-    };
-
-    const response = await fetch(
-      "http://localhost:4000/api/create-checkout-session",
-      {
-        method: "POST",
-        headers: headers,
-        body: JSON.stringify({ data: [Payments] }),
+      const therapistDetails = [];
+      const userDetails = [];
+      for (let i in users.data.getUsers) {
+        if (users.data.getUsers[i].role == Roles.therapist) {
+          therapistDetails.push(users.data.getUsers[i]);
+        } else if (users.data.getUsers[i].role == Roles.user) {
+          userDetails.push(users.data.getUsers[i]);
+        }
       }
-    );
+      setTherapistList(therapistDetails);
+      setUsersList(userDetails);
 
-    const session = await response.json();
+      const loggedInUser = findLoggedInUser();
+      console.log(loggedInUser);
 
-    const result = stripe.redirectToCheckout({
-      sessionId: session.id,
-    });
+      if (loggedInUser) {
+        const appointmentData = {
+          therapistID: therapistInfo.id,
+          userEmail: loggedInUser.email,
+          therapistEmail: selectedTherapist.email,
+          date: selectedDate.format("YYYY-MM-DD"),
+          time: selectedDate.format("HH:mm"),
+          meetlink: "",
+        };
 
-    if (result.error) {
-      console.log(result.error);
+        const appointmentResponse = await axios.post(
+          "http://localhost:4000/bookAppointment",
+          appointmentData,
+          { withCredentials: true }
+        );
+
+        const { success, message } = appointmentResponse.data;
+        if (success) {
+          console.error("Appointment booked successfully:", message);
+        } else {
+          console.error("Error with booking appointment:", message);
+        }
+      } else {
+        console.error("Logged in user not found.");
+      }
+    } catch (err) {
+      console.log(err);
     }
+    // const stripe = await loadStripe(
+    //   "pk_test_51OWNFwSGbQwiiPfQU0irBiHJ1vuiSeCbom1cm6R2AxgZCc0GHZ0uMHP2aRyXbJwjp04s1Pathfv4EbcMGk6eTlAR00NyZmIYNc"
+    // );
+    // const body = {
+    //   Payments: { Payments },
+    // };
+    // const headers = {
+    //   "Content-Type": "application/json",
+    // };
+    // const response = await fetch(
+    //   "http://localhost:4000/api/create-checkout-session",
+    //   {
+    //     method: "POST",
+    //     headers: headers,
+    //     body: JSON.stringify({ data: [Payments] }),
+    //   }
+    // );
+    // const session = await response.json();
+    // const result = stripe.redirectToCheckout({
+    //   sessionId: session.id,
+    // });
+    // if (result.error) {
+    //   console.log(result.error);
+    // }
   };
 
   const getAvailableDays = () =>
@@ -77,10 +143,6 @@ const AppointmentCard = ({ therapistInfo }) => {
           label={"Book Appointment"}
           type="primary"
           icon={<ReadOutlined />}
-          contentFontSize={{
-            xs: 5,
-            sm: 12,
-          }}
           onClick={handleBookAppointment}
           className="xs:w-6/7 md:mx-4 mt-4"
         />

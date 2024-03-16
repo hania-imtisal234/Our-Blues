@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 
-const BasicCard = ({ name }) => {
+const BasicCard = ({ name, id }) => {
   const navigate = useNavigate();
   return (
     <div
       className="bg-yale-blue w-40 h-40 rounded-lg cursor-pointer"
       onClick={() => {
-        navigate(name);
+        navigate(id);
       }}
     >
       <div className="flex justify-center p-4">

@@ -87,6 +87,7 @@ export const appointmentStatusTypeOptions = [
 export const Therapists = [
   {
     id: 1,
+    email: "l201026@lhr.nu.edu.pk",
     name: "Therapist 1",
     title: "Psychiatrist",
     qualification: "MBBS, FCPS",
@@ -98,6 +99,7 @@ export const Therapists = [
   },
   {
     id: 2,
+    email: "therapist2@gmail.com",
     name: "Therapist 2",
     title: "Psychiatrist",
     qualification: "MBBS, FCPS",
@@ -110,6 +112,7 @@ export const Therapists = [
   {
     id: 3,
     name: "Therapist 3",
+    email: "therapist3@gmail.com",
     title: "Psychiatrist",
     qualification: "MBBS, FCPS",
     rating: 5.0,
@@ -121,6 +124,7 @@ export const Therapists = [
   {
     id: 4,
     name: "Therapist 4",
+    email: "therapist4@gmail.com",
     title: "Psychiatrist",
     qualification: "MBBS, FCPS",
     rating: 4.0,
@@ -140,4 +144,10 @@ export const Payments = {
   amount: 1000,
   currency: "PKR",
   address: "NFC,Lahore",
+};
+
+export const Roles = {
+  therapist: "therapist",
+  user: "user",
+  admin: "admin",
 };

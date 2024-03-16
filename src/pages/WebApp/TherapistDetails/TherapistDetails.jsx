@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import WebHeader from "../../../components/WebApp/WebHeader/WebHeader";
 import { Layout } from "antd";
 import { useParams } from "react-router-dom";
@@ -7,19 +7,13 @@ import { Therapists } from "../../../enums";
 import TherapistCard from "../../../components/WebApp/TherapistCard/TherapistCard";
 import ViewRatings from "../../../components/WebApp/ViewRatings/ViewRatings";
 import AppointmentCard from "../../../components/WebApp/AppointmentCard/AppointmentCard";
-import { useCookies } from "react-cookie";
-import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
-
 const TherapistDetails = () => {
-  const params = useParams();
-  const selectedTherapist = params.therapistName.replace(/(\d)$/, " $1");
-  console.log(selectedTherapist);
+  const { id } = useParams();
+  const selectedTherapistId = parseInt(id);
+
   const therapistInfo = Therapists.find(
-    (therapist) => therapist.name == selectedTherapist
+    (therapist) => therapist.id === selectedTherapistId
   );
-  console.log(therapistInfo);
 
   return (
     <Layout className="mainLayout bg-sea-salt h-full">
@@ -34,7 +28,7 @@ const TherapistDetails = () => {
               <div className="my-10">
                 <ViewRatings
                   therapistInfo={therapistInfo}
-                  selectedTherapist={selectedTherapist}
+                  selectedTherapist={selectedTherapistId}
                 />
               </div>
             </div>
