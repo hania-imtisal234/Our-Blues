@@ -20,4 +20,8 @@ export const BOOK_MEETING = "/book";
 export const HEALTHBLOG = "/healthblog";
 export const THERAPISTS = "/therapists";
 export const SUPPORTGROUP = "/supportgroup";
+
+export const SELFCARE="/selfcare";
+
 export const THERAPISTDETAILS = "/therapists/:id";
+

@@ -1,7 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { Layout, Button, Form, FloatButton } from "antd";
+import React, { useState } from "react";
+import { Layout, Button, FloatButton, Avatar,Form } from "antd";
 import WebHeader from "../../../components/WebApp/WebHeader/WebHeader.jsx";
 import AppFooter from "../../../components/Shared/AppFooter/AppFooter.jsx";
+import nawal from "../../../assets/nawal.jpg";
+import hania from "../../../assets/hania.png";
+import hassaan from "../../../assets/hassaan.jpg";
+import mentalHealth1 from "../../../assets/mentalHealth1.jpg";
+import mentalHealth2 from "../../../assets/mentalHealth2.jpg";
+import mentalHealth3 from "../../../assets/mentalHealth3.png";
+import mentalHealth4 from "../../../assets/mentalHealth4.jpg";
 import {
   ReadOutlined,
   QuestionCircleOutlined,
@@ -12,15 +19,13 @@ import {
   BOOK_MEETING,
   HEALTHBLOG,
   THERAPISTS,
+  SELFCARE,
 } from "../../../constants/Routes.js";
 import { useNavigate } from "react-router-dom";
 import FormInput from "../../../components/Shared/FormInput/FormInput.jsx";
 import { FormRule } from "../../../constants/formRules.js";
 import FormButton from "../../../components/Shared/FormButton/FormButton.jsx";
 import AppChatBot from "../../../components/Shared/AppChatbot/AppChatbot.jsx";
-import { useCookies } from "react-cookie";
-import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
 
 const Home = () => {
   const [city, setCity] = useState("");
@@ -28,7 +33,6 @@ const Home = () => {
   const navigate = useNavigate();
   const [chatBotVisible, setChatBotVisible] = useState(false);
 
-  
   const handleOpenChatBot = () => {
     setChatBotVisible(true);
   };
@@ -36,6 +40,29 @@ const Home = () => {
   const handleCloseChatBot = () => {
     setChatBotVisible(false);
   };
+  const [selectedCard, setSelectedCard] = useState(null);
+
+  const handleCardClick = (index) => {
+    setSelectedCard(index);
+  };
+
+  const leaders = [
+    {
+      name: "Nawal Maqsood",
+      image: nawal,
+      description: "Co-Founder & CEO",
+    },
+    {
+      name: "Hassaan Ahmed",
+      image: hassaan,
+      description: "Co-Founder & CEO",
+    },
+    {
+      name: "Hania Imtisal",
+      image: hania,
+      description: "Co-Founder & CEO",
+    },
+  ];
 
   return (
     <Layout className="mainLayout bg-white h-screen">
@@ -107,33 +134,67 @@ const Home = () => {
           </h2>
           <div className="grid grid-cols-1  text-font-sans gap-y-2 md:gap-y-0">
             <Button
-              type="link"
-              className="text-white text-base md:text-lg my-2"
-              icon={<ReadOutlined />}
-              onClick={() => {
-                navigate(HEALTHBLOG);
-              }}
-            >
+              type="link" className="text-white text-base md:text-lg my-2" icon={<ReadOutlined />} onClick={() => {navigate(HEALTHBLOG);}}>
               Read Mental Health Articles
             </Button>
             <Button
-              type="link"
-              className="text-white text-base md:text-lg my-2"
-              icon={<QuestionCircleOutlined />}
-              onClick={handleOpenChatBot}
-            >
+              type="link" className="text-white text-base md:text-lg my-2" icon={<QuestionCircleOutlined />} onClick={handleOpenChatBot} >
               Ask a Question
             </Button>
             <Button
-              type="link"
-              className="text-white text-base md:text-lg my-2"
-              icon={<InfoCircleOutlined />}
-            >
-              About Us
+              type="link" className="text-white text-base md:text-lg my-2" icon={<InfoCircleOutlined />} onClick={() => {navigate(SELFCARE);}}>
+              Self-care Activities
             </Button>
           </div>
         </div>
       </div>
+
+      <div className="whyOurBluesSection text-yale-blue font-bold p" style={{ padding: "60px 60px 60px", background: "#f0f2f5" }}>
+        <h2 className="sectionTitle" style={{ fontSize: "1.5rem", marginBottom: "20px", textAlign: "center", color: "#002d62" }}>Why Our Blues?</h2>
+        <div className="whyOurBluesGrid" style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "20px", flexWrap: "wrap" }}>
+          <div className="whyOurBluesCard" style={{ padding: "20px", background: selectedCard === 0 ? "rgba(0, 0, 0, 0.2)" : "#fff", border: selectedCard === 0 ? "2px solid #002d62" : "2px solid #00468b", borderRadius: "10px", textAlign: "center", cursor: "pointer" }} onClick={() => handleCardClick(0)}>
+            <img src={mentalHealth1} alt="Support Group" style={{ width: "150px", height: "150px", borderRadius: "10px", marginBottom: "10px" }} />
+            <h3 style={{ fontSize: "1.2rem", color: "#002d62" }}>Support Group</h3>
+          </div>
+          <div className="whyOurBluesCard" style={{ padding: "20px", background: selectedCard === 1 ? "rgba(0, 0, 0, 0.2)" : "#fff", border: selectedCard === 1 ? "2px solid #002d62" : "2px solid #00468b", borderRadius: "10px", textAlign: "center", cursor: "pointer" }} onClick={() => handleCardClick(1)}>
+            <img src={mentalHealth2} alt="Online Consultation" style={{ width: "150px", height: "150px", borderRadius: "10px", marginBottom: "10px" }} />
+            <h3 style={{ fontSize: "1.2rem", color: "#002d62" }}>Online Consultation</h3>
+          </div>
+          <div className="whyOurBluesCard" style={{ padding: "20px", background: selectedCard === 2 ? "rgba(0, 0, 0, 0.2)" : "#fff", border: selectedCard === 2 ? "2px solid #002d62" : "2px solid #00468b", borderRadius: "10px", textAlign: "center", cursor: "pointer" }} onClick={() => handleCardClick(2)}>
+            <img src={mentalHealth3} alt="Secure Payment" style={{ width: "150px", height: "150px", borderRadius: "10px", marginBottom: "10px" }} />
+            <h3 style={{ fontSize: "1.2rem", color: "#002d62" }}>Secure Payment</h3>
+          </div>
+          <div className="whyOurBluesCard" style={{ padding: "20px", background: selectedCard === 3 ? "rgba(0, 0, 0, 0.2)" : "#fff", border: selectedCard === 3 ? "2px solid #002d62" : "2px solid #00468b", borderRadius: "10px", textAlign: "center", cursor: "pointer" }} onClick={() => handleCardClick(3)}>
+            <img src={mentalHealth4} alt=" Chatbot" style={{ width: "150px", height: "150px", borderRadius: "10px", marginBottom: "10px" }} />
+            <h3 style={{ fontSize: "1.2rem", color: "#002d62" }}> Chatbot</h3>
+          </div>
+        </div>
+      </div>
+
+      <div className="py-10">
+        <div className="container mx-auto">
+          <h2 className="text-3xl text-center font-bold mb-4 text-yale-blue">Meet the leaders at Our-Blues</h2>
+          <p className="text-center text-sm font-bold mb-6 text-carolina-blue">
+            Our-Blues is led, designed, and managed by a diverse group of individuals driven by a common mission - to deliver the best mental healthcare to anyone who needs it.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-center">
+            {leaders.map((leader, index) => (
+              <div key={index} className="text-center">
+                <Avatar
+                  size={150}
+                  src={leader.image}
+                  style={{ marginBottom: '10px' }}
+                />
+                <p className="text-lg font-bold mb-1 text-yale-blue">{leader.name}</p>
+                <p className="text-sm text-yale-blue">{leader.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      
+
       <Layout style={{ marginTop: "8vh" }}>
         <FloatButton icon={<WechatOutlined />} onClick={handleOpenChatBot} />
         <AppChatBot visible={chatBotVisible} onClose={handleCloseChatBot} />
@@ -144,5 +205,7 @@ const Home = () => {
     </Layout>
   );
 };
+
+
 
 export default Home;

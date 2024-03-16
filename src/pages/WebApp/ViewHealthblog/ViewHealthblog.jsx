@@ -36,7 +36,7 @@ const ViewHealthblog = () => {
       <WebHeader />
       <Content className="flex justify-center bg-sea-salt">
         <div className="w-[2/3] h-[2/3] p-10">
-          <div className="flex justify-center text-4xl font-bold mb-8 text-yale-blue">Mental Health Articles</div>
+          <div className="flex justify-center text-2xl font-bold mb-8 text-yale-blue">MENTAL HEALTH ARTCLES</div>
           <Row gutter={[16, 16]} justify="center">
             {articles.map(article => (
               <Col key={article.id} xs={24} sm={12} md={8}>
