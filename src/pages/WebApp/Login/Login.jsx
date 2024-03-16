@@ -38,27 +38,21 @@ const Login = () => {
         },
         { withCredentials: true }
       );
-      console.log(data);
       const { success, message } = data;
       if (success) {
         handleSuccess(message);
         setTimeout(() => {
-          if (data.role == "therapist") {
+          if (data.role == "user") {
             localStorage.setItem(
               "userInfo",
-              JSON.stringify({ role: "therapist", loggedIn: true })
+              JSON.stringify({
+                role: "user",
+                loggedIn: true,
+                userEmail: values.email,
+              })
             );
-            // setUserInfo({ role: "therapist", loggedIn: true });
-
-            navigate("/backoffice/Dashboard");
-          } else if (data.role == "admin") {
-            localStorage.setItem(
-              "userInfo",
-              JSON.stringify({ role: "admin", loggedIn: true })
-            );
-            console.log("Admin Logged in");
-            navigate("/backoffice/Dashboard");
           }
+          navigate("/home");
         }, 1000);
       } else {
         handleError(message);

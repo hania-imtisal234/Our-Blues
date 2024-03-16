@@ -20,4 +20,4 @@ export const BOOK_MEETING = "/book";
 export const HEALTHBLOG = "/healthblog";
 export const THERAPISTS = "/therapists";
 export const SUPPORTGROUP = "/supportgroup";
-export const THERAPISTDETAILS = "/therapists/:therapistName";
+export const THERAPISTDETAILS = "/therapists/:id";

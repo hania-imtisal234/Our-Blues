@@ -17,7 +17,7 @@ import axios from "axios";
 const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-    const handleError = (err) =>
+  const handleError = (err) =>
     toast.error(err, {
       position: "bottom-left",
     });
@@ -26,7 +26,6 @@ const Register = () => {
       position: "bottom-left",
     });
 
-
   const handleLogin = async (values) => {
     try {
       setIsLoading(true);
@@ -34,6 +33,7 @@ const Register = () => {
         "http://localhost:4000/signup",
         {
           ...values,
+          role: "therapist",
         },
         { withCredentials: true }
       );
