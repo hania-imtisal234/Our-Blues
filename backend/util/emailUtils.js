@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 const { EMAIL, PASSWORD } = process.env;
-// Function to send confirmation email
+
 async function sendConfirmationEmail(recipientEmail, subject, message) {
   try {
     const transporter = nodemailer.createTransport({
@@ -11,9 +11,8 @@ async function sendConfirmationEmail(recipientEmail, subject, message) {
       },
     });
 
-    // Send mail with defined transport object
     await transporter.sendMail({
-      from: EMAIL, // Your email address
+      from: EMAIL, // our blue email address
       to: recipientEmail,
       subject: subject,
       text: message,
