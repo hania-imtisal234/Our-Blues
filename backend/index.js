@@ -4,7 +4,6 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const authRoute = require("./routes/AuthRoute");
-const checkoutController = require("./controllers/checkoutController");
 const { MONGO_URL, PORT } = process.env;
 const app = express();
 

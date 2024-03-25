@@ -151,3 +151,6 @@ export const Roles = {
   user: "user",
   admin: "admin",
 };
+
+export const STRIPE_API =
+  "pk_test_51OwE95SDL5iPtkTm0w95kRlD0YAUy9dONoRp2CdAz8WwvrphKCosLqhsaM4i8z0V6nMzYtGf2IcoD8E6gqLGv77o00EEPQUAje";

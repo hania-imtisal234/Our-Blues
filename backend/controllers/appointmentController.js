@@ -1,38 +1,51 @@
 const Appointment = require("../Models/appointmentModel");
-const { v4: uuidv4 } = require("uuid");
 const { sendConfirmationEmail } = require("../util/emailUtils");
-
-const generateUniqueIdentifier = () => {
-  return uuidv4();
-};
+const { createMeeting } = require("../util/createMeetingUtil");
+const { updateMeetingHost } = require("../util/updateMeetingHostUtil.js");
 
 module.exports.bookAppointment = async (req, res, next) => {
   try {
     const { userEmail, therapistEmail, date, time } = req.body;
 
-    const appointmentIdentifier = generateUniqueIdentifier();
-    const meetLink = `https://meet.google.com/${appointmentIdentifier}`;
+    const meetingInfo = await createMeeting(
+      "Appointment with Therapist",
+      60,
+      new Date(date + "T" + time)
+    );
+
+    if (!meetingInfo) {
+      throw new Error("Failed to create meeting link");
+    }
+    //  await updateMeetingHost(meetingInfo.meetingId, therapistEmail);
 
     const appointment = await Appointment.create({
       userEmail,
       therapistEmail,
       date,
       time,
-      meetLink,
+      meetLink: meetingInfo.meetLink,
     });
 
     await sendConfirmationEmail(
       therapistEmail,
       "New Appointment Scheduled",
-      `You have a new appointment scheduled for ${date} at ${time}. Please follow this link to join the meeting: ${meetLink}`
+      `You have a new appointment scheduled for ${date} at ${time}. Here is the meetLink ${meetingInfo.meetLink}`
     );
+
+    await sendConfirmationEmail(
+      userEmail,
+      "Appointment Confirmation",
+      `Your appointment with the therapist is scheduled for ${date} at ${time}. Here is the meetLink ${meetingInfo.meetLink}`
+    );
+
     res.status(201).json({
       message: "Appointment Saved Successfully",
-      succes: true,
+      success: true,
       appointment,
     });
     next();
   } catch (err) {
-    console.log(err);
+    console.error("Error booking appointment:", err);
+    res.status(500).json({ error: "Failed to book appointment" });
   }
 };
