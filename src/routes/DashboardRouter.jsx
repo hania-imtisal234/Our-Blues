@@ -12,6 +12,7 @@ import {
   DASHBOARD_SET_FEE_TIME,
   DASHBOARD_THERAPISTSINFO,
   DASHBOARD_USERSINFO,
+  DASHBOARD_ADMINSTATS
 } from "../constants/Routes.js";
 import EditProfile from "../components/Shared/EditProfile/EditProfile.jsx";
 import ChangePassword from "../components/Shared/ChangePassword/ChangePassword.jsx";

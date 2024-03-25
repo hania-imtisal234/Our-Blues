@@ -10,6 +10,7 @@ const { supportGroup } = require("../controllers/chatController");
 const { getChat } = require("../Middlewares/chatMiddleware");
 const { getUsers } = require("../Middlewares/UsersMiddleware");
 const { bookAppointment } = require("../controllers/appointmentController");
+const { getTherapists } = require("../Middlewares/TherapistsMiddleware"); 
 
 router.post(
   "/api/create-checkout-session",
@@ -25,4 +26,5 @@ router.post("/saveChat", supportGroup);
 router.get("/getChat", getChat);
 router.get("/getUsers", getUsers);
 router.post("/bookAppointment", bookAppointment);
+router.get("/getTherapists", getTherapists);
 module.exports = router;

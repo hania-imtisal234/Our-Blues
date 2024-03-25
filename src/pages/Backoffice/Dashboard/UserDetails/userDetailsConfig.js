@@ -18,8 +18,8 @@ export const userDetailsConfig = (
   return [
     {
       title: "",
-      dataIndex: "sNo",
-      key: "sNo",
+      dataIndex: "id",
+      key: "id",
       editable: false,
       inputType: InputType.STRING,
       align: "center",
@@ -108,7 +108,7 @@ export const userDetailsConfig = (
     },
     {
       title: <div className="text-sm text-yale-blue">Address</div>,
-      dataIndex: "address",
+      dataIndex: "location",
       key: "address",
       editable: true,
       inputType: InputType.STRING,
@@ -116,20 +116,6 @@ export const userDetailsConfig = (
       inputProps: {
         rules: FormRule.ADDRESS,
       },
-    },
-    {
-      title: <div className="text-sm text-yale-blue">Status</div>,
-      dataIndex: "status",
-      key: "role",
-      width: "10%",
-      editable: true,
-      inputType: InputType.SELECT,
-      inputProps: {
-        options: userStatusTypeOptions,
-      },
-      align: "center",
-      className: "table-team status",
-      render: (text) => getLabelForKey(userStatusTypeOptions, text),
     },
     {
       title: "",
