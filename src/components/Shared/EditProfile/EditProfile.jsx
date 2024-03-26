@@ -9,13 +9,13 @@ import { UserOutlined } from "@ant-design/icons";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 
-var _id
+var _id;
 
 const EditProfile = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [antForm] = Form.useForm();
 
-    const handleError = (err) =>
+  const handleError = (err) =>
     toast.error(err, {
       position: "bottom-left",
     });
@@ -24,10 +24,10 @@ const EditProfile = () => {
       position: "bottom-left",
     });
 
-    const getID = async () => {
+  const getID = async () => {
     try {
       const { data } = await axios.post(
-        "http://localhost:4000/",
+        "http://localhost:4000/therapist",
         {},
         { withCredentials: true }
       );
@@ -37,14 +37,14 @@ const EditProfile = () => {
     }
   };
 
-
   const handleEditProfile = async (values) => {
     try {
-     setIsLoading(true);
+      setIsLoading(true);
       const { data } = await axios.post(
         "http://localhost:4000/updateDetails",
         {
-          _id, ...values,
+          _id,
+          ...values,
         },
         { withCredentials: true }
       );
@@ -63,9 +63,9 @@ const EditProfile = () => {
   };
 
   useEffect(() => {
-    getID()
-    console.log(_id)
-  })
+    getID();
+    console.log(_id);
+  });
 
   return (
     <div className="flex-col">

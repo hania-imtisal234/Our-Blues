@@ -7,12 +7,13 @@ export const BACKOFFICE_DASHBOARD = "/backoffice/*";
 export const DASHBOARD_USERSINFO = "/users";
 export const DASHBOARD_THERAPISTSINFO = "/users/therapists";
 export const DASHBOARD_ADDARTICLES = "/articles";
-export const DASHBOARD_ADMINSTATS="/stats";
+export const DASHBOARD_ADMINSTATS = "/stats";
 //BackOffice Therapist Dashboard
 export const DASHBOARD_APPOINTMENTS = "/appointments";
 export const DASHBOARD_EDITPROFILE = "/ViewProfile/edit";
 export const DASHBOARD_CHANGEPASSWORD = "/viewProfile/changePassword";
 export const DASHBOARD_SET_FEE_TIME = "/editProfile/set-fee-time";
+export const DASHBOARD_UPLOADLICENSE = "/uploadLicense";
 // Webapp
 export const HOME_PAGE = "/home";
 export const WEBAPP_LOGIN = "/login";

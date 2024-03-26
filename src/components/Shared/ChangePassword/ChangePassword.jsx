@@ -6,13 +6,13 @@ import FormInput from "../FormInput/FormInput";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 
-var _id
+var _id;
 
 const ChangePassword = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-     const handleError = (err) =>
+  const handleError = (err) =>
     toast.error(err, {
       position: "bottom-left",
     });
@@ -21,10 +21,10 @@ const ChangePassword = () => {
       position: "bottom-left",
     });
 
-    const getID = async () => {
+  const getID = async () => {
     try {
       const { data } = await axios.post(
-        "http://localhost:4000/",
+        "http://localhost:4000/therapist",
         {},
         { withCredentials: true }
       );
@@ -34,44 +34,43 @@ const ChangePassword = () => {
     }
   };
 
-
-
   const handleChangePassword = async (values) => {
     console.log(values);
-    const password = values.newPassword
+    const password = values.newPassword;
     setIsLoading(true);
     if (values.newPassword !== values.confirmNewPassword) {
       setErrorMessage("password and confirm password does not match.");
     } else {
-        try {
-          setIsLoading(true);
-          const { data } = await axios.post(
-            "http://localhost:4000/updatePassword",
-            {
-              _id, password
-            },
-            { withCredentials: true }
-          );
-          console.log(data);
-          const { success, message } = data;
-          if (success) {
-            handleSuccess(message);
-          } else {
-            handleError(message);
-          }
-          setIsLoading(false);
+      try {
+        setIsLoading(true);
+        const { data } = await axios.post(
+          "http://localhost:4000/updatePassword",
+          {
+            _id,
+            password,
+          },
+          { withCredentials: true }
+        );
+        console.log(data);
+        const { success, message } = data;
+        if (success) {
+          handleSuccess(message);
+        } else {
+          handleError(message);
+        }
+        setIsLoading(false);
       } catch (error) {
-          setIsLoading(false);
-          throw new Error(error);
+        setIsLoading(false);
+        throw new Error(error);
       }
     }
     setIsLoading(false);
   };
 
   useEffect(() => {
-    getID()
-    console.log(_id)
-  })
+    getID();
+    console.log(_id);
+  });
 
   return (
     <div className="flex-col">

@@ -12,11 +12,13 @@ import {
   DASHBOARD_SET_FEE_TIME,
   DASHBOARD_THERAPISTSINFO,
   DASHBOARD_USERSINFO,
-  DASHBOARD_ADMINSTATS
+  DASHBOARD_ADMINSTATS,
+  DASHBOARD_UPLOADLICENSE,
 } from "../constants/Routes.js";
 import EditProfile from "../components/Shared/EditProfile/EditProfile.jsx";
 import ChangePassword from "../components/Shared/ChangePassword/ChangePassword.jsx";
 import SetTimeFee from "../pages/Backoffice/Dashboard/SetTimeFee/SetTimeFee.jsx";
+import UploadLicense from "../pages/Backoffice/Dashboard/UploadLicense/UploadLicense.jsx";
 
 const DashboardRouter = () => {
   return (
@@ -32,6 +34,7 @@ const DashboardRouter = () => {
         <Route path={DASHBOARD_EDITPROFILE} element={<EditProfile />} />
         <Route path={DASHBOARD_CHANGEPASSWORD} element={<ChangePassword />} />
         <Route path={DASHBOARD_SET_FEE_TIME} element={<SetTimeFee />} />
+        <Route path={DASHBOARD_UPLOADLICENSE} element={<UploadLicense />} />
       </Routes>
     </div>
   );

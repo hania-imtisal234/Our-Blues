@@ -72,4 +72,11 @@ export const therapistMenuItems = [
     route: "/backoffice/editProfile/set-fee-time",
     icon: <AccessTimeIcon style={{ color: "white" }} />,
   },
+  {
+    key: "sixth",
+    label: <div className="text-white">Upload License</div>,
+    title: "UploadLicense",
+    route: "/backoffice/uploadLicense",
+    icon: <AccessTimeIcon style={{ color: "white" }} />,
+  },
 ];
