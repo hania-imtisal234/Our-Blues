@@ -39,7 +39,19 @@ const UserDetails = () => {
     fetchUsers();
   }, [navigate]);
   
-  
+  const handlePreview = (record) => {
+    Modal.info({
+      title: "Image Preview",
+      content: (
+        <Image
+          src={record.licenseeImage}
+          alt="Licensee Image"
+          id="LicenseeImage"
+        />
+      ),
+      id: "PreviewModal",
+    });
+  };
   
   const Logout = () => {
     removeCookie("token");
@@ -101,6 +113,7 @@ const UserDetails = () => {
     onCancel,
     onEdit,
     onDelete,
+    handlePreview,
   );
 
   const mergedColumns = columns.map((col) => {

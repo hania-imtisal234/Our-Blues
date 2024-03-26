@@ -1,3 +1,5 @@
+// Login.jsx
+
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Form, Layout } from "antd";
@@ -15,9 +17,8 @@ import AppContext from "../../../context/AppContext.js";
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
-  // const { userInfo, setUserInfo } = useUserContext(""); //yahn use kia
   const appContext = useContext(AppContext);
-  const { userInfo, setRole, setLoggedIn, setUserInfo } = appContext;
+  const { setRole, setLoggedIn, setUserInfo } = appContext;
   const navigate = useNavigate();
   const handleError = (err) =>
     toast.error(err, {
@@ -41,16 +42,22 @@ const Login = () => {
       const { success, message } = data;
       if (success) {
         handleSuccess(message);
-        setTimeout(() => {
-          if (data.role == "user") {
-            localStorage.setItem(
-              "userInfo",
-              JSON.stringify({
-                role: "user",
-                loggedIn: true,
+        setTimeout(async () => {
+          if (data.role === "user") {
+            const userDetails = await fetchUserDetails(values.email);
+            if (userDetails) {
+              // Set only email to user info
+              setUserInfo({
                 userEmail: values.email,
-              })
-            );
+              });
+              // Save email to local storage
+              localStorage.setItem(
+                "userInfo",
+                JSON.stringify({
+                  userEmail: values.email,
+                })
+              );
+            }
           }
           navigate("/home");
         }, 1000);
@@ -60,7 +67,23 @@ const Login = () => {
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
-      throw new Error(error);
+      console.error("Error during login:", error);
+      handleError("An error occurred during login");
+    }
+  };
+
+  const fetchUserDetails = async (email) => {
+    try {
+      const response = await axios.get("http://localhost:4000/getUsers", {
+        withCredentials: true,
+        params: {
+          email: email
+        }
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching user details:", error);
+      return null;
     }
   };
 

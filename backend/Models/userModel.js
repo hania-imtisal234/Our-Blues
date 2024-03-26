@@ -43,6 +43,7 @@ const userSchema = new mongoose.Schema({
         type: Date,
         default: new Date(),
     },
+    
 })
 
 userSchema.pre("save", async function () {
