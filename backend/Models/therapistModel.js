@@ -17,7 +17,7 @@ const therapistSchema = new mongoose.Schema({
   },
   age: {
     type: Number,
-    required: [true, "Your Last Name is required"],
+    required: [true, "Your Age is required"],
   },
   gender: {
     type: String,
@@ -48,6 +48,7 @@ const therapistSchema = new mongoose.Schema({
   },
   role: {
     type: String,
+
   },
   status: {
     type: String,
@@ -55,6 +56,9 @@ const therapistSchema = new mongoose.Schema({
   },
   LicenseeImage: {
     type: String,
+
+    required: true,
+
   },
 });
 

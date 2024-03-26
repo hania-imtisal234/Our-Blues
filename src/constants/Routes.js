@@ -7,6 +7,7 @@ export const BACKOFFICE_DASHBOARD = "/backoffice/*";
 export const DASHBOARD_USERSINFO = "/users";
 export const DASHBOARD_THERAPISTSINFO = "/users/therapists";
 export const DASHBOARD_ADDARTICLES = "/articles";
+export const DASHBOARD_ADMINSTATS="/stats";
 //BackOffice Therapist Dashboard
 export const DASHBOARD_APPOINTMENTS = "/appointments";
 export const DASHBOARD_EDITPROFILE = "/ViewProfile/edit";

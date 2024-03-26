@@ -1,8 +1,10 @@
+
 import React, { useState } from "react";
-import { Layout, Menu } from "antd";
+import { Layout, Menu, Button } from "antd";
 import OurBluesIcon from "../../../../assets/Icon.png";
 import { useNavigate } from "react-router-dom";
 const { Sider } = Layout;
+import { DASHBOARD_ADMINSTATS } from "../../../../constants/Routes";
 
 const Sidebar = ({ className = "bg-yale-blue", menuItems }) => {
   const [collapsed, setCollapsed] = useState(false);
@@ -11,6 +13,10 @@ const Sidebar = ({ className = "bg-yale-blue", menuItems }) => {
   const handleMenuClick = ({ item }) => {
     console.log(item.props.route);
     navigate(item.props.route);
+  };
+
+  const handleStatsButtonClick = () => {
+    navigate(DASHBOARD_ADMINSTATS); 
   };
 
   const renderMenuItems = (items) => {
@@ -44,12 +50,17 @@ const Sidebar = ({ className = "bg-yale-blue", menuItems }) => {
   };
 
   return (
-    <div
-      className={`bg-yale-blue ${
-        collapsed ? "sticky top-0" : "sticky top-0 z-10"
-      }`}
-      id="custom-sidebar"
-    >
+    <div className={`bg-yale-blue sticky top-0 ${collapsed ? "z-50" : "z-10"}`}>
+      <div className="flex items-center justify-center bg-yale-blue h-14">
+        {!collapsed && (
+          <h1 className="text-white font-bold text-lg">Our Blues</h1>
+        )}
+        <img
+          src={OurBluesIcon}
+          alt="Icon"
+          className="w-12 my-1 h-[40px] object-contain ml-0 bg-carolina-blue rounded-full"
+        />
+      </div>
       <Sider
         collapsible
         collapsed={collapsed}
@@ -59,26 +70,6 @@ const Sidebar = ({ className = "bg-yale-blue", menuItems }) => {
         breakpoint="md"
         style={{ position: "sticky", top: 0, zIndex: 10 }}
       >
-        {!collapsed ? (
-          <div className="flex items-center justify-center bg-yale-blue h-14 gap-2">
-            <h1 className="text-white font-bold text-lg ">Our Blues</h1>
-            <img
-              src={OurBluesIcon}
-              alt="Icon"
-              className="w-12 my-1 h-[40px] object-contain ml-0 bg-carolina-blue rounded-full"
-            />
-          </div>
-        ) : (
-          <div className="flex items-center justify-center bg-yale-blue h-14 gap-2">
-            <img
-              src={OurBluesIcon}
-              alt="Icon"
-              className="w-12 my-1 h-[40px] object-contain ml-0 bg-carolina-blue rounded-full"
-            />
-          </div>
-        )}
-
-        <div className="demo-logo-vertical" id="menuItems" />
         <Menu
           mode="inline"
           className={className}
@@ -87,6 +78,12 @@ const Sidebar = ({ className = "bg-yale-blue", menuItems }) => {
         >
           {renderMenuItems(menuItems)}
         </Menu>
+
+        <div className="z-10 flex mt-4 ml-4">
+          <Button type="primary" onClick={handleStatsButtonClick} style={{color:"white"}} mode="inline">
+            Go to Stats
+          </Button>
+        </div>
       </Sider>
     </div>
   );

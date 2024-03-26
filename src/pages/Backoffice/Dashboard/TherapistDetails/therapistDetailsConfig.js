@@ -20,8 +20,8 @@ export const therapistDetailsConfig = (
   return [
     {
       title: "",
-      dataIndex: "sNo",
-      key: "sNo",
+      dataIndex: "id",
+      key: "id",
       editable: false,
       inputType: InputType.STRING,
       align: "center",
@@ -71,9 +71,6 @@ export const therapistDetailsConfig = (
       editable: true,
       inputType: InputType.STRING,
       align: "center",
-      inputProps: {
-        rules: FormRule.PHONENUMBER_TABLE,
-      },
     },
     {
       title: <div className="text-sm text-yale-blue">Email</div>,
@@ -109,15 +106,12 @@ export const therapistDetailsConfig = (
       },
     },
     {
-      title: <div className="text-sm text-yale-blue">Address</div>,
-      dataIndex: "address",
-      key: "address",
+      title: <div className="text-sm text-yale-blue">Location</div>,
+      dataIndex: "location",
+      key: "location",
       editable: true,
       inputType: InputType.STRING,
       align: "center",
-      inputProps: {
-        rules: FormRule.ADDRESS,
-      },
     },
     {
       title: <div className="text-sm text-yale-blue">Status</div>,

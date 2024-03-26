@@ -76,6 +76,7 @@ const Dashboard = () => {
           className="bg-yale-blue sticky top-0 z-10"
           menuItems={menuItems}
         />
+        
         <Layout>
           <AppHeader />
           <Content className="mx-4 my-2 ">
