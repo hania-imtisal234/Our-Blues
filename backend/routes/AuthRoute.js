@@ -1,4 +1,9 @@
-const { Signup, Login } = require("../controllers/authController");
+const {
+  Signup,
+  Login,
+  SignupTherapist,
+  LoginTherapist,
+} = require("../controllers/authController");
 const router = require("express").Router();
 const {
   updateDetails,
@@ -10,14 +15,19 @@ const { supportGroup } = require("../controllers/chatController");
 const { getChat } = require("../Middlewares/chatMiddleware");
 const { getUsers } = require("../Middlewares/UsersMiddleware");
 const { bookAppointment } = require("../controllers/appointmentController");
-const { getTherapists } = require("../Middlewares/TherapistsMiddleware"); 
+
+const { UploadImage } = require("../controllers/UploadController");
+const upload = require("../Middlewares/MulterMiddleware");
+
 
 router.post(
   "/api/create-checkout-session",
   checkoutController.createCheckoutSession
 );
 router.post("/signup", Signup);
+router.post("/signupTherapist", SignupTherapist);
 router.post("/login", Login);
+router.post("/loginTherapist", LoginTherapist);
 router.post("/", userVerification);
 router.get("/", userVerification);
 router.post("/updateDetails", updateDetails);
@@ -26,5 +36,7 @@ router.post("/saveChat", supportGroup);
 router.get("/getChat", getChat);
 router.get("/getUsers", getUsers);
 router.post("/bookAppointment", bookAppointment);
-router.get("/getTherapists", getTherapists);
+
+router.post("/upload", upload.single("file"), UploadImage);
+
 module.exports = router;

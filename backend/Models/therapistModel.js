@@ -37,7 +37,7 @@ const therapistSchema = new mongoose.Schema({
   },
   fees: {
     type: Number,
-    required: [true],
+    required: [false],
   },
   appointmentDate: {
     type: Date,
@@ -48,7 +48,17 @@ const therapistSchema = new mongoose.Schema({
   },
   role: {
     type: String,
+
+  },
+  status: {
+    type: String,
+    default: "Deactivated",
+  },
+  LicenseeImage: {
+    type: String,
+
     required: true,
+
   },
 });
 
