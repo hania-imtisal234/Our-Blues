@@ -1,4 +1,5 @@
 import ActionButton from "../../../../components/Shared/ActionButton/ActionButton";
+import CustomButton from "../../../../components/Shared/CustomButton/CustomButton";
 import { FormRule } from "../../../../constants/formRules";
 import {
   InputType,
@@ -7,13 +8,13 @@ import {
 } from "../../../../enums";
 import { getLabelForKey, validateName } from "../../../../utils";
 
-// This function returns an array of columns for User Details Table.
 export const userDetailsConfig = (
   editingKey,
   onSave,
   onCancel,
   onEdit,
-  onDelete
+  onDelete,
+  onPreview,
 ) => {
   return [
     {
@@ -116,6 +117,18 @@ export const userDetailsConfig = (
       inputProps: {
         rules: FormRule.ADDRESS,
       },
+    },
+    {
+      title: "Preview",
+      dataIndex: "preview",
+      key: "preview",
+      render: (_, record) => (
+        <CustomButton
+          buttonLabel={"Preview"}
+          className=" bg-yale-blue text-white"
+          onClick={() => onPreview(record)}
+        />
+      ),
     },
     {
       title: "",
