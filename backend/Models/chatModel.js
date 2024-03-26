@@ -3,8 +3,8 @@ const mongoose = require("mongoose")
 const chatSchema = new mongoose.Schema({
     count: {
         type: Number,
-        required: [true],
-        unique: true,
+        required: [false],
+        unique: false,
     },
     user: {
         type: String,

@@ -17,7 +17,7 @@ const therapistSchema = new mongoose.Schema({
   },
   age: {
     type: Number,
-    required: [true, "Your Last Name is required"],
+    required: [true, "Your Age is required"],
   },
   gender: {
     type: String,
@@ -37,7 +37,7 @@ const therapistSchema = new mongoose.Schema({
   },
   fees: {
     type: Number,
-    required: [true],
+    required: [false],
   },
   appointmentDate: {
     type: Date,
@@ -45,6 +45,20 @@ const therapistSchema = new mongoose.Schema({
   },
   appointmentTime: {
     type: String,
+  },
+  role: {
+    type: String,
+
+  },
+  status: {
+    type: String,
+    default: "Deactivated",
+  },
+  LicenseeImage: {
+    type: String,
+
+    required: true,
+
   },
 });
 

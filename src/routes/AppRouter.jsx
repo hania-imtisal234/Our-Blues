@@ -12,6 +12,7 @@ import {
   HEALTHBLOG,
   SELFCARE,
   THERAPISTDETAILS,
+  DASHBOARD_ADMINSTATS,
 } from "../../src/constants/Routes";
 import Dashboard from "../pages/Backoffice/Dashboard/Dashboard";
 import RegisterBackOffice from "../pages/Backoffice/Register/Register";
@@ -24,6 +25,7 @@ import Therapists from "../pages/WebApp/Therapists/Therapists";
 import ViewHealthblog from "../pages/WebApp/ViewHealthblog/ViewHealthblog";
 import TherapistDetails from "../pages/WebApp/TherapistDetails/TherapistDetails";
 import SelfCare from "../pages/WebApp/SelfCare/SelfCare";
+import AdminStats from "../pages/Backoffice/Dashboard/AdminStats/AdminStats";
 
 const AppRouter = () => {
   return (
@@ -34,6 +36,7 @@ const AppRouter = () => {
           <Route path={BACKOFFICE_LOGIN} element={<LoginBackoffice />} />
           <Route path={BACKOFFICE_REGISTER} element={<RegisterBackOffice />} />
           <Route path={BACKOFFICE_DASHBOARD} element={<Dashboard />} />
+          <Route path={DASHBOARD_ADMINSTATS} element={<AdminStats/>}/>
 
           {/* Webapp Routes */}
           <Route path={HOME_PAGE} element={<Home />} />

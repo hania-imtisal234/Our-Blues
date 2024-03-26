@@ -2,10 +2,8 @@ import { Form, Table, Modal, Image } from "antd";
 import React, { useState, useEffect } from "react";
 import { EditableCell } from "../../../../utils";
 import { therapistDetailsConfig } from "./therapistDetailsConfig";
-import ourBluesLogo from "../../../../assets/Logo.png";
 import { useCookies } from "react-cookie";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const TherapistDetails = () => {
@@ -17,48 +15,42 @@ const TherapistDetails = () => {
   const navigate = useNavigate();
   const [cookies, removeCookie] = useCookies([]);
   const [lastName, setUsername] = useState("");
+  const [users, setUsers] = useState([]);
+
+  
   useEffect(() => {
-    const verifyCookie = async () => {
-      console.log(cookies.token);
-      if (!cookies.token) {
-        navigate("/login");
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get("http://localhost:4000/getUsers");
+        const filteredUsers = response.data.getUsers.filter(
+          (user) => user.role === "therapist"
+        );
+        setUserDetailsData(filteredUsers.map((user, index) => ({
+          ...user,
+          status: user.status || "disapproved",
+          key: index.toString(), 
+          id: index + 1, 
+        })));
+      } catch (error) {
+        console.error(error);
+        navigate("/login"); 
       }
-      const { data } = await axios.post(
-        "http://localhost:4000/",
-        {},
-        { withCredentials: true }
-      );
-      const { status, user } = data;
-      setUsername(user);
-      return status
-        ? toast(`Hello ${user}`, {
-            position: "top-right",
-          })
-        : (removeCookie("token"), navigate("/login"));
     };
-    verifyCookie();
-  }, [cookies, navigate, removeCookie]);
+  
+    fetchUsers();
+  }, [navigate]);
+  
+  
+  
   const Logout = () => {
     removeCookie("token");
     navigate("/signup");
   };
 
+  const [userDetailsData, setUserDetailsData] = useState([]);
 
-  const [userDetailsData, setUserDetailsData] = useState([
-    {
-      key: "1",
-      dataIndex: "1",
-      sNo: "1",
-      firstName: "Hania",
-      phoneNumber: "0331-2575044",
-      lastName: "Imtisal",
-      email: "hania@gmail.com",
-      gender: "female",
-      age: 20,
-      address: "Faisal Town",
-      status: "suspended",
-    },
-  ]);
+
+
   const handlePreview = (record) => {
     Modal.info({
       title: "Image Preview",
@@ -72,7 +64,7 @@ const TherapistDetails = () => {
       id: "PreviewModal",
     });
   };
-  // This function saves the edited changes.
+
   const onSave = async (key) => {
     try {
       const row = await form.validateFields();
@@ -96,13 +88,10 @@ const TherapistDetails = () => {
     }
   };
 
-  // This function cancels the editing mode.
   const onCancel = () => {
     setEditingKey("");
   };
-  // Editing key is really important.
 
-  // This function enables the editing mode for the selected record.
   const onEdit = (record) => {
     form.setFieldsValue({
       sNo: "",
@@ -111,17 +100,19 @@ const TherapistDetails = () => {
       email: "",
       gender: "",
       age: "",
-      address: "",
+      location: "",
       status: "",
       ...record,
     });
-    setEditingKey(record.key);
+    setEditingKey(record.key); 
   };
+  
 
   const onDelete = (key) => {
     const newData = userDetailsData.filter((item) => item.key !== key.key);
     setUserDetailsData(newData);
   };
+
   const columns = therapistDetailsConfig(
     editingKey,
     onSave,
@@ -169,4 +160,5 @@ const TherapistDetails = () => {
     </div>
   );
 };
+
 export default TherapistDetails;

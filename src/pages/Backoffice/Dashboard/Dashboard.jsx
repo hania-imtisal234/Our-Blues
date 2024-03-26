@@ -16,18 +16,18 @@ import { useNavigate } from "react-router-dom";
 const { Content } = Layout;
 var userRole;
 const Dashboard = () => {
-  const handleLogin = async () => {
-    try {
-      const { data } = await axios.post(
-        "http://localhost:4000/",
-        {},
-        { withCredentials: true }
-      );
-      userRole = data.role;
-    } catch (error) {
-      throw new Error(error);
-    }
-  };
+  // const handleLogin = async () => {
+  //   try {
+  //     const { data } = await axios.post(
+  //       "http://localhost:4000/",
+  //       {},
+  //       { withCredentials: true }
+  //     );
+  //     userRole = data.role;
+  //   } catch (error) {
+  //     throw new Error(error);
+  //   }
+  // };
 
   const [userInfo, setUserInfo] = useState({
     role: "",
@@ -38,31 +38,31 @@ const Dashboard = () => {
   const [cookies, removeCookie] = useCookies([]);
   const [lastName, setUsername] = useState("");
 
-  useEffect(() => {
-    const verifyCookie = async () => {
-      console.log(cookies.token);
-      if (!cookies.token) {
-        navigate("/login");
-      }
+  // useEffect(() => {
+  //   const verifyCookie = async () => {
+  //     console.log(cookies.token);
+  //     if (!cookies.token) {
+  //       navigate("/login");
+  //     }
 
-      const storedUserInfo = JSON.parse(localStorage.getItem("userInfo")) || {};
-      setUserInfo(storedUserInfo);
+  //     const storedUserInfo = JSON.parse(localStorage.getItem("userInfo")) || {};
+  //     setUserInfo(storedUserInfo);
 
-      const { data } = await axios.post(
-        "http://localhost:4000/",
-        {},
-        { withCredentials: true }
-      );
-      const { status, user } = data;
-      setUsername(user);
-      return status
-        ? toast(`Hello ${user}`, {
-            position: "top-right",
-          })
-        : (removeCookie("token"), navigate("/login"));
-    };
-    verifyCookie();
-  }, [cookies, navigate, removeCookie]);
+  //     const { data } = await axios.post(
+  //       "http://localhost:4000/",
+  //       {},
+  //       { withCredentials: true }
+  //     );
+  //     const { status, user } = data;
+  //     setUsername(user);
+  //     return status
+  //       ? toast(`Hello ${user}`, {
+  //           position: "top-right",
+  //         })
+  //       : (removeCookie("token"), navigate("/backoffice/dashboard"));
+  //   };
+  //   verifyCookie();
+  // }, [cookies, navigate, removeCookie]);
   const Logout = () => {
     removeCookie("token");
     navigate("/signup");
@@ -76,6 +76,7 @@ const Dashboard = () => {
           className="bg-yale-blue sticky top-0 z-10"
           menuItems={menuItems}
         />
+        
         <Layout>
           <AppHeader />
           <Content className="mx-4 my-2 ">

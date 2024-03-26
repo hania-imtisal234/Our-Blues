@@ -1,30 +1,65 @@
-import { Form, Table } from "antd";
-import React, { useState } from "react";
+import { Form, Table, Modal, Image } from "antd";
+import React, { useState, useEffect } from "react";
 import { EditableCell } from "../../../../utils";
 import { userDetailsConfig } from "./userDetailsConfig";
+import { useCookies } from "react-cookie";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const userDetails = () => {
+const UserDetails = () => {
   // Ant Design's Form Hook
   const [form] = Form.useForm();
   const [isLoading, setIsLoading] = useState(false);
   const [editingKey, setEditingKey] = useState("");
-  const [userDetailsData, setUserDetailsData] = useState([
-    {
-      key: "1",
-      dataIndex: "1",
-      sNo: "1",
-      firstName: "Hania",
-      phoneNumber: "0331-2575044",
-      lastName: "Imtisal",
-      email: "hania@gmail.com",
-      gender: "female",
-      age: 20,
-      address: "Faisal Town",
-      status: "suspended",
-    },
-  ]);
 
-  // This function saves the edited changes.
+  const navigate = useNavigate();
+  const [cookies, removeCookie] = useCookies([]);
+  const [lastName, setUsername] = useState("");
+  const [users, setUsers] = useState([]);
+
+  
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get("http://localhost:4000/getUsers");
+        const filteredUsers = response.data.getUsers.filter(
+          (user) => user.role === "user"
+        );
+        setUserDetailsData(filteredUsers.map((user, index) => ({
+          ...user,
+          key: index.toString(), 
+          id: index + 1, 
+        })));
+      } catch (error) {
+        console.error(error);
+        navigate("/login"); 
+      }
+    };
+  
+    fetchUsers();
+  }, [navigate]);
+  
+  const handlePreview = (record) => {
+    Modal.info({
+      title: "Image Preview",
+      content: (
+        <Image
+          src={record.licenseeImage}
+          alt="Licensee Image"
+          id="LicenseeImage"
+        />
+      ),
+      id: "PreviewModal",
+    });
+  };
+  
+  const Logout = () => {
+    removeCookie("token");
+    navigate("/signup");
+  };
+
+  const [userDetailsData, setUserDetailsData] = useState([]);
+
   const onSave = async (key) => {
     try {
       const row = await form.validateFields();
@@ -48,13 +83,10 @@ const userDetails = () => {
     }
   };
 
-  // This function cancels the editing mode.
   const onCancel = () => {
     setEditingKey("");
   };
-  // Editing key is really important.
 
-  // This function enables the editing mode for the selected record.
   const onEdit = (record) => {
     form.setFieldsValue({
       sNo: "",
@@ -63,23 +95,25 @@ const userDetails = () => {
       email: "",
       gender: "",
       age: "",
-      address: "",
-      status: "",
+      location: "",
       ...record,
     });
-    setEditingKey(record.key);
+    setEditingKey(record.key); 
   };
+  
 
   const onDelete = (key) => {
     const newData = userDetailsData.filter((item) => item.key !== key.key);
     setUserDetailsData(newData);
   };
+
   const columns = userDetailsConfig(
     editingKey,
     onSave,
     onCancel,
     onEdit,
-    onDelete
+    onDelete,
+    handlePreview,
   );
 
   const mergedColumns = columns.map((col) => {
@@ -121,4 +155,4 @@ const userDetails = () => {
   );
 };
 
-export default userDetails;
+export default UserDetails;
