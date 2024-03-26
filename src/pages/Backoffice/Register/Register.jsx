@@ -16,7 +16,15 @@ import axios from "axios";
 
 const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [therapistEmail, setTherapistEmail] = useState("");
   const navigate = useNavigate();
+
+  const handleEmailChange = (e) => {
+    setTherapistEmail(e.target.value);
+  };
+  const getTherapistEmail = () => {
+    return therapistEmail;
+  };
   const handleError = (err) =>
     toast.error(err, {
       position: "bottom-left",
@@ -30,7 +38,7 @@ const Register = () => {
     try {
       setIsLoading(true);
       const { data } = await axios.post(
-        "http://localhost:4000/signup",
+        "http://localhost:4000/signupTherapist",
         {
           ...values,
           role: "therapist",
@@ -89,6 +97,7 @@ const Register = () => {
                     size="middle"
                     placeholder="Enter your email"
                     classNames="w-[100%]"
+                    onChange={handleEmailChange}
                   />
                   <FormInput
                     name="phoneNumber"
@@ -176,11 +185,16 @@ const Register = () => {
                     type="text"
                     placeholder="Enter your location"
                   />
-                  <AppUploader
-                    name="license"
-                    label="Uplaod License"
-                    className="w-[100] p-0"
+                  {/* <AppUploader
+                    name="uploader"
+                    label="upload license"
+                    getTherapistEmail={getTherapistEmail}
+                  /> */}
+                  {/* <input
+                    type="file"
+                    onChange={(e) => setFile(e.target.files[0])}
                   />
+                  <button onClick={handleUpload}>Upload</button> */}
                 </div>
                 <div className="">
                   <FormButton

@@ -28,7 +28,7 @@ const Login = () => {
     try {
       setIsLoading(true);
       const { data } = await axios.post(
-        "http://localhost:4000/login",
+        "http://localhost:4000/loginTherapist",
         {
           ...values,
         },

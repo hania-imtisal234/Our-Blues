@@ -1,6 +1,6 @@
 const User = require("../Models/userModel");
 const { createSecretToken } = require("../util/SecretToken");
-
+const Therapist = require("../Models/therapistModel");
 const bcrypt = require("bcrypt");
 
 module.exports.Signup = async (req, res, next) => {
@@ -66,13 +66,88 @@ module.exports.Login = async (req, res, next) => {
       withCredentials: true,
       httpOnly: false,
     });
-    res
-      .status(201)
-      .json({
-        message: "User logged in successfully",
-        success: true,
-        role: existingUser.role,
-      });
+    res.status(201).json({
+      message: "User logged in successfully",
+      success: true,
+      role: existingUser.role,
+    });
+    next();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+module.exports.SignupTherapist = async (req, res, next) => {
+  try {
+    const {
+      email,
+      password,
+      firstName,
+      lastName,
+      age,
+      gender,
+      phoneNumber,
+      location,
+      role,
+      licenseeImage,
+    } = req.body;
+    console.log(req.body);
+    const existingTherapist = await Therapist.findOne({ email });
+    if (existingTherapist) {
+      return res.json({ message: "Therapist already exists" });
+    }
+    const therapist = await Therapist.create({
+      email,
+      password,
+      firstName,
+      lastName,
+      age,
+      gender,
+      phoneNumber,
+      location,
+      role,
+      licenseeImage,
+    });
+    const token = createSecretToken(therapist._id);
+    res.cookie("token", token, {
+      withCredentials: true,
+      httpOnly: false,
+    });
+    res.status(200).json({
+      message: "Therapist Registered in successfully",
+      succes: true,
+      therapist,
+    });
+    next();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+module.exports.LoginTherapist = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return res.json({ message: "All fields are required" });
+    }
+    const existingTherapist = await Therapist.findOne({ email });
+    if (!existingTherapist) {
+      return res.json({ message: "Incorrect email or password" });
+    }
+    const auth = await bcrypt.compare(password, existingTherapist.password);
+    if (!auth) {
+      return res.json({ message: "Incorrect email or password" });
+    }
+    const token = createSecretToken(existingTherapist._id);
+    res.cookie("token", token, {
+      withCredentials: true,
+      httpOnly: false,
+    });
+    res.status(201).json({
+      message: "User logged in successfully",
+      success: true,
+      role: existingTherapist.role,
+    });
     next();
   } catch (error) {
     console.error(error);
