@@ -18,9 +18,12 @@ const { supportGroup } = require("../controllers/chatController");
 const { getChat } = require("../Middlewares/chatMiddleware");
 const { getUsers } = require("../Middlewares/UsersMiddleware");
 const { bookAppointment } = require("../controllers/appointmentController");
+const {getTherapists}=require("../Middlewares/TherapistsMiddleware");
 
 const { UploadImage } = require("../controllers/UploadController");
 const upload = require("../Middlewares/MulterMiddleware");
+
+const {AppChatBot} = require("../chatbot/chatbot")
 
 router.post(
   "/api/create-checkout-session",
@@ -39,8 +42,10 @@ router.post("/updatePassword", changePassword);
 router.post("/saveChat", supportGroup);
 router.get("/getChat", getChat);
 router.get("/getUsers", getUsers);
+router.get("/getTherapists", getTherapists);
 router.post("/bookAppointment", bookAppointment);
-
 router.post("/upload", upload.single("file"), UploadImage);
+
+router.post("/chatbot", AppChatBot);
 
 module.exports = router;

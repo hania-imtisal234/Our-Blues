@@ -49,7 +49,6 @@ const Login = () => {
                 loggedIn: true,
               })
             );
-
             navigate("/backoffice/Dashboard");
           } else if (data.role == "admin") {
             localStorage.setItem(

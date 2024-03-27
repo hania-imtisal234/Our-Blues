@@ -15,14 +15,13 @@ const TherapistDetails = () => {
   const navigate = useNavigate();
   const [cookies, removeCookie] = useCookies([]);
   const [lastName, setUsername] = useState("");
-  const [users, setUsers] = useState([]);
 
   
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/getUsers");
-        const filteredUsers = response.data.getUsers.filter(
+        const response = await axios.get("http://localhost:4000/getTherapists");
+        const filteredUsers = response.data.getTherapists.filter(
           (user) => user.role === "therapist"
         );
         setUserDetailsData(filteredUsers.map((user, index) => ({
@@ -33,20 +32,13 @@ const TherapistDetails = () => {
         })));
       } catch (error) {
         console.error(error);
-        navigate("/login"); 
+        navigate("/backoffice"); 
       }
     };
   
     fetchUsers();
   }, [navigate]);
   
-  
-  
-  const Logout = () => {
-    removeCookie("token");
-    navigate("/signup");
-  };
-
   const [userDetailsData, setUserDetailsData] = useState([]);
 
 
