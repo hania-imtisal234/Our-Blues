@@ -1,21 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Upload, message } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
 import axios from "axios";
-
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const { Dragger } = Upload;
 
-const AppUploader = ({ name, label, getTherapistEmail }) => {
+const AppUploader = ({ name, label }) => {
+  const [currentTherapist, setCurrentTherapist] = useState(""); // Moved useState inside the component body
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("userInfo");
+    if (storedUser) {
+      const { email } = JSON.parse(storedUser);
+      setCurrentTherapist(email);
+    }
+  }, []);
+
   const handleUpload = async (file) => {
     try {
-      console.log(file);
-      const therapistEmail = getTherapistEmail();
-      console.log(therapistEmail);
       const formData = new FormData();
       formData.append("file", file);
-      formData.append("email", therapistEmail);
-      console.log(therapistEmail);
-      const response = await axios.post(
+      formData.append("email", currentTherapist);
+      const UploadedImage = await axios.post(
         "http://localhost:4000/upload",
         formData,
 
@@ -25,12 +32,17 @@ const AppUploader = ({ name, label, getTherapistEmail }) => {
           },
         }
       );
-      message.success("Image uploaded successfully.");
+      const { success, message } = UploadedImage.data;
+      if (!success) {
+        throw new Error(`Error with booking appointment: ${message}`);
+      }
+
+      toast.success("Image uploaded successfully.");
     } catch (error) {
       if (error.response && error.response.status === 400) {
-        message.error("Image already uploaded");
+        toast.error("Image Already Uploaded");
       } else {
-        message.error("Failed to upload image.");
+        toast.error("Failed to upload image.");
       }
     }
   };

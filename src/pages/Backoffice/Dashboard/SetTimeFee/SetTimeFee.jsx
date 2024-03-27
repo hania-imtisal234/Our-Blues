@@ -50,7 +50,6 @@ const SetTimeFee = () => {
   const handleSubmit = async (values) => {
     try {
       setIsLoading(true);
-      console.log(values);
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);

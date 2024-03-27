@@ -19,7 +19,7 @@ import EditProfile from "../components/Shared/EditProfile/EditProfile.jsx";
 import ChangePassword from "../components/Shared/ChangePassword/ChangePassword.jsx";
 import SetTimeFee from "../pages/Backoffice/Dashboard/SetTimeFee/SetTimeFee.jsx";
 import UploadLicense from "../pages/Backoffice/Dashboard/UploadLicense/UploadLicense.jsx";
-
+import AdminStats from "../pages/Backoffice/Dashboard/AdminStats/AdminStats.jsx";
 const DashboardRouter = () => {
   return (
     <div>
@@ -27,6 +27,7 @@ const DashboardRouter = () => {
         {/* Admin Routes */}
         <Route path={DASHBOARD_USERSINFO} element={<UserDetails />} />
         <Route path={DASHBOARD_THERAPISTSINFO} element={<TherapistDetails />} />
+        <Route path={DASHBOARD_ADMINSTATS} element={<AdminStats />} />
         {/* <Route path={DASHBOARD_ADDARTICLES} element={<TherapistDetails />} /> */}
 
         {/* Therapist Routes */}

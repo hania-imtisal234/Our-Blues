@@ -35,6 +35,7 @@ const Login = () => {
         { withCredentials: true }
       );
       console.log(data);
+      console.log(data.email);
       const { success, message } = data;
       if (success) {
         handleSuccess(message);
@@ -42,7 +43,11 @@ const Login = () => {
           if (data.role == "therapist") {
             localStorage.setItem(
               "userInfo",
-              JSON.stringify({ role: "therapist", loggedIn: true })
+              JSON.stringify({
+                email: data.email,
+                role: "therapist",
+                loggedIn: true,
+              })
             );
 
             navigate("/backoffice/Dashboard");
