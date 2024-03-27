@@ -48,7 +48,6 @@ const therapistSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-
   },
   status: {
     type: String,
@@ -56,9 +55,7 @@ const therapistSchema = new mongoose.Schema({
   },
   LicenseeImage: {
     type: String,
-
-    required: true,
-
+    required: false,
   },
 });
 

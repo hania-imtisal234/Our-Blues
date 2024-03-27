@@ -113,7 +113,7 @@ module.exports.SignupTherapist = async (req, res, next) => {
       withCredentials: true,
       httpOnly: false,
     });
-    res.status(200).json({
+    res.status(201).json({
       message: "Therapist Registered in successfully",
       succes: true,
       therapist,
