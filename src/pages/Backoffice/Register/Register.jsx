@@ -48,7 +48,9 @@ const Register = () => {
       console.log(data);
       const { success, message } = data;
       if (success) {
-        handleSuccess(message);
+        toast.success(message, {
+          position: "bottom-left",
+        });
         setTimeout(() => {
           navigate("/backoffice/Dashboard");
         }, 1000);

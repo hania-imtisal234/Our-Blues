@@ -36,6 +36,7 @@ module.exports.therapistVerification = (req, res) => {
           therapist: therapist.email,
           role: therapist.role,
           user: therapist.firstName,
+
           cookies: token
         });
       else return res.json({ status: false });
