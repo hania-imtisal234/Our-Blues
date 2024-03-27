@@ -22,6 +22,8 @@ const { bookAppointment } = require("../controllers/appointmentController");
 const { UploadImage } = require("../controllers/UploadController");
 const upload = require("../Middlewares/MulterMiddleware");
 
+const {AppChatBot} = require("../chatbot/chatbot")
+
 router.post(
   "/api/create-checkout-session",
   checkoutController.createCheckoutSession
@@ -42,5 +44,7 @@ router.get("/getUsers", getUsers);
 router.post("/bookAppointment", bookAppointment);
 
 router.post("/upload", upload.single("file"), UploadImage);
+
+router.post("/chatbot", AppChatBot);
 
 module.exports = router;

@@ -1,4 +1,4 @@
-require("dotenv").config();
+require('dotenv').config({path: '../.env'});
 const User = require("../Models/userModel");
 const Therapist = require("../Models/therapistModel");
 const jwt = require("jsonwebtoken");
@@ -35,6 +35,8 @@ module.exports.therapistVerification = (req, res) => {
           status: true,
           therapist: therapist.email,
           role: therapist.role,
+          user: therapist.firstName,
+          cookies: token
         });
       else return res.json({ status: false });
     }

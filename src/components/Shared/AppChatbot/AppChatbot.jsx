@@ -1,22 +1,49 @@
 import React, { useState, useEffect } from "react";
 import { Button, Input, List, Avatar, Modal } from "antd";
 import { MessageOutlined } from "@ant-design/icons";
+import axios from "axios";
+
 
 const AppChatBot = ({ visible, onClose }) => {
   const [messages, setMessages] = useState([
-    { text: "Ask a question", sender: "ai" },
+    { text: "Hi, I am your virtual personal mental health assistant. How are you doing today?", sender: "ai" },
   ]);
   const [inputValue, setInputValue] = useState("");
 
+  var AiResponse
+
   const handleSendMessage = () => {
     if (inputValue.trim() !== "") {
+      getChatBot(inputValue)
       const newMessages = [...messages, { text: inputValue, sender: "user" }];
-      setMessages([...newMessages, { text: "AI Response..", sender: "ai" }]);
+      setMessages([...newMessages]);
+      //setMessages([...newMessages, { text: AiResponse, sender: "ai" }]);
+      
       setInputValue("");
     }
   };
 
+  const getChatBot = async (value) => {
+    try {
+      console.log(value)
+      const { data } = await axios.post(
+        "http://localhost:4000/chatbot",
+        {queryResult:{
+          action:"input.unknown",
+          queryText: `${value}`
+        }},
+        { withCredentials: false }
+      );
+      const  { response } = data
+      const newMessages = [...messages, { text: inputValue, sender: "user" }];
+      setMessages([...newMessages, { text: response, sender: "ai" }]);
+    } catch (error) {
+      throw new Error(error);
+    }
+  };
+
   useEffect(() => {
+
     const chatList = document.getElementById("chatList");
     if (chatList) {
       chatList.scrollTop = chatList.scrollHeight;

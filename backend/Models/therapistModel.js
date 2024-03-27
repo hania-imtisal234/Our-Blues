@@ -29,7 +29,7 @@ const therapistSchema = new mongoose.Schema({
   },
   phoneNumber: {
     type: String,
-    required: [true, "Your Phone Number is required"],
+    required: [false],
   },
   location: {
     type: String,
@@ -57,7 +57,7 @@ const therapistSchema = new mongoose.Schema({
   LicenseeImage: {
     type: String,
 
-    required: true,
+    required: false,
 
   },
 });
