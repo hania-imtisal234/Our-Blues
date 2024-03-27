@@ -147,7 +147,11 @@ module.exports.LoginTherapist = async (req, res, next) => {
       message: "User logged in successfully",
       success: true,
       role: existingTherapist.role,
+
+      email: existingTherapist.email,
+
       cookie: cookie
+
     });
     next();
   } catch (error) {

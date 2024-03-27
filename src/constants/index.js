@@ -4,6 +4,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import PasswordIcon from "@mui/icons-material/Password";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import UploadIcon from "@mui/icons-material/Upload";
+
 export const adminMenuItems = [
   {
     key: "first",
@@ -27,6 +29,13 @@ export const adminMenuItems = [
         icon: <UserOutlined style={{ color: "white" }} />,
       },
     ],
+  },
+  {
+    key: "forth",
+    label: <div className="text-white">Stats</div>,
+    title: "Stats",
+    route: "/backoffice/users/stats",
+    icon: <UserOutlined style={{ color: "white" }} />,
   },
 ];
 
@@ -77,6 +86,6 @@ export const therapistMenuItems = [
     label: <div className="text-white">Upload License</div>,
     title: "UploadLicense",
     route: "/backoffice/uploadLicense",
-    icon: <AccessTimeIcon style={{ color: "white" }} />,
+    icon: <UploadIcon style={{ color: "white" }} />,
   },
 ];

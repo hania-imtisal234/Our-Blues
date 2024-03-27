@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Layout } from "antd";
-import AppHeader from "../../../../components/Shared/AppHeader/AppHeader";
 import Chart from "chart.js/auto";
 
 const AdminStats = () => {
@@ -17,7 +16,7 @@ const AdminStats = () => {
         console.error("Error fetching user data:", error);
       }
     };
-  
+
     fetchData();
   }, []);
 
@@ -31,7 +30,7 @@ const AdminStats = () => {
 
   const getMonthFromDate = (dateString) => {
     const date = new Date(dateString);
-    return date.toLocaleString('en-US', { month: 'long' });
+    return date.toLocaleString("en-US", { month: "long" });
   };
 
   const monthWiseUserStats = () => {
@@ -48,61 +47,71 @@ const AdminStats = () => {
   };
 
   useEffect(() => {
-    const existingUserChart = new Chart(document.getElementById('existingUserChart'), {
-      type: 'pie',
-      data: {
-        labels: ['Users', 'Therapists'],
-        datasets: [{
-          data: [countUsersByRole("user"), countTherapistsByStatus()],
-          backgroundColor: ['#FF6384', '#36A2EB'],
-        }],
-      },
-      options: {
-        plugins: {
-          title: {
-            display: true,
-            text: 'Existing User Stats',
-            color: '#0F4C81',
-            font: {
-              size: 20,
-              weight: 'bold',
+    const existingUserChart = new Chart(
+      document.getElementById("existingUserChart"),
+      {
+        type: "pie",
+        data: {
+          labels: ["Users", "Therapists"],
+          datasets: [
+            {
+              data: [countUsersByRole("user"), countTherapistsByStatus()],
+              backgroundColor: ["#FF6384", "#36A2EB"],
+            },
+          ],
+        },
+        options: {
+          plugins: {
+            title: {
+              display: true,
+              text: "Existing User Stats",
+              color: "#0F4C81",
+              font: {
+                size: 20,
+                weight: "bold",
+              },
             },
           },
         },
-      },
-    });
+      }
+    );
 
-    const monthWiseUserChart = new Chart(document.getElementById('monthWiseUserChart'), {
-      type: 'bar',
-      data: {
-        labels: Object.keys(monthWiseUserStats()),
-        datasets: [{
-          label: 'Number of Users',
-          data: Object.values(monthWiseUserStats()),
-          backgroundColor: 'rgba(255, 99, 132, 0.2)',
-          borderColor: 'rgba(255, 99, 132, 1)',
-          borderWidth: 1,
-        }],
-      },
-      options: {
-        plugins: {
-          title: {
-            display: true,
-            text: 'Month-wise User Stats',
-            color: '#0F4C81',
-            font: {
-              size: 20,
-              weight: 'bold',
+    const monthWiseUserChart = new Chart(
+      document.getElementById("monthWiseUserChart"),
+      {
+        type: "bar",
+        data: {
+          labels: Object.keys(monthWiseUserStats()),
+          datasets: [
+            {
+              label: "Number of Users",
+              data: Object.values(monthWiseUserStats()),
+              backgroundColor: "rgba(255, 99, 132, 0.2)",
+              borderColor: "rgba(255, 99, 132, 1)",
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          plugins: {
+            title: {
+              display: true,
+              text: "Month-wise User Stats",
+              color: "#0F4C81",
+              font: {
+                size: 20,
+                weight: "bold",
+              },
+            },
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
             },
           },
         },
-        scales: {
-          y: {
-            beginAtZero: true,
-          },
-        },
-      },
-    });
+      }
+    );
 
     return () => {
       existingUserChart.destroy();
@@ -112,13 +121,19 @@ const AdminStats = () => {
 
   return (
     <Layout>
-      <AppHeader />
       <Layout>
-        <div style={{ display: "flex", justifyContent: "space-around", alignItems: "center", minHeight: "calc(100vh - 64px)" }}>
-          <div style={{ width: "30%" }}> 
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-around",
+            alignItems: "center",
+            minHeight: "calc(100vh - 64px)",
+          }}
+        >
+          <div style={{ width: "30%" }}>
             <canvas id="existingUserChart"></canvas>
           </div>
-          <div style={{ width: "40%" }}> 
+          <div style={{ width: "40%" }}>
             <canvas id="monthWiseUserChart"></canvas>
           </div>
         </div>

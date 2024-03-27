@@ -1,22 +1,15 @@
-
 import React, { useState } from "react";
 import { Layout, Menu, Button } from "antd";
 import OurBluesIcon from "../../../../assets/Icon.png";
 import { useNavigate } from "react-router-dom";
 const { Sider } = Layout;
-import { DASHBOARD_ADMINSTATS } from "../../../../constants/Routes";
 
 const Sidebar = ({ className = "bg-yale-blue", menuItems }) => {
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
 
   const handleMenuClick = ({ item }) => {
-    console.log(item.props.route);
     navigate(item.props.route);
-  };
-
-  const handleStatsButtonClick = () => {
-    navigate(DASHBOARD_ADMINSTATS); 
   };
 
   const renderMenuItems = (items) => {
@@ -78,12 +71,6 @@ const Sidebar = ({ className = "bg-yale-blue", menuItems }) => {
         >
           {renderMenuItems(menuItems)}
         </Menu>
-
-        <div className="z-10 flex mt-4 ml-4">
-          <Button type="primary" onClick={handleStatsButtonClick} style={{color:"white"}} mode="inline">
-            Go to Stats
-          </Button>
-        </div>
       </Sider>
     </div>
   );
