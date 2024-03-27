@@ -54,6 +54,8 @@ const Dashboard = () => {
         { withCredentials: true }
       );
       const { status, user } = data;
+      cookies.token = data.cookies
+
       setUsername(user);
       return status
         ? toast(`Hello ${user}`, {
