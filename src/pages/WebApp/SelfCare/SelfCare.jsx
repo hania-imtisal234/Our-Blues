@@ -25,7 +25,7 @@ const SelfCare = () => {
 
   useEffect(() => {
     let interval;
-    if (breathingTimer < 8) {
+    if (breathingTimer < 5) {
       interval = setInterval(() => {
         setBreathingTimer(prev => prev + 1);
         if (breathingState === 'inhale') {
@@ -196,7 +196,7 @@ const SelfCare = () => {
         <Title style={{ color: '#0F4C81', textAlign: 'center', marginBottom: '40px', fontWeight: 'bold', fontSize: "20px" }}>STOP, BREATHE & THINK</Title>
         <div className="flex flex-col items-center mt-8">
       <div className="w-40 h-40 rounded-full bg-gray-300 flex items-center justify-center transition duration-500 ease-in-out transform hover:scale-110">
-        <div className={`w-24 h-24 rounded-full ${breathingState === 'inhale' ? 'bg-blue-500' : 'bg-red-500'} animate-pulse`} />
+        <div className={`w-24 h-24 rounded-full ${breathingState === 'inhale' ? 'bg-blue-600' : 'bg-red-500'} animate-pulse`} />
       </div>
       <Paragraph className="mt-4 text-center">
         {breathingState === 'inhale' ? 'Inhale Slowly' : 'Exhale Slowly'}
@@ -210,11 +210,11 @@ const SelfCare = () => {
         </Paragraph>
       </div>
     </div>
+    <footer style={{ bottom: 0, width: '100%' }}>
+          <AppFooter />
+        </footer>
       </div>
       
-      <Layout style={{ marginTop: "90vh" }}>
-        <AppFooter />
-      </Layout>
       <style>
         {`
           @keyframes floatRed {
@@ -239,6 +239,7 @@ const SelfCare = () => {
           }
         `}
       </style>
+      
     </Layout>
   );
 };
