@@ -22,7 +22,8 @@ const WebHeader = () => {
   const navigate = useNavigate();
   useEffect(() => {
     const storedUserInfo = JSON.parse(localStorage.getItem("userInfo"));
-    if (storedUserInfo && storedUserInfo.loggedIn) {
+
+    if (storedUserInfo) {
       console.log("yes");
       setIsLoggedIn(true);
     }
