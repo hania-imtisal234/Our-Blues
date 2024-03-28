@@ -21,11 +21,16 @@ const WebHeader = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
-    const storedUserInfo = JSON.parse(localStorage.getItem("userInfo")) || {};
-    setIsLoggedIn(storedUserInfo.loggedIn || false);
+    const storedUserInfo = JSON.parse(localStorage.getItem("userInfo"));
+    if (storedUserInfo && storedUserInfo.loggedIn) {
+      console.log("yes");
+      setIsLoggedIn(true);
+    }
   }, []);
+
   const handleLogout = () => {
-    localStorage.clear();
+    localStorage.removeItem("userInfo");
+    setIsLoggedIn(false);
     navigate(WEBAPP_LOGIN);
   };
   const showDrawer = () => {
