@@ -15,6 +15,7 @@ const textGeneration = async (prompt) => {
       model: "gpt-3.5-turbo-0125",
       //model: "gpt-3.5-turbo-16k-0613",
       //model: "ft:gpt-3.5-turbo-0125:personal:our-blues:979G2mFK"
+      //model: "ft:gpt-3.5-turbo-0125:personal:ourblues:978CLrPh"
       messages: [
         {
           role: "system",
@@ -39,7 +40,7 @@ const textGeneration = async (prompt) => {
         },
       ],
       temperature: 1,
-      max_tokens: 256,
+      max_tokens: 100,
       top_p: 1,
       frequency_penalty: 0,
       presence_penalty: 0.06,

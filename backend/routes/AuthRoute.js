@@ -7,6 +7,7 @@ const {
 const router = require("express").Router();
 const {
   updateDetails,
+  updateUserDetails,
   changePassword,
 } = require("../controllers/updateController");
 const {
@@ -38,6 +39,7 @@ router.get("/", userVerification);
 router.post("/therapist", therapistVerification);
 router.get("/therapist", therapistVerification);
 router.post("/updateDetails", updateDetails);
+router.post("/updateUserDetails", updateUserDetails);
 router.post("/updatePassword", changePassword);
 router.post("/saveChat", supportGroup);
 router.get("/getChat", getChat);

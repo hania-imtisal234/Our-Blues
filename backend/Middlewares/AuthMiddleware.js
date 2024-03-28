@@ -14,7 +14,7 @@ module.exports.userVerification = (req, res) => {
     } else {
       const user = await User.findById(data.id);
       if (user)
-        return res.json({ status: true, user: user.email, role: user.role });
+        return res.json({ status: true, user: user.email, role: user.role, id: user.id, cookies: token });
       else return res.json({ status: false });
     }
   });
@@ -36,7 +36,7 @@ module.exports.therapistVerification = (req, res) => {
           therapist: therapist.email,
           role: therapist.role,
           user: therapist.firstName,
-
+          id: therapist.id,
           cookies: token
         });
       else return res.json({ status: false });

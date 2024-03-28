@@ -1,4 +1,5 @@
 const { default: mongoose } = require("mongoose");
+const Therapist = require("../Models/therapistModel")
 const User = require("../Models/userModel")
 
 const bcrypt = require("bcrypt")
@@ -6,6 +7,31 @@ const bcrypt = require("bcrypt")
 module.exports.updateDetails = async (req, res) => {
     try {
         const {_id, email, firstName, lastName, age, gender, phoneNumber} = req.body;
+        const updatedUser = await Therapist.findOneAndUpdate(
+            {_id: new mongoose.Types.ObjectId(_id)},
+            {
+            $set: {
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                age: age,
+                gender: gender,
+                phoneNumber: phoneNumber,
+                }
+            },
+            {new: true}
+        );
+        res
+            .status(201)
+            .json({message: "User Details Updated successfully", succes: true, updatedUser})
+    } catch(err) {
+        console.error(err);
+    }
+}
+
+module.exports.updateUserDetails = async (req, res) => {
+    try {
+        const {_id, email, firstName, lastName, age, gender, phoneNumber, location} = req.body;
         const updatedUser = await User.findOneAndUpdate(
             {_id: new mongoose.Types.ObjectId(_id)},
             {
@@ -16,6 +42,7 @@ module.exports.updateDetails = async (req, res) => {
                 age: age,
                 gender: gender,
                 phoneNumber: phoneNumber,
+                location: location,
                 }
             },
             {new: true}
