@@ -40,7 +40,6 @@ const Dashboard = () => {
 
   useEffect(() => {
     const verifyCookie = async () => {
-      console.log(cookies.token);
       if (!cookies.token) {
         navigate("/login");
       }
@@ -54,7 +53,7 @@ const Dashboard = () => {
         { withCredentials: true }
       );
       const { status, user } = data;
-      cookies.token = data.cookies
+      cookies.token = data.cookies;
 
       setUsername(user);
       return status

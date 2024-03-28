@@ -150,8 +150,7 @@ module.exports.LoginTherapist = async (req, res, next) => {
 
       email: existingTherapist.email,
 
-      cookie: cookie
-
+      cookie: cookie,
     });
     next();
   } catch (error) {
