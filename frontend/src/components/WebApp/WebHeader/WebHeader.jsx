@@ -22,7 +22,7 @@ const WebHeader = () => {
   const navigate = useNavigate();
   useEffect(() => {
     const storedUserInfo = JSON.parse(localStorage.getItem("userInfo")) || {};
-    setIsLoggedIn(storedUserInfo.loggedIn);
+    setIsLoggedIn(storedUserInfo.loggedIn || false);
   }, []);
   const handleLogout = () => {
     localStorage.clear();
