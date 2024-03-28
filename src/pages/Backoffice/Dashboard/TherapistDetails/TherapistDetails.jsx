@@ -5,6 +5,7 @@ import { therapistDetailsConfig } from "./therapistDetailsConfig";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 const TherapistDetails = () => {
   // Ant Design's Form Hook
@@ -15,6 +16,41 @@ const TherapistDetails = () => {
   const navigate = useNavigate();
   const [cookies, removeCookie] = useCookies([]);
   const [lastName, setUsername] = useState("");
+
+
+const handleError = (err) =>
+toast.error(err, {
+  position: "bottom-left",
+});
+const handleSuccess = (msg) =>
+toast.success(msg, {
+  position: "bottom-left",
+});
+
+
+  const handleEditProfile = async (values) => {
+    try {
+      setIsLoading(true);
+      const { data } = await axios.post(
+        "http://localhost:4000/updateDetails",
+        {
+          ...values,
+        },
+        { withCredentials: true }
+      );
+      console.log(data);
+      const { success, message } = data;
+      if (success) {
+        handleSuccess(message);
+      } else {
+        handleError(message);
+      }
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      throw new Error(error);
+    }
+  };
 
   
   useEffect(() => {
@@ -68,7 +104,9 @@ const TherapistDetails = () => {
           ...item,
           ...row,
         });
+        console.log(newData[index])
         setUserDetailsData(newData);
+        handleEditProfile(newData[index])
         setEditingKey("");
       } else {
         newData.push(row);
