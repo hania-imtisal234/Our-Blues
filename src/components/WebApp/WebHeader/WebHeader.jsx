@@ -9,6 +9,7 @@ import { useNavigate } from "react-router";
 import {
   HEALTHBLOG,
   HOME_PAGE,
+  SELFCARE,
   SUPPORTGROUP,
   THERAPISTS,
   WEBAPP_LOGIN,
@@ -53,6 +54,13 @@ const WebHeader = () => {
         <ul className="h-10 xs:hidden md:flex md:items-center md:justify-end  flex-1 gap-6  text-white font-bold md:text-base sm:text-xl sm:mx-0 xs:text-sm xs:mx-2  mx-4">
           <a
             onClick={() => {
+              navigate(HOME_PAGE);
+            }}
+          >
+            <li>Home</li>
+          </a>
+          <a
+            onClick={() => {
               navigate(HEALTHBLOG);
             }}
           >
@@ -71,6 +79,13 @@ const WebHeader = () => {
             }}
           >
             <li>Join Support Group</li>
+          </a>
+          <a
+            onClick={() => {
+              navigate(SELFCARE);
+            }}
+          >
+            <li>Self Care</li>
           </a>
         </ul>
       </div>
