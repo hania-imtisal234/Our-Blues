@@ -89,3 +89,31 @@ export const therapistMenuItems = [
     icon: <UploadIcon style={{ color: "white" }} />,
   },
 ];
+export const LoginButtonOptions = [
+  {
+    key: "first",
+    label: <div className=" text-yale-blue">As User</div>,
+    title: "AsUser",
+    route: "/login",
+  },
+  {
+    key: "second",
+    label: <div className="text-yale-blue">As Therapist</div>,
+    title: "AsTherapist",
+    route: "/backoffice",
+  },
+];
+export const RegisterButtonOptions = [
+  {
+    key: "first",
+    label: <div className=" text-yale-blue">As User</div>,
+    title: "AsUser",
+    route: "/register",
+  },
+  {
+    key: "second",
+    label: <div className="text-yale-blue">As Therapist</div>,
+    title: "AsTherapist",
+    route: "/backoffice/register",
+  },
+];
