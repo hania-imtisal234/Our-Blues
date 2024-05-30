@@ -391,7 +391,7 @@ const Home = () => {
           <div className="grid grid-cols-1  text-font-sans gap-y-2 md:gap-y-0">
             <Button
               type="link"
-              className="text-white text-base md:text-lg my-2"
+              className="text-white text-base md:text-lg my-2 cursor-pointer"
               icon={<ReadOutlined />}
               onClick={() => {
                 navigate(HEALTHBLOG);
