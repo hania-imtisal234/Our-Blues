@@ -40,7 +40,7 @@ const Login = () => {
         { withCredentials: true }
       );
       const { data } = response;
-
+      console.log(data);
       if (data && data.success) {
         handleSuccess(data.message);
 

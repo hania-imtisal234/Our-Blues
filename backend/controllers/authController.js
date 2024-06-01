@@ -90,6 +90,8 @@ module.exports.SignupTherapist = async (req, res, next) => {
       location,
       role,
       licenseeImage,
+      experience,
+      qualification,
     } = req.body;
     console.log(req.body);
     const existingTherapist = await Therapist.findOne({ email });
@@ -107,6 +109,8 @@ module.exports.SignupTherapist = async (req, res, next) => {
       location,
       role,
       licenseeImage,
+      experience,
+      qualification,
     });
     const token = createSecretToken(therapist._id);
     res.cookie("token", token, {

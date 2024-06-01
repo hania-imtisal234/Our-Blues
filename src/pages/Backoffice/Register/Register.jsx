@@ -48,9 +48,7 @@ const Register = () => {
       console.log(data);
       const { success, message } = data;
       if (success) {
-        toast.success(message, {
-          position: "bottom-left",
-        });
+        handleSuccess(message);
         setTimeout(() => {
           navigate("/backoffice/Dashboard");
         }, 1000);
@@ -181,22 +179,32 @@ const Register = () => {
                   <FormInput
                     name="location"
                     label="Location"
-                    rules={FormRule.LOCATION}
+                    rules={FormRule.QUALIFICATION}
                     className="w-[100px]"
                     size="middle"
                     type="text"
                     placeholder="Enter your location"
                   />
-                  {/* <AppUploader
-                    name="uploader"
-                    label="upload license"
-                    getTherapistEmail={getTherapistEmail}
-                  /> */}
-                  {/* <input
-                    type="file"
-                    onChange={(e) => setFile(e.target.files[0])}
+                  <FormInput
+                    name="experience"
+                    label="Experience"
+                    rules={FormRule.EXPERIENCE}
+                    className="w-[100px]"
+                    size="middle"
+                    type="text"
+                    placeholder="Enter your experience"
                   />
-                  <button onClick={handleUpload}>Upload</button> */}
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  <FormInput
+                    name="qualification"
+                    label="Qualification"
+                    rules={FormRule.QUALIFICATION}
+                    className="w-[100px]"
+                    size="middle"
+                    type="text"
+                    placeholder="Enter your qualification"
+                  />
                 </div>
                 <div className="">
                   <FormButton

@@ -28,6 +28,11 @@ const { UploadImage } = require("../controllers/UploadController");
 const upload = require("../Middlewares/MulterMiddleware");
 
 const { AppChatBot } = require("../chatbot/chatbot");
+const {
+  UpdateRatings,
+  getReviews,
+  addReviews,
+} = require("../controllers/therapistController");
 
 //WEBAPP
 router.post("/signup", Signup);
@@ -38,6 +43,9 @@ router.get("/getChat", getChat);
 router.get("/getUsers", getUsers);
 router.get("/getUsersByEmail", getUserByEmail);
 router.get("/getTherapistById/:id", getTherapistsById);
+router.post("/rateTherapist/:id", UpdateRatings);
+router.get("/getReviews/:id", getReviews);
+router.post("/addReview/:id", addReviews);
 router.post("/saveChat", supportGroup);
 router.get("/getTherapists", getTherapists);
 router.post("/bookAppointment", bookAppointment);

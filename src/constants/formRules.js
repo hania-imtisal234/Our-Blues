@@ -8,6 +8,37 @@ export const FormRule = {
       max: 50,
     },
   ],
+  REVIEW: [
+    {
+      required: false,
+      pattern: /^[a-zA-Z0-9\s.,!?'"()-]*$/,
+    },
+  ],
+  QUALIFICATION: [
+    {
+      required: true,
+      message: "Please enter a qualification!",
+      min: 3,
+      max: 50,
+    },
+  ],
+  EXPERIENCE: [
+    {
+      required: true,
+      pattern: /^[a-zA-Z0-9 ]{3,50}$/,
+      message: "Please enter a experience!",
+      min: 3,
+      max: 50,
+    },
+  ],
+  Experince: [
+    {
+      required: true,
+      message: "Please enter a qualification!",
+      min: 3,
+      max: 50,
+    },
+  ],
   TIME: [
     {
       required: true,

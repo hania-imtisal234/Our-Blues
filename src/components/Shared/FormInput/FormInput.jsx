@@ -8,6 +8,7 @@ const FormInput = ({
   type = "text",
   placeholder,
   onPressEnter = null,
+  onChange = () => {},
   addonAfter,
   label,
   rules,
@@ -26,6 +27,7 @@ const FormInput = ({
         className={classNames}
         placeholder={placeholder}
         addonAfter={addonAfter}
+        onChange={onChange}
         onPressEnter={onPressEnter}
       />
     </Form.Item>
