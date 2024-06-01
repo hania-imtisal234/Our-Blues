@@ -1,5 +1,3 @@
-// SupportGroup.jsx
-
 import React, { useState, useEffect, useRef } from "react";
 import { Layout, Input, Button, List, Avatar, Dropdown, Menu } from "antd";
 import WebHeader from "../../../components/WebApp/WebHeader/WebHeader";
@@ -11,25 +9,45 @@ const { Content } = Layout;
 
 const socket = io("http://localhost:3001", { transports: ["websocket"] });
 
-const SupportGroup = () => {
+const SupportGroup = ({ selectedGroup }) => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [currentUser, setCurrentUser] = useState("");
   const [users, setUsers] = useState([]);
   const [menuVisible, setMenuVisible] = useState(false);
-  const [pagination, setPagination] = useState({ skip: 0, limit: 8 });
-  const [reachedEnd, setReachedEnd] = useState(false);
   const messagesEndRef = useRef(null);
   const [showParticipants, setShowParticipants] = useState(false);
   const [participantColorMap, setParticipantColorMap] = useState({});
-  const [messageCount, setMessageCount] = useState(0);
+
+  const generateParticipantColorMap = (participants) => {
+    const colorMap = {};
+    participants.forEach((participant) => {
+      colorMap[participant] = "#" + Math.floor(Math.random() * 16777215).toString(16);
+    });
+    return colorMap;
+  };
+
+  const getChats = async () => {
+    try {
+      const chats = await axios.get("http://localhost:4000/getChat", {
+        params: { group: selectedGroup },
+        withCredentials: true,
+      });
+      setMessages(chats.data.getChats);
+      const participants = chats.data.getChats.map(chat => chat.user);
+      const colorMap = generateParticipantColorMap(participants);
+      setParticipantColorMap(colorMap);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
     const storedUser = localStorage.getItem("userInfo");
     if (storedUser) {
       const { userEmail } = JSON.parse(storedUser);
       setCurrentUser(userEmail);
-    } 
+    }
   }, []);
 
   useEffect(() => {
@@ -40,52 +58,7 @@ const SupportGroup = () => {
 
   useEffect(() => {
     getChats();
-  }, []);
-
-  const getChats = async () => {
-    try {
-      const chats = await axios.get("http://localhost:4000/getChat/", {
-        withCredentials: true,
-      });
-      setMessages(chats.data.getChats);
-      setMessageCount(chats.data.getChats.length);
-      const participants = chats.data.getChats.map(chat => chat.user);
-      const colorMap = generateParticipantColorMap(participants);
-      setParticipantColorMap(colorMap);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const handleChat = async (values) => {
-    try {
-      console.log(messageCount);
-      const { data } = await axios.post(
-        "http://localhost:4000/saveChat",
-        {
-          count: messageCount, ...values, 
-        },
-        { withCredentials: true }
-      );
-      console.log(data);
-      const { success, message } = data;
-      if (success) {
-        console.log("Success!", message);
-      } else {
-        console.log("Error with Chat");
-      }
-    } catch (error) {
-      throw new Error(error);
-    }
-  };
-
-  const generateParticipantColorMap = (participants) => {
-    const colorMap = {};
-    participants.forEach((participant) => {
-      colorMap[participant] = "#" + Math.floor(Math.random() * 16777215).toString(16);
-    });
-    return colorMap;
-  };
+  }, [selectedGroup]);
 
   const handleSendMessage = async () => {
     if (newMessage.trim() !== "") {
@@ -96,15 +69,15 @@ const SupportGroup = () => {
           const messageData = {
             user: userEmail,
             content: newMessage,
+            group: selectedGroup,
           };
-          setMessageCount((prevCount) => prevCount + 1); 
           await axios.post("http://localhost:4000/saveChat", messageData, {
             withCredentials: true,
           });
           socket.emit("message", messageData);
           setNewMessage("");
           setMessages((prevMessages) => [...prevMessages, messageData]);
-        } 
+        }
       } catch (error) {
         console.error("Error sending message to backend:", error);
       }
@@ -124,15 +97,6 @@ const SupportGroup = () => {
     console.log(participant);
   };
 
-  const loadMoreMessages = () => {
-    if (!reachedEnd) {
-      setPagination((prevPagination) => ({
-        skip: prevPagination.skip + prevPagination.limit,
-        limit: prevPagination.limit,
-      }));
-    }
-  };
-
   const menu = (
     <Menu onClick={handleMenuClick}>
       <Menu.Item key="participants">
@@ -150,10 +114,10 @@ const SupportGroup = () => {
   return (
     <Layout>
       <WebHeader />
-      <Content className="m-4 p-4 bg-carolina-blue text-black font-bold">
-        <div className="max-w-md mx-auto">
+      <Content className="m-4 p-4 bg-carolina-blue text-black font-bold flex">
+        <div className="flex-1 flex flex-col bg-white p-4 shadow-lg rounded-lg">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-semibold">Support Group</h2>
+            <h2 className="text-xl font-semibold">Support Group: {selectedGroup}</h2>
             <Dropdown
               overlay={menu}
               trigger={["click"]}
@@ -166,57 +130,60 @@ const SupportGroup = () => {
               </Button>
             </Dropdown>
           </div>
-          {showParticipants && (
+          <div className="flex-1 overflow-y-auto border p-4 mb-4">
             <List
-              dataSource={users}
-              renderItem={(user) => (
-                <List.Item>
+              dataSource={messages}
+              renderItem={(message, index) => (
+                <List.Item
+                  key={index}
+                  className={message.user === currentUser ? "text-right" : "text-left"}
+                  style={{
+                    justifyContent: message.user === currentUser ? "flex-end" : "flex-start"
+                  }}
+                >
                   <List.Item.Meta
                     avatar={
-                      <Avatar style={{ backgroundColor: participantColorMap[user] }}>
-                        {user[0]}
+                      <Avatar
+                        style={{ backgroundColor: participantColorMap[message.user] }}
+                      >
+                        {message.user.charAt(0).toUpperCase()}
                       </Avatar>
                     }
-                    title={user}
-                    onClick={() => handleParticipantClick(user)}
+                    title={message.user}
+                    description={message.content}
+                    className={message.user === currentUser ? "bg-blue-100 p-2 rounded-lg" : "bg-gray-100 p-2 rounded-lg"}
                   />
                 </List.Item>
               )}
             />
-          )}
-          <List
-            itemLayout="horizontal"
-            dataSource={messages}
-            renderItem={(item, index) =>
-              item && item.user ? (
-                <List.Item className={item.user === currentUser ? "text-right" : "text-left"}>
-                  <List.Item.Meta
-                    avatar={
-                      <Avatar style={{ backgroundColor: participantColorMap[item.user] }}>
-                        {item.user[0]}
-                      </Avatar>
-                    }
-                    title={<span style={{ fontWeight: "bold" }}>{item.user}</span>}
-                    description={<span style={{ fontSize: "12px" }}>{item.content}</span>}
-                    style={item.user === currentUser ? { textAlign: "right" } : { textAlign: "left" }}
-                  />
-                </List.Item>
-              ) : null
-            }
-            onScroll={loadMoreMessages}
-          />
-          <div ref={messagesEndRef}></div>
-          <div className="flex mt-4">
+            <div ref={messagesEndRef} />
+          </div>
+          <div className="flex items-center">
             <Input
-              className="mr-2 text-black "
-              placeholder="Type a message..."
+              placeholder="Type a message"
               value={newMessage}
               onChange={(e) => setNewMessage(e.target.value)}
+              onPressEnter={handleSendMessage}
+              className="mr-2"
             />
             <Button type="primary" onClick={handleSendMessage}>
               Send
             </Button>
           </div>
+        </div>
+        <div className="ml-4 w-72 bg-white p-4 shadow-lg rounded-lg">
+          <h2 className="text-xl font-semibold mb-4">Groups</h2>
+          <List
+            dataSource={['Depression', 'Anxiety', 'Stress', 'General Support']}
+            renderItem={(room, index) => (
+              <List.Item key={index}>
+                <List.Item.Meta
+                  avatar={<Avatar>{room.charAt(0).toUpperCase()}</Avatar>}
+                  title={room}
+                />
+              </List.Item>
+            )}
+          />
         </div>
       </Content>
     </Layout>
@@ -224,4 +191,3 @@ const SupportGroup = () => {
 };
 
 export default SupportGroup;
-

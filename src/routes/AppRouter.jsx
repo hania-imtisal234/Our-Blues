@@ -7,12 +7,13 @@ import {
   HOME_PAGE,
   WEBAPP_LOGIN,
   WEBAPP_REGISTER,
-  SUPPORTGROUP,
+  GROUPSELECTION,
   THERAPISTS,
   HEALTHBLOG,
   SELFCARE,
   THERAPISTDETAILS,
   DASHBOARD_ADMINSTATS,
+  GROUP_CHAT,
 } from "../../src/constants/Routes";
 import Dashboard from "../pages/Backoffice/Dashboard/Dashboard";
 import RegisterBackOffice from "../pages/Backoffice/Register/Register";
@@ -20,12 +21,14 @@ import LoginBackoffice from "../pages/Backoffice/Login/Login";
 import Home from "../pages/WebApp/Home/Home";
 import UserRegister from "../pages/WebApp/Register/Register";
 import LoginUser from "../pages/WebApp/Login/Login";
-import SupportGroup from "../pages/WebApp/SupportGroup/SupportGroup";
+import GroupSelection from "../pages/WebApp/GroupSelection/GroupSelection";
 import Therapists from "../pages/WebApp/Therapists/Therapists";
 import ViewHealthblog from "../pages/WebApp/ViewHealthblog/ViewHealthblog";
 import TherapistDetails from "../pages/WebApp/TherapistDetails/TherapistDetails";
 import SelfCare from "../pages/WebApp/SelfCare/SelfCare";
 import AdminStats from "../pages/Backoffice/Dashboard/AdminStats/AdminStats";
+import GroupChat from "../pages/WebApp/GroupChat/GroupChat";
+import SupportGroup from "../pages/WebApp/SupportGroup/SupportGroup";
 
 const AppRouter = () => {
   return (
@@ -43,11 +46,12 @@ const AppRouter = () => {
           <Route path={"/"} element={<Navigate to={HOME_PAGE} />} />
           <Route path={WEBAPP_LOGIN} element={<LoginUser />} />
           <Route path={WEBAPP_REGISTER} element={<UserRegister />} />
-          <Route path={SUPPORTGROUP} element={<SupportGroup />} />
+          <Route path={GROUPSELECTION} element={<GroupChat />} />
           <Route path={THERAPISTS} element={<Therapists />} />
           <Route path={HEALTHBLOG} element={<ViewHealthblog />} />
           <Route path={THERAPISTDETAILS} element={<TherapistDetails />} />
           <Route path={SELFCARE} element={<SelfCare />}/>
+          <Route path="/group/:groupName" element={<SupportGroup />} />
         </Routes>
       </BrowserRouter>
     </div>
