@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import Sidebar from "../../../components/Backoffice/Dashboard/Sidebar/Sidebar";
-import AppHeader from "../../../components/Shared/AppHeader/AppHeader";
+import AppHeader from "../../../components/Backoffice/AppHeader/AppHeader.jsx";
 import {
   adminMenuItems,
   therapistMenuItems,
@@ -10,7 +10,7 @@ import { Layout } from "antd";
 import DashboardRouter from "../../../routes/DashboardRouter";
 import { useCookies } from "react-cookie";
 import axios from "axios";
-import { toast } from "react-toastify";
+
 import { useNavigate } from "react-router-dom";
 
 const { Content } = Layout;
@@ -56,11 +56,10 @@ const Dashboard = () => {
       cookies.token = data.cookies;
 
       setUsername(user);
-      return status
-        ? toast(`Hello ${user}`, {
-            position: "top-right",
-          })
-        : (removeCookie("token"), navigate("/backoffice/dashboard"));
+      if (!status) {
+        removeCookie("token");
+        navigate("/backoffice/dashboard");
+      }
     };
     verifyCookie();
   }, [cookies, navigate, removeCookie]);

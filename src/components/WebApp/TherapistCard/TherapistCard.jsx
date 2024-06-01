@@ -2,6 +2,7 @@ import { Avatar } from "antd";
 import React from "react";
 
 const TherapistCard = ({ therapistInfo }) => {
+  console.log("TherapistCard received therapistInfo:", therapistInfo);
   const {
     id,
     name,

@@ -1,7 +1,8 @@
 import { Form } from "antd";
 import { NAME_ONLY_LETTERS, NAME_REQUIRED } from "../constants/messages";
 import { editableTableInputConfig } from "../enums";
-import CustomButton from "../components/Shared/CustomButton/CustomButton";
+
+import { toast } from "react-toastify";
 
 export const getItem = (label, key, icon, children) => {
   return {
@@ -62,3 +63,12 @@ export const EditableCell = ({
     </td>
   );
 };
+
+export const handleError = (err) =>
+  toast.error(err, {
+    position: "top-center",
+  });
+export const handleSuccess = (msg) =>
+  toast.success(msg, {
+    position: "top-center",
+  });

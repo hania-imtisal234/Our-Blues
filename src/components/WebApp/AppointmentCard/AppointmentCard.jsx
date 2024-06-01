@@ -3,13 +3,11 @@ import React, { useState, useEffect } from "react";
 import { ReadOutlined } from "@ant-design/icons";
 import FormButton from "../../Shared/FormButton/FormButton";
 import { loadStripe } from "@stripe/stripe-js";
-import { Payments, Therapists, STRIPE_API } from "../../../enums";
+import { Payments, Therapists, STRIPE_API, Roles } from "../../../enums"; // Ensure all enums are imported
 import axios from "axios";
-import { Roles } from "../../../enums";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { THERAPISTDETAILS } from "../../../constants/Routes";
 import LoadingButton from "../../Shared/LoadingButton/LoadingButton";
 
 const AppointmentCard = ({ therapistInfo }) => {
@@ -19,16 +17,11 @@ const AppointmentCard = ({ therapistInfo }) => {
   const [usersList, setUsersList] = useState([]);
   const [appointmentBooked, setAppointmentBooked] = useState(false);
 
-  const loggedInUserEmail = JSON.parse(
-    localStorage.getItem("userInfo")
-  ).userEmail;
+  const userInfo = localStorage.getItem("userInfo");
+  const loggedInUserEmail = userInfo ? JSON.parse(userInfo).userEmail : null;
 
   const { id } = useParams();
-  const selectedTherapistId = parseInt(id);
-
-  const selectedTherapist = Therapists.find(
-    (therapist) => therapist.id === selectedTherapistId
-  );
+  const selectedTherapistId = id;
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -49,8 +42,6 @@ const AppointmentCard = ({ therapistInfo }) => {
         console.error("Error fetching users:", error);
       }
     };
-
-    fetchUsers();
   }, []);
 
   const findLoggedInUser = () => {
@@ -74,9 +65,9 @@ const AppointmentCard = ({ therapistInfo }) => {
       }
 
       const appointmentData = {
-        therapistID: therapistInfo.id,
+        therapistID: therapistInfo._id,
         userEmail: loggedInUser.email,
-        therapistEmail: selectedTherapist.email,
+        therapistEmail: therapistInfo.email,
         date: selectedDate.format("YYYY-MM-DD"),
         time: selectedDate.format("HH:mm"),
         meetlink: "",
@@ -102,7 +93,6 @@ const AppointmentCard = ({ therapistInfo }) => {
 
   const handleProceedToPayment = async () => {
     try {
-      // Initialize Stripe and create checkout session
       const returnUrl = window.location.href;
       const stripe = await loadStripe(STRIPE_API);
       const response = await axios.post(
@@ -126,10 +116,9 @@ const AppointmentCard = ({ therapistInfo }) => {
     } catch (error) {
       console.error("Error proceeding to payment:", error);
       toast.error("Error proceeding to payment");
-      return; // Exit the function if an error occurs
+      return;
     }
 
-    // If no error occurred, show success toast
     toast.success("Payment Proceeded successfully");
   };
 

@@ -1,16 +1,21 @@
 import React, { useEffect } from "react";
 import { Avatar } from "antd";
 import OurBluesLogo from "../../../assets/Logo.png";
-import CustomButton from "../CustomButton/CustomButton.jsx";
+import CustomButton from "../../Shared/CustomButton/CustomButton.jsx";
 import { MenuOutlined, UserOutlined } from "@ant-design/icons";
 import { useState } from "react";
-import MobileDrawer from "../MobileDrawer/MobileDrawer.jsx";
+import MobileDrawer from "../../Shared/MobileDrawer/MobileDrawer.jsx";
 import { useNavigate } from "react-router";
 import {
   BACKOFFICE_LOGIN,
   BACKOFFICE_REGISTER,
   WEBAPP_LOGIN,
 } from "../../../constants/Routes.js";
+import {
+  LoginButtonOptions,
+  RegisterButtonOptions,
+} from "../../../constants/index.js";
+import DropDownButton from "../../Shared/DropDownButton/DropDownButton.jsx";
 
 const AppHeader = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
@@ -22,7 +27,7 @@ const AppHeader = () => {
   }, []);
   const handleLogout = () => {
     localStorage.clear();
-    navigate(WEBAPP_LOGIN);
+    navigate(BACKOFFICE_LOGIN);
   };
   const showDrawer = () => {
     setIsDrawerOpen(true);
@@ -41,21 +46,15 @@ const AppHeader = () => {
           />
           <div className="flex item-center justify-end">
             <div className=" xs:hidden md:flex  gap-2 ">
-              <CustomButton
-                buttonLabel="Login"
-                className="bg-yale-blue text-white"
-                size="middle"
-                onClick={() => {
-                  navigate(WEBAPP_LOGIN);
-                }}
+              <DropDownButton
+                className=" text-white"
+                MenuItems={LoginButtonOptions}
+                buttonName="Login"
               />
-              <CustomButton
-                buttonLabel="Register"
-                className="bg-yale-blue text-white"
-                size="middle"
-                onClick={() => {
-                  navigate(BACKOFFICE_REGISTER);
-                }}
+              <DropDownButton
+                className=" text-white"
+                MenuItems={RegisterButtonOptions}
+                buttonName="Register"
               />
             </div>
           </div>

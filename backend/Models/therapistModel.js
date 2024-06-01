@@ -56,7 +56,22 @@ const therapistSchema = new mongoose.Schema({
   LicenseeImage: {
     type: String,
     required: false,
-
+  },
+  qualification: {
+    type: String,
+    required: false,
+  },
+  ratings: {
+    type: Number,
+    required: false,
+  },
+  experience: {
+    type: String,
+    required: false,
+  },
+  reviews: {
+    type: Array,
+    required: false,
   },
 });
 

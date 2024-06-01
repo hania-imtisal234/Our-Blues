@@ -5,7 +5,7 @@ import FormInput from "../../../components/Shared/FormInput/FormInput";
 import FormButton from "../../../components/Shared/FormButton/FormButton.jsx";
 import OurBlueLogo from "../../../assets/Logo.png";
 import { FormRule } from "../../../constants/formRules";
-import AppHeader from "../../../components/Shared/AppHeader/AppHeader.jsx";
+import AppHeader from "../../../components/Backoffice/AppHeader/AppHeader.jsx";
 import AppFooter from "../../../components/Shared/AppFooter/AppFooter.jsx";
 import Loader from "../../../components/Shared/Loader/Loader.jsx";
 import FormSelect from "../../../components/Shared/FormSelect/FormSelect.jsx";
@@ -27,11 +27,11 @@ const Register = () => {
   };
   const handleError = (err) =>
     toast.error(err, {
-      position: "bottom-left",
+      position: "top-center",
     });
   const handleSuccess = (msg) =>
     toast.success(msg, {
-      position: "bottom-left",
+      position: "top-center",
     });
 
   const handleLogin = async (values) => {
