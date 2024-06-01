@@ -28,11 +28,10 @@ const AppointmentDetails = () => {
       );
       const { status, user } = data;
       setUsername(user);
-      return status
-        ? toast(`Hello ${user}`, {
-            position: "top-right",
-          })
-        : (removeCookie("token"), navigate("/login"));
+      if (!status) {
+        removeCookie("token");
+        navigate("/backoffice/");
+      }
     };
     verifyCookie();
   }, [cookies, navigate, removeCookie]);

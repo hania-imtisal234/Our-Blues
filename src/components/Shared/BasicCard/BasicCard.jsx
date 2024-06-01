@@ -6,6 +6,7 @@ import { THERAPISTDETAILS } from "../../../constants/Routes";
 
 const BasicCard = ({ name, id }) => {
   const navigate = useNavigate();
+  console.log("id of", id);
   return (
     <div
       className="bg-yale-blue w-40 h-40 rounded-lg cursor-pointer"
@@ -17,8 +18,10 @@ const BasicCard = ({ name, id }) => {
         <Avatar size={60} icon={<UserOutlined />} className="cursor-pointer " />
       </div>
       <div className="flex justify-center px-4 ">
-        <div className=" w-40 h-8 px-2 bg-white rounded-md text-center sticky top-0">
-          <h5 className="text-yale-blue p-2 text-center text-xs ">{name}</h5>
+        <div className=" w-40 h-12 px-2 bg-white rounded-md text-center sticky top-0 ">
+          <h5 className="text-yale-blue pt-1 text-center text-large ">
+            {name}
+          </h5>
         </div>
       </div>
     </div>

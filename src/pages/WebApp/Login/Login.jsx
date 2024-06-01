@@ -7,7 +7,7 @@ import FormInput from "../../../components/Shared/FormInput/FormInput";
 import FormButton from "../../../components/Shared/FormButton/FormButton.jsx";
 import OurBlueLogo from "../../../assets/Logo.png";
 import { FormRule } from "../../../constants/formRules";
-import AppHeader from "../../../components/Shared/AppHeader/AppHeader.jsx";
+import AppHeader from "../../../components/Backoffice/AppHeader/AppHeader.jsx";
 import AppFooter from "../../../components/Shared/AppFooter/AppFooter.jsx";
 import Loader from "../../../components/Shared/Loader/Loader.jsx";
 import { WEBAPP_REGISTER } from "../../../constants/Routes.js";
@@ -22,47 +22,49 @@ const Login = () => {
   const navigate = useNavigate();
   const handleError = (err) =>
     toast.error(err, {
-      position: "bottom-left",
+      position: "top-center",
     });
   const handleSuccess = (msg) =>
     toast.success(msg, {
-      position: "bottom-left",
+      position: "top-center",
     });
 
   const handleLogin = async (values) => {
     try {
       setIsLoading(true);
-      const { data } = await axios.post(
+      const response = await axios.post(
         "http://localhost:4000/login",
         {
           ...values,
         },
         { withCredentials: true }
       );
-      const { success, message } = data;
-      if (success) {
-        handleSuccess(message);
-        setTimeout(async () => {
-          if (data.role === "user") {
-            const userDetails = await fetchUserDetails(values.email);
-            if (userDetails) {
-              // Set only email to user info
-              setUserInfo({
+      const { data } = response;
+
+      if (data && data.success) {
+        handleSuccess(data.message);
+
+        if (data) {
+          const userDetails = await fetchUserDetails(values.email);
+
+          if (userDetails) {
+            setUserInfo({
+              userEmail: values.email,
+            });
+            localStorage.setItem(
+              "userInfo",
+              JSON.stringify({
                 userEmail: values.email,
-              });
-              // Save email to local storage
-              localStorage.setItem(
-                "userInfo",
-                JSON.stringify({
-                  userEmail: values.email,
-                })
-              );
-            }
+              })
+            );
           }
+        }
+
+        setTimeout(() => {
           navigate("/home");
         }, 1000);
       } else {
-        handleError(message);
+        handleError(data ? data.message : "Unknown error");
       }
       setIsLoading(false);
     } catch (error) {
@@ -74,12 +76,16 @@ const Login = () => {
 
   const fetchUserDetails = async (email) => {
     try {
-      const response = await axios.get("http://localhost:4000/getUsers", {
-        withCredentials: true,
-        params: {
-          email: email
+      const response = await axios.get(
+        "http://localhost:4000/getUsersByEmail",
+        {
+          withCredentials: true,
+          params: {
+            email: email,
+          },
         }
-      });
+      );
+
       return response.data;
     } catch (error) {
       console.error("Error fetching user details:", error);

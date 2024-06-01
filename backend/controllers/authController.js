@@ -144,7 +144,7 @@ module.exports.LoginTherapist = async (req, res, next) => {
       httpOnly: false,
     });
     res.status(201).json({
-      message: "User logged in successfully",
+      message: "Therapist logged in successfully",
       success: true,
       role: existingTherapist.role,
 
