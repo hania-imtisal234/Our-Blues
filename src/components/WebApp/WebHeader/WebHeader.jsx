@@ -12,7 +12,7 @@ import {
   HEALTHBLOG,
   HOME_PAGE,
   SELFCARE,
-  SUPPORTGROUP,
+  GROUPSELECTION,
   THERAPISTS,
   WEBAPP_LOGIN,
   WEBAPP_REGISTER,
@@ -66,7 +66,7 @@ const WebHeader = () => {
           <a onClick={() => navigate(THERAPISTS)}>
             <li>Therapists</li>
           </a>
-          <a onClick={() => navigate(SUPPORTGROUP)}>
+          <a onClick={() => navigate(GROUPSELECTION)}>
             <li>Join Support Group</li>
           </a>
           <a onClick={() => navigate(SELFCARE)}>
