@@ -31,7 +31,9 @@ const Therapists = () => {
           },
           { withCredentials: true }
         );
-
+        if (data[0].role == "admin") {
+          data.shift();
+        }
         setTherapists(data);
 
         setIsLoading(false);

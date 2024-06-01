@@ -64,6 +64,19 @@ const therapistSchema = new mongoose.Schema({
   ratings: {
     type: Number,
     required: false,
+    default: 0,
+    min: [0, "Rating must be at least 0"],
+    max: [5, "Rating must be at most 5"],
+  },
+  totalRatingCount: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  totalRatingSum: {
+    type: Number,
+    required: false,
+    default: 0,
   },
   experience: {
     type: String,

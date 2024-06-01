@@ -54,16 +54,16 @@ const TherapistDetails = () => {
   console.log("Therapist info is set and not null:", therapistInfo);
 
   return (
-    <Layout className="mainLayout bg-sea-salt h-full">
+    <Layout className="mainLayout bg-sea-salt ">
       <WebHeader />
       <div className="grid grid-cols-2">
         <div className="col-span-1">
           <div className="flex justify-center items-center">
-            <div className="flex flex-col justify-center items-center">
+            <div className="flex flex-col">
               <div className="my-10">
                 <TherapistCard therapistInfo={therapistInfo} />
               </div>
-              <div className="my-10">
+              <div className="">
                 <ViewRatings
                   therapistInfo={therapistInfo}
                   selectedTherapist={id}
@@ -76,7 +76,7 @@ const TherapistDetails = () => {
           <AppointmentCard therapistInfo={therapistInfo} />
         </div>
       </div>
-      <Layout>
+      <Layout style={{ marginTop: "10vh" }}>
         <AppFooter />
       </Layout>
     </Layout>
