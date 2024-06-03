@@ -9,4 +9,4 @@ module.exports.getChat = async (req, res) => {
     } catch(err) {
         console.log(err)
     }
-}
+};

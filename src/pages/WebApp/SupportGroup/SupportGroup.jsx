@@ -19,6 +19,7 @@ const SupportGroup = ({ selectedGroup }) => {
   const [showParticipants, setShowParticipants] = useState(false);
   const [participantColorMap, setParticipantColorMap] = useState({});
 
+
   const generateParticipantColorMap = (participants) => {
     const colorMap = {};
     participants.forEach((participant) => {
@@ -33,8 +34,9 @@ const SupportGroup = ({ selectedGroup }) => {
         params: { group: selectedGroup },
         withCredentials: true,
       });
-      setMessages(chats.data.getChats);
-      const participants = chats.data.getChats.map(chat => chat.user);
+      const filteredChats = chats.data.getChats.filter(chat => chat.group === selectedGroup);
+      setMessages(filteredChats);
+      const participants = filteredChats.map(chat => chat.user);
       const colorMap = generateParticipantColorMap(participants);
       setParticipantColorMap(colorMap);
     } catch (err) {
@@ -57,6 +59,7 @@ const SupportGroup = ({ selectedGroup }) => {
   }, [messages]);
 
   useEffect(() => {
+    console.log("Selected group:", selectedGroup);
     getChats();
   }, [selectedGroup]);
 
@@ -69,7 +72,7 @@ const SupportGroup = ({ selectedGroup }) => {
           const messageData = {
             user: userEmail,
             content: newMessage,
-            group: selectedGroup,
+            group: selectedGroup, 
           };
           await axios.post("http://localhost:4000/saveChat", messageData, {
             withCredentials: true,
@@ -117,7 +120,7 @@ const SupportGroup = ({ selectedGroup }) => {
       <Content className="m-4 p-4 bg-carolina-blue text-black font-bold flex">
         <div className="flex-1 flex flex-col bg-white p-4 shadow-lg rounded-lg">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-semibold">Support Group: {selectedGroup}</h2>
+            <h2 className="text-xl font-semibold">Support Group: {selectedGroup.name}</h2>
             <Dropdown
               overlay={menu}
               trigger={["click"]}

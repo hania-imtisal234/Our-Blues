@@ -17,6 +17,7 @@ const GroupSelection = ({ onGroupSelect }) => {
   const [selectedGroup, setSelectedGroup] = useState(null);
 
   const handleSelect = (group) => {
+    console.log("Selected group:", group); 
     setSelectedGroup(group);
     onGroupSelect(group);
   };

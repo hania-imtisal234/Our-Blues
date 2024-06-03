@@ -1,9 +1,9 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
 const chatSchema = new mongoose.Schema({
     count: {
         type: Number,
-        required: [false],
+        required: false,
         unique: false,
     },
     user: {
@@ -12,19 +12,22 @@ const chatSchema = new mongoose.Schema({
     },
     content: {
         type: String,
-        required:[true, "Content of Messages do not exist"]
+        required: [true, "Content of Messages do not exist"],
     },
     reported: {
         type: Boolean,
-        required: [false],
-        //default: false,
+        required: false,
+        default: false,
     },
     createdAt: {
-        type: Date, 
-        required: [true],
-        default: new Date().toUTCString(),
-
+        type: Date,
+        required: true,
+        default: Date.now,
     },
-})
+    group: {
+        type: mongoose.Schema.Types.Mixed,
+        required: true, 
+    }
+});
 
-module.exports = mongoose.model("Chat", chatSchema)
+module.exports = mongoose.model("Chat", chatSchema);
