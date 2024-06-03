@@ -1,10 +1,11 @@
 /* eslint-disable camelcase */
 // backend/controllers/checkoutController.js
 const stripe = require("stripe")(process.env.STRIPE_SECRET);
+const PaymentsModel = require("../Models/paymentModel.js");
 
 module.exports.createCheckoutSession = async (req, res) => {
   try {
-    const { data, returnUrl } = req.body; // Add a new parameter 'returnUrl' to get the return URL
+    const { data, returnUrl } = req.body;
 
     if (!Array.isArray(data)) {
       return res
@@ -14,7 +15,7 @@ module.exports.createCheckoutSession = async (req, res) => {
 
     const lineItems = data.map((item) => ({
       price_data: {
-        currency: "usd",
+        currency: "pkr",
         product_data: {
           name: item.therapistName,
         },
@@ -31,6 +32,17 @@ module.exports.createCheckoutSession = async (req, res) => {
       cancel_url: `${returnUrl}`, // Set cancel_url to the returnUrl
       customer_email: data[0].userEmail,
     });
+
+    const paymentsData = data.map((item) => ({
+      userName: item.userName,
+      userEmail: item.userEmail,
+
+      therapistName: item.therapistName,
+      amount: item.amount,
+      currency: "pkr",
+    }));
+
+    await PaymentsModel.create(paymentsData);
 
     res.json({ id: session.id });
   } catch (error) {

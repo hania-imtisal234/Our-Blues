@@ -34,8 +34,7 @@ const Login = () => {
         },
         { withCredentials: true }
       );
-      console.log(data);
-      console.log(data.email);
+
       const { success, message } = data;
       if (success) {
         handleSuccess(message);
@@ -55,7 +54,7 @@ const Login = () => {
               "userInfo",
               JSON.stringify({ role: "admin", loggedIn: true })
             );
-            console.log("Admin Logged in");
+
             navigate("/backoffice/Dashboard");
           }
         }, 1000);

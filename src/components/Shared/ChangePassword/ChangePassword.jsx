@@ -14,11 +14,11 @@ const ChangePassword = () => {
 
   const handleError = (err) =>
     toast.error(err, {
-      position: "bottom-left",
+      position: "top-center",
     });
   const handleSuccess = (msg) =>
     toast.success(msg, {
-      position: "bottom-left",
+      position: "top-center",
     });
 
   const getID = async () => {
@@ -52,8 +52,8 @@ const ChangePassword = () => {
           { withCredentials: true }
         );
         console.log(data);
-        const { success, message } = data;
-        if (success) {
+        const { status, message } = data;
+        if (status) {
           handleSuccess(message);
         } else {
           handleError(message);

@@ -1,6 +1,25 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
+const therapistTimingSchema = new mongoose.Schema({
+  date: {
+    type: Date,
+    required: [true, "Appointment date is required"],
+  },
+  startTime: {
+    type: String,
+    required: [true, "Start time is required"],
+  },
+  endTime: {
+    type: String,
+    required: [true, "End time is required"],
+  },
+  fees: {
+    type: String,
+    required: [true, "Fees is required"],
+  },
+});
+
 const therapistSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -35,17 +54,8 @@ const therapistSchema = new mongoose.Schema({
     type: String,
     required: [false],
   },
-  fees: {
-    type: Number,
-    required: [false],
-  },
-  appointmentDate: {
-    type: Date,
-    default: new Date(),
-  },
-  appointmentTime: {
-    type: String,
-  },
+
+  therapistTimings: [therapistTimingSchema],
   role: {
     type: String,
   },
