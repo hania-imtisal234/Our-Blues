@@ -3,12 +3,12 @@ import React, { useState, useEffect } from "react";
 import { ReadOutlined } from "@ant-design/icons";
 import FormButton from "../../Shared/FormButton/FormButton";
 import { loadStripe } from "@stripe/stripe-js";
-import { Payments, Therapists, STRIPE_API, Roles } from "../../../enums"; // Ensure all enums are imported
+import { Payments, STRIPE_API, Roles } from "../../../enums";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import LoadingButton from "../../Shared/LoadingButton/LoadingButton";
+import moment from "moment";
 
 const AppointmentCard = ({ therapistInfo }) => {
   const [selectedDate, setSelectedDate] = useState(null);
@@ -42,11 +42,14 @@ const AppointmentCard = ({ therapistInfo }) => {
         console.error("Error fetching users:", error);
       }
     };
+
+    fetchUsers();
   }, []);
 
   const findLoggedInUser = () => {
+    console.log("loggedinuser", loggedInUserEmail);
     for (let i = 0; i < usersList.length; i++) {
-      if (usersList[i].email === loggedInUserEmail) {
+      if (usersList[i].email == loggedInUserEmail) {
         return usersList[i];
       }
     }
@@ -60,6 +63,8 @@ const AppointmentCard = ({ therapistInfo }) => {
   const handleBookAppointment = async () => {
     try {
       const loggedInUser = findLoggedInUser();
+      console.log(usersList);
+      console.log(loggedInUser);
       if (!loggedInUser) {
         throw new Error("Logged in user not found.");
       }
@@ -93,17 +98,33 @@ const AppointmentCard = ({ therapistInfo }) => {
 
   const handleProceedToPayment = async () => {
     try {
+      const loggedInUser = findLoggedInUser();
+      console.log(usersList);
+      console.log(loggedInUser);
+      if (!loggedInUser) {
+        throw new Error("Logged in user not found.");
+      }
       const returnUrl = window.location.href;
       const stripe = await loadStripe(STRIPE_API);
+      const paymentData = [
+        {
+          userName: loggedInUser.firstName + loggedInUser.lastName,
+          userEmail: loggedInUser.email,
+          therapistName: therapistInfo.firstName + therapistInfo.lastName,
+          therapistEmail: therapistInfo.email,
+          currency: "pkr",
+          amount: therapistInfo.therapistTimings[0].fees,
+        },
+      ];
+      console.log(paymentData);
       const response = await axios.post(
         "http://localhost:4000/api/create-checkout-session",
-        { data: [Payments], returnUrl },
+        { data: paymentData, returnUrl },
         {
           withCredentials: true,
           headers: { "Content-Type": "application/json" },
         }
       );
-      console.log("Stripe checkout session created:", response.data);
 
       const session = response.data;
       const result = await stripe.redirectToCheckout({
@@ -123,10 +144,45 @@ const AppointmentCard = ({ therapistInfo }) => {
   };
 
   const getAvailableDays = () =>
-    therapistInfo ? therapistInfo.availability || [] : [];
+    therapistInfo
+      ? therapistInfo.therapistTimings.map((timing) =>
+          moment(timing.date).format("YYYY-MM-DD")
+        )
+      : [];
 
   const disabledDate = (current) =>
-    !getAvailableDays().includes(current.format("dddd"));
+    !getAvailableDays().includes(current.format("YYYY-MM-DD"));
+
+  const disabledTime = (current) => {
+    if (!current) {
+      return {};
+    }
+
+    const selectedDateTimings = therapistInfo.therapistTimings.filter(
+      (timing) =>
+        moment(timing.date).format("YYYY-MM-DD") ===
+        current.format("YYYY-MM-DD")
+    );
+
+    if (selectedDateTimings.length > 0) {
+      return {
+        disabledHours: () => {
+          const hours = [];
+          selectedDateTimings.forEach((timing) => {
+            const startHour = moment(timing.startTime, "HH:mm:ss").hour();
+            const endHour = moment(timing.endTime, "HH:mm:ss").hour();
+            for (let i = 0; i < 24; i++) {
+              if (i < startHour || i > endHour) {
+                hours.push(i);
+              }
+            }
+          });
+          return hours;
+        },
+      };
+    }
+    return {};
+  };
 
   const pickerClassName = isDatePickerOpen ? "small-datepicker" : "";
 
@@ -139,11 +195,12 @@ const AppointmentCard = ({ therapistInfo }) => {
         <div className="flex-cols mb-2 sm:mb-1 md:mx-4">
           <label className="block mb-2">Select Date and Time:</label>
           <DatePicker
-            showTime
+            showTime={{ format: "HH:mm" }}
             placeholder="Select date and time"
             onChange={handleDateChange}
             className={`w-full sm:w-auto ${pickerClassName}`}
             disabledDate={disabledDate}
+            disabledTime={disabledTime}
             open={isDatePickerOpen}
             onOpenChange={(open) => setDatePickerOpen(open)}
           />

@@ -128,7 +128,7 @@ module.exports.SignupTherapist = async (req, res, next) => {
   }
 };
 
-module.exports.LoginTherapist = async (req, res, next) => {
+module.exports.LoginTherapist = async (req, res) => {
   try {
     const { email, password } = req.body;
     if (!email || !password) {
@@ -154,7 +154,6 @@ module.exports.LoginTherapist = async (req, res, next) => {
 
       email: existingTherapist.email,
     });
-    next();
   } catch (error) {
     console.error(error);
   }

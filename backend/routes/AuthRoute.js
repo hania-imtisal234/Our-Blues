@@ -32,6 +32,7 @@ const {
   UpdateRatings,
   getReviews,
   addReviews,
+  saveTherapistTimings,
 } = require("../controllers/therapistController");
 
 //WEBAPP
@@ -46,6 +47,7 @@ router.get("/getTherapistById/:id", getTherapistsById);
 router.post("/rateTherapist/:id", UpdateRatings);
 router.get("/getReviews/:id", getReviews);
 router.post("/addReview/:id", addReviews);
+router.post("/setTimeFee/:email", saveTherapistTimings);
 router.post("/saveChat", supportGroup);
 router.get("/getTherapists", getTherapists);
 router.post("/bookAppointment", bookAppointment);

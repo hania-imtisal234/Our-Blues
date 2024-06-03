@@ -12,20 +12,19 @@ import axios from "axios";
 const TherapistDetails = () => {
   const { id } = useParams();
   const selectedTherapistId = id;
-  const [therapistInfo, setTherapistInfo] = useState(null); // Initial state as null to check for data
+  const [therapistInfo, setTherapistInfo] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchTherapistData = async () => {
       try {
-        console.log("Fetching data for Therapist ID:", selectedTherapistId);
         const { data } = await axios.get(
           `http://localhost:4000/getTherapistById/${selectedTherapistId}`,
           {
             withCredentials: true,
           }
         );
-        console.log("Fetched data:", data);
+
         setTherapistInfo(data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -37,21 +36,15 @@ const TherapistDetails = () => {
     fetchTherapistData();
   }, [selectedTherapistId]);
 
-  useEffect(() => {
-    console.log("Therapist info state updated:", therapistInfo);
-  }, [therapistInfo]);
+  useEffect(() => {}, [therapistInfo]);
 
   if (isLoading) {
-    console.log("Loading state: true");
     return <Loader />;
   }
 
   if (!therapistInfo) {
-    console.log("Therapist info is null");
     return <Loader />;
   }
-
-  console.log("Therapist info is set and not null:", therapistInfo);
 
   return (
     <Layout className="mainLayout bg-sea-salt ">
