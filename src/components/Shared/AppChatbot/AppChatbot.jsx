@@ -3,6 +3,7 @@ import { Button, Input, List, Avatar, Modal } from "antd";
 import { MessageOutlined } from "@ant-design/icons";
 import axios from "axios";
 
+const regex = /\b(self[-\s]?harm|self[-\s]?injur(y|ies)|cut(ting)?|burn(ing)?|self[-\s]?mutilat(e|ion)|self[-\s]?inflict(ed|ion)|self[-\s]?abuse|self[-\s]?destruct(ion|ive)|wrist[-\s]?cut|self[-\s]?wound|suicide|Suicide|sucide|Sucide)\b/gi;
 
 const AppChatBot = ({ visible, onClose }) => {
   const [messages, setMessages] = useState([
@@ -10,15 +11,34 @@ const AppChatBot = ({ visible, onClose }) => {
   ]);
   const [inputValue, setInputValue] = useState("");
 
-  var AiResponse
+  const AiResponse = `
+ I'm here for you, and I care deeply about your well-being. It takes courage to acknowledge and share these feelings. Please know that you are not alone in this. If you're comfortable, I encourage you to seek help from a mental health professional or a trusted person in your life.  
+  Help is always available, \n
+  Speak with someone today.
+  Umang:
+  Contact: 0311-7786264,
+  Website: umang.com.pk
+  
+  Rozan Counseling Helpline:
+  Contact: 0304 111 1741,
+  Website: rozan.org
+  `
 
   const handleSendMessage = () => {
     if (inputValue.trim() !== "") {
+      console.log(inputValue)
+      console.log(inputValue.search(regex) )
+      if(inputValue.search(regex) != -1){
+      const newMessages = [...messages, { text: inputValue, sender: "user" }];
+      setMessages([...newMessages]);
+      setMessages([...newMessages, { text: AiResponse, sender: "ai" }]);
+      
+      } else{
       getChatBot(inputValue)
       const newMessages = [...messages, { text: inputValue, sender: "user" }];
       setMessages([...newMessages]);
       //setMessages([...newMessages, { text: AiResponse, sender: "ai" }]);
-      
+      }
       setInputValue("");
     }
   };
