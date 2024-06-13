@@ -134,27 +134,44 @@ module.exports.LoginTherapist = async (req, res) => {
     if (!email || !password) {
       return res.json({ message: "All fields are required" });
     }
-    const existingTherapist = await Therapist.findOne({ email });
+
+    // Log the email and password for debugging
+    console.log(`Login attempt with email: ${email}, password: ${password}`);
+
+    const existingTherapist = await Therapist.findOne({ email: email });
+
     if (!existingTherapist) {
+      console.log("No therapist found with that email");
       return res.json({ message: "Incorrect email or password" });
     }
+
+    // Log the found therapist for debugging
+    console.log(`Found therapist: ${existingTherapist.email}`);
+
     const auth = await bcrypt.compare(password, existingTherapist.password);
+
     if (!auth) {
+      console.log("Password mismatch");
       return res.json({ message: "Incorrect email or password" });
     }
+
+    // Log successful password match
+    console.log("Password matched successfully");
+
     const token = createSecretToken(existingTherapist._id);
     res.cookie("token", token, {
       withCredentials: true,
       httpOnly: false,
     });
+
     res.status(201).json({
-      message: "Therapist logged in successfully",
+      message: "User logged in successfully",
       success: true,
       role: existingTherapist.role,
-
       email: existingTherapist.email,
     });
   } catch (error) {
-    console.error(error);
+    console.error("Error in LoginTherapist:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 };

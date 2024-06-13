@@ -22,6 +22,7 @@ const { bookAppointment } = require("../controllers/appointmentController");
 const {
   getTherapists,
   getTherapistsById,
+  getTherapistsDetails,
 } = require("../Middlewares/TherapistsMiddleware");
 
 const { UploadImage } = require("../controllers/UploadController");
@@ -34,6 +35,7 @@ const {
   addReviews,
   saveTherapistTimings,
 } = require("../controllers/therapistController");
+const { getAppointments } = require("../Middlewares/AppointmentMiddleware");
 
 //WEBAPP
 router.post("/signup", Signup);
@@ -63,6 +65,8 @@ router.post("/signupTherapist", SignupTherapist);
 router.post("/loginTherapist", LoginTherapist);
 router.post("/therapist", therapistVerification);
 router.get("/therapist", therapistVerification);
+router.get("/getTherapistsDetails", getTherapistsDetails);
+router.get("/getAppointments", getAppointments);
 router.post("/updateDetails", updateDetails);
 router.post("/updateUserDetails", updateUserDetails);
 router.post("/updatePassword", changePassword);

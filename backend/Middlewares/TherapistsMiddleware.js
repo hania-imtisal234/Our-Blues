@@ -10,6 +10,17 @@ module.exports.getTherapists = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+module.exports.getTherapistsDetails = async (req, res) => {
+  try {
+    const therapists = await therapistDetails.find();
+    res.status(200).json({ success: true, data: therapists });
+  } catch (error) {
+    console.error("Error fetching therapists:", error);
+    res
+      .status(500)
+      .json({ success: false, message: "Internal server error", data: [] });
+  }
+};
 
 module.exports.getTherapistsById = async (req, res) => {
   try {
