@@ -5,7 +5,8 @@ const { updateMeetingHost } = require("../util/updateMeetingHostUtil.js");
 
 module.exports.bookAppointment = async (req, res, next) => {
   try {
-    const { userEmail, therapistEmail, date, time } = req.body;
+    const { firstName, lastName, userEmail, therapistEmail, date, time } =
+      req.body;
 
     const meetingInfo = await createMeeting(
       "Appointment with Therapist",
@@ -19,6 +20,8 @@ module.exports.bookAppointment = async (req, res, next) => {
     //  await updateMeetingHost(meetingInfo.meetingId, therapistEmail);
 
     const appointment = await Appointment.create({
+      firstName,
+      lastName,
       userEmail,
       therapistEmail,
       date,
